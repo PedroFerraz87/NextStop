@@ -1,8 +1,8 @@
 # Projeto_FDS
 ## Equipe:
-1-Pedro Ferraz
-2-Caio Buonora 
-3-Rafael de Lima
+1-Pedro Ferraz<br>
+2-Caio Buonora<br>
+3-Rafael de Lima<br>
 4-Eduardo Henrique de Sá
 
 ## Produto: 
