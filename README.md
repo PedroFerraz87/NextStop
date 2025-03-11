@@ -2,7 +2,7 @@
 ## Equipe:
 1-Pedro Ferraz<br>
 2-Caio Buonora<br>
-3-Rafael de Lima<br>
+3-Rafael Fernandes<br>
 4-Eduardo Henrique de Sá
 
 ## Produto: 
