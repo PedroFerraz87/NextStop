@@ -1,16 +1,16 @@
-# NextStop
-## Equipe:
-1-Pedro Ferraz<br>
-2-Caio Buonora<br>
-3-Rafael Fernandes<br>
-4-Eduardo Henrique de Sá
+# Next Stop
 
-## Produto: 
-O NextStop é uma solução desenvolvida em Django que fornece ao usuário um planejamento de roteiro de viagem, encontrar destinos e personalizar suas experiências. 								
+## Sobre o Projeto
+Uma breve descrição do projeto e o que ele pretende resolver.
 
+## Integrantes
+- Caio Buonora - ccmb@cesar.school
+- Pedro Valença - pvf@cesar.school
+- Rafael Fernandes - rlclf@cesar.school
+- Eduardo Henrique - ehsnl@cesar.school
 
-## Links:
-[DOCS](https://docs.google.com/document/d/1aSS9CKXjFiJVWMc2ProF_4tRzgPjE1SwDDQWuf53CP4/edit?usp=sharing)
-[SCREENCAST](https://youtu.be/vZgO7tRvAdg?feature=shared)
-[JIRA](https://cesar-team-v8afv3ud.atlassian.net/jira/software/projects/KAN/boards/1?atlOrigin=eyJpIjoiNDFiOTQyNTYzYjc4NDAyM2EyNWFjMmRmYTRjMzRhMWEiLCJwIjoiaiJ9)
-
+## Links Úteis
+- [Quadro no Jira]((https://cesar-team-v8afv3ud.atlassian.net/jira/software/projects/KAN/boards/1?atlOrigin=eyJpIjoiZjNhNzI1Mzk1NzdmNDE1ZThlMTBmZjM4NWY0OTE3Y2MiLCJwIjoiaiJ9))
+- [Figma](https://www.figma.com/design/NH6gXtqEq6ScD94R0JjhhT/Next-Stop?node-id=37-6&t=Df3CO9P0t0yYVnd6-1)
+- [Docs](https://docs.google.com/document/d/1aSS9CKXjFiJVWMc2ProF_4tRzgPjE1SwDDQWuf53CP4/edit?usp=sharing)
+- [ScreenCast](https://youtu.be/vZgO7tRvAdg)
