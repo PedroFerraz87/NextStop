@@ -1,7 +1,7 @@
 # Next Stop
 
 ## Sobre o Projeto
-Uma breve descrição do projeto e o que ele pretende resolver.
+O NextStop é uma solução desenvolvida em Django que fornece ao usuário um planejamento de roteiro de viagem, encontrar destinos e personalizar suas experiências. 
 
 ## Integrantes
 - Caio Buonora - ccmb@cesar.school
