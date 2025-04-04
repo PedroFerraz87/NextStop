@@ -43,10 +43,10 @@ jobs:
 
       - name: Zip artifact for deployment
         run: |
-          cd SEUPROJETODJANGO/
+          cd NextStop/
           zip release.zip ./* -r
           cd ..
-          mv SEUPROJETODJANGO/release.zip .
+          mv NextStop/release.zip .
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
