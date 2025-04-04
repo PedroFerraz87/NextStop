@@ -36,7 +36,7 @@ O NextStop é uma solução desenvolvida em Django que fornece ao usuário um pl
 ![Image 2]()
 
 
-[🎥 ScreenCast 1]()
+[🎥 ScreenCast 2]()
 </details>
 
 
