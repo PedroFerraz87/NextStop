@@ -23,13 +23,20 @@ O NextStop é uma solução desenvolvida em Django que fornece ao usuário um pl
 ![Image 2](https://github.com/user-attachments/assets/2119c3fa-c443-4a63-a275-859e827854da)
    
 
-- [🎥 ScreenCast 1](https://youtu.be/vZgO7tRvAdg)  
-<details>
+[🎥 ScreenCast 1](https://youtu.be/vZgO7tRvAdg)  
+</details>
 
 ## Entrega 2
 <details>
 <summary>Ver detalhes</summary>
 <br/>
+
+![Image]()
+
+![Image 2]()
+
+
+[🎥 ScreenCast 1]()
 </details>
 
 
