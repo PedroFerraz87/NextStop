@@ -30,7 +30,7 @@ if NOT_PROD:
     DEBUG = True
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = 'django-insecure-=^tnu3-m%70hstirp3oq+9k0_06*im*s67g=hs^zkz+iyembq!'
-    ALLOWED_HOSTS = ['nextstop-c4dxdkh4g9apgxf5.brazilsouth-01.azurewebsites.net']
+    ALLOWED_HOSTS = ['*']
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -143,7 +143,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 
-STATIC_URL = os.environ.get('DJANGO_STATIC_URL', "/static/")
+STATIC_URL = os.environ.get('DJANGO_STATIC_URL', "templates/static/")
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
