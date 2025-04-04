@@ -1,6 +1,6 @@
 # Next Stop
 ## Sobre o Projeto
-O NextStop é uma solução desenvolvida em Django que fornece ao usuário um planejamento de roteiro de viagem, encontrar destinos e personalizar suas experiências. 
+O Next Stop é um aplicativo desenvolvido para auxiliar o usuário no planejamento de suas viagens. Ele oferece recursos como a criação de checklists, notificações e roteiros personalizados de turismo, proporcionando uma experiência mais eficiente e organizada para o viajante.
 
 ## Links Úteis
 - <a href="https://cesar-team-v8afv3ud.atlassian.net/jira/software/projects/KAN/boards/1?atlOrigin=eyJpIjoiZjNhNzI1Mzk1NzdmNDE1ZThlMTBmZjM4NWY0OTE3Y2MiLCJwIjoiaiJ9" target="_blank">Quadro no Jira</a>
