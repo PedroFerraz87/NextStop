@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            width: 100%;
+            background-color: #203ace;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        .logo {
+            height: 40px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a, .login-btn {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .nav-links a:hover, .login-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .login-btn {
+            background-color: #ffffff33;
+            border: none;
+            cursor: pointer;
+        }
+        .content {
+            padding: 100px 20px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="Next_stop-removebg-preview.png" alt="Logo do Grupo" class="logo">
+        <nav class="nav-links">
+            <a href="#criacao">Criação</a>
+            <a href="#checklist">Checklist</a>
+            <a href="#lembretes">Lembretes</a>
+            <a href="#sugestao">Sugestão de Destinos</a>
+        </nav>
+        <button class="login-btn" onclick="window.location.href='login.html'">Login</button>
+        <button class="cadastrar-btn" onclick="window.location.href='cadastrar.html'">Cadastro</button>
+    </div>
+    <div class="content">
+        <div class="box" id="criacao">
+            <h3>Criação</h3>
+            <p>Crie e personalize sua viagem do jeito que quiser.</p>
+        </div>
+        <div class="box" id="checklist">
+            <h3>Checklist</h3>
+            <p>Organize tudo o que você precisa levar para sua viagem.</p>
+        </div>
+        <div class="box" id="lembretes">
+            <h3>Lembretes</h3>
+            <p>Defina alertas para não esquecer nada importante.</p>
+        </div>
+    </div>
+</body>
+</html>
