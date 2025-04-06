@@ -40,4 +40,8 @@ O NextStop é uma solução desenvolvida em Django que fornece ao usuário um pl
 [🎥 ScreenCast 2]()
 </details>
 
+### Relato de Pair Programming
+Nós nos juntamos em duplas e compartilhamos tela através do meeting para resolver todos requisitos do projeto, assim, otimizando tempo.
+
+
 
