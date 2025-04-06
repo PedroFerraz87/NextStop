@@ -1,11 +1,11 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 
 def home(request):
-    return redirect('home')
+    return render(request, 'static/home.html')
 
 def login(request):
-    return redirect('login')
+    return render(request, 'static/login.html')
 
 def cadastrar(request):
     return render(request, 'static/cadastrar.html')
