@@ -30,14 +30,23 @@ O NextStop é uma solução desenvolvida em Django que fornece ao usuário um pl
 <details>
 <summary>Ver detalhes</summary>
 <br/>
+  
+![Captura de tela 2025-04-06 151506](https://github.com/user-attachments/assets/8042f050-0cac-4d00-b01f-aa4422484c8d)
 
-![Image]()
-
-![Image 2]()
+![Captura de tela 2025-04-06 151452](https://github.com/user-attachments/assets/3212f534-871c-4b07-b7bd-ffc0da57273f)
 
 ![Issue/Bug tracker](https://github.com/user-attachments/assets/731ec2eb-c417-4639-8720-fffc105b771a)
 
 [🎥 ScreenCast 2]()
+
+### Relatos de Pair Programming
+Nós nos juntamos em duplas e compartilhamos tela através do meeting para resolver todos requisitos do projeto, assim, otimizando tempo. O objetivo era fazer com que as entregas fossem feitas de forma eficiente e concluídas nos tempos determinados.
+
+**Divisão de tarefas:** Em cada reunião, nós nos dividíamos em duplas e decidíamos o que cada uma ficaria responsável por fazer, possibilitando uma aceleração na produção das entregas. Isso era colocado em um grupo no WhatsApp para que cada integrante ficasse sempre ciente do que deveria ser feito e os prazos determinados, para que nada deixasse de ser entregue. 
+
+**Metodologia de Trabalho:** Utilizamos sempre e Google Meet para realizar as reuniões em grupo e em dupla, o que possibilitou que todos os intergrantes presentes pudessem colaborar com a realização do trabalho, principalmente através do compartilhamento de tela. Assim, conseguíamos realizar as tarefas em conjunto, para que tudo fosse feito sob conhecimento de todos do grupo.
 </details>
+
+
 
 
