@@ -39,7 +39,7 @@ O NextStop é uma solução desenvolvida em Django que fornece ao usuário um pl
 
 [🎥 ScreenCast 2]()
 
-### Relato de Pair Programming
+### Relatos de Pair Programming
 Nós nos juntamos em duplas e compartilhamos tela através do meeting para resolver todos requisitos do projeto, assim, otimizando tempo. O objetivo era fazer com que as entregas fossem feitas de forma eficiente e concluídas nos tempos determinados.
 
 **Divisão de tarefas:** Em cada reunião, nós nos dividíamos em duplas e decidíamos o que cada uma ficaria responsável por fazer, possibilitando uma aceleração na produção das entregas. Isso era colocado em um grupo no WhatsApp para que cada integrante ficasse sempre ciente do que deveria ser feito e os prazos determinados, para que nada deixasse de ser entregue. 
