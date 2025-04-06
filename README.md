@@ -35,6 +35,7 @@ O NextStop é uma solução desenvolvida em Django que fornece ao usuário um pl
 
 ![Image 2](https://github.com/user-attachments/assets/ff5c2781-b4c0-44e3-a6da-2a5a182d9af6)
 
+![Image 3](https://github.com/user-attachments/assets/4742e9fa-4a19-4b14-a1c1-49df2aa6f031)
 
 [🎥 ScreenCast 2]()
 </details>
