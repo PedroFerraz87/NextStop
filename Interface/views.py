@@ -1,23 +1,23 @@
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .models import Interface
-from django.contrib.auth import authenticate,login
+from .models import Interface as InterfaceModel
+from django.contrib.auth import authenticate, login
 
 def home(request):
     return render(request, 'Interface/home.html')
 
-def login(request):
+def login_view(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         senha = request.POST.get('senha')
 
         try:
-            Interface = Interface.nome.get(email=email, senha=senha)
-            login(request, Interface)  
+            usuario = InterfaceModel.nome.get(email=email, senha=senha)
+           # login(request, Interface)  
             return redirect('home')  
-        except Interface.DoesNotExist:
-            return render(request, 'Interface/login.html', {'erro': 'Dados inválidos'})
+        except InterfaceModel.DoesNotExist:
+            return render(request, 'Interface/login.html', {'erro': 'Não encontrado'})
     
     return render(request, 'Interface/login.html')
 
@@ -27,8 +27,8 @@ def cadastro(request):
         email = request.POST.get('email')
         senha = request.POST.get('senha')
         
-        Interface = Interface.objects.create(nome=nome, email=email, senha=senha)
-        Interface.save()
+        usuario = InterfaceModel.objects.create(nome=nome, email=email, senha=senha)
+        usuario.save()
 
         return redirect('login')
     
