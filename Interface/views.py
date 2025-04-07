@@ -9,8 +9,8 @@ def home(request):
 
 def login(request):
     if request.method == 'POST':
-        email = request.POST['email']
-        senha = request.POST['senha']
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
 
         try:
             Interface = Interface.objects.get(email=email, senha=senha)
@@ -23,9 +23,9 @@ def login(request):
 
 def cadastro(request):
     if request.method == 'POST':
-        nome = request.POST['nome']
-        email = request.POST['email']
-        senha = request.POST['senha']
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
         
         Interface = Interface.objects.create(nome=nome, email=email, senha=senha)
         Interface.save()
