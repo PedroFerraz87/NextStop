@@ -1,9 +1,12 @@
 from django.urls import path
-from django.contrib.auth.views import LoginView
 from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('login/', LoginView.as_view(template_name='static/login.html'), name='login'),
-    path('cadastrar/', views.cadastrar, name='cadastrar')
+    path('cadastro/', views.cadastro, name='cadastro'),
+    path('login/', views.login, name='login'),
+    path('roteiro/', views.roteiro, name='roteiro'),
+    path('orçamento/', views.orçamento, name='orçamento'),
+    path('sugestão/', views.sugestão, name='sugestão'),
+
 ]

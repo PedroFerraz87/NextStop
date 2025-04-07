@@ -30,7 +30,11 @@ if NOT_PROD:
     DEBUG = True
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = 'django-insecure-=^tnu3-m%70hstirp3oq+9k0_06*im*s67g=hs^zkz+iyembq!'
-    ALLOWED_HOSTS = ['nextstop-c4dxdkh4g9apgxf5.brazilsouth-01.azurewebsites.net']
+    ALLOWED_HOSTS = [
+        'localhost', 
+        '127.0.0.1',
+        'nextstop-c4dxdkh4g9apgxf5.brazilsouth-01.azurewebsites.net'
+        ]
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -90,7 +94,7 @@ ROOT_URLCONF = 'NextStop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,14 +142,13 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 
-STATIC_URL = os.environ.get('DJANGO_STATIC_URL', "templates/static/")
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+STATICFILES_DIRS = [ BASE_DIR / "static" ]
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 
 # Default primary key field type
