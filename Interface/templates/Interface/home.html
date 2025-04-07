@@ -11,13 +11,13 @@
     <header class="fixed top-0 left-0 right-0 bg-blue-800 p-4 flex justify-between items-center z-50 shadow-lg">
         <img src="https://media.istockphoto.com/id/1414160809/pt/vetorial/airplane-icon-plane-flight-pictogram-transport-symbol-travel.jpg?s=612x612&w=0&k=20&c=YFAp5pnsR_fHynqYZ8d7nWjLDUtps7vaITIfYJBkmKY=" alt="Logo do Grupo" class="w-12 h-12">
         <nav class="space-x-8">
-            <a href="roteiro.html" class="hover:text-blue-300 text-lg font-semibold">Criação de Roteiros</a>
-            <a href="orçamento.html" class="hover:text-blue-300 text-lg font-semibold">Orçamento de Viagem</a>
-            <a href="sugestão.html" class="hover:text-blue-300 text-lg font-semibold">Sugestão de Destinos</a>
+            <a href="{% url 'roteiro' %}" class="hover:text-blue-300 text-lg font-semibold">Criação de Roteiros</a>
+            <a href="{% url 'orçamento' %}" class="hover:text-blue-300 text-lg font-semibold">Orçamento de Viagem</a>
+            <a href="{% url 'sugestão' %}" class="hover:text-blue-300 text-lg font-semibold">Sugestão de Destinos</a>
         </nav>
         <div class="space-x-4">
-            <button class="bg-transparent border border-white text-white px-4 py-2 rounded-lg hover:bg-blue-700" onclick="window.location.href='login.html'">Login</button>
-            <button class="bg-transparent border border-white text-white px-4 py-2 rounded-lg hover:bg-blue-700" onclick="window.location.href='cadastro.html'">Cadastre-se</button>
+            <a href="{% url 'login' %}" class="hover:text-blue-300 text-lg font-semibold">Login</a>
+            <a href="{% url 'cadastro' %}" class="hover:text-blue-300 text-lg font-semibold">Cadastre-se</a>
         </div>
     </header>
 

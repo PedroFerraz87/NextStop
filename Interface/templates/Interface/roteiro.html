@@ -51,7 +51,7 @@
       mensagemSucesso.textContent = "Roteiro salvo com sucesso!";
 
       setTimeout(() => {
-        window.location.href = 'home.html';
+        window.location.href = "{% url 'home' %}";
       }, 1500);
     }
   </script>
