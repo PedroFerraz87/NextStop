@@ -31,7 +31,7 @@ jobs:
       
       - name: Install dependencies
         run:
-          pip install -r NextStop/requirements.txt
+          pip install -r requirements.txt
 
       - name: Cleaning testing files
         run: |
