@@ -19,14 +19,4 @@ class Migration(migrations.Migration):
                 ('senha', models.CharField(max_length=8)),
             ],
         ),
-        migrations.RemoveField(
-            model_name='roteiro',
-            name='usuario',
-        ),
-        migrations.DeleteModel(
-            name='Usuario',
-        ),
-        migrations.DeleteModel(
-            name='Roteiro',
-        ),
     ]

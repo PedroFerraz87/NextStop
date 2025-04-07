@@ -13,7 +13,7 @@ def login(request):
         senha = request.POST.get('senha')
 
         try:
-            Interface = Interface.objects.get(email=email, senha=senha)
+            Interface = Interface.nome.get(email=email, senha=senha)
             login(request, Interface)  
             return redirect('home')  
         except Interface.DoesNotExist:

@@ -22,18 +22,4 @@ class Migration(migrations.Migration):
                 ('senha', models.CharField(max_length=100)),
             ],
         ),
-        migrations.RemoveField(
-            model_name='roteiro',
-            name='local',
-        ),
-        migrations.AddField(
-            model_name='roteiro',
-            name='locais',
-            field=models.TextField(default='Local padrão'),
-        ),
-        migrations.AddField(
-            model_name='roteiro',
-            name='usuario',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
-        ),
     ]
