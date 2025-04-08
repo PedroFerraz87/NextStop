@@ -36,10 +36,6 @@ if NOT_PROD:
         '127.0.0.1',
         ]
 
-        'localhost',
-        '127.0.0.1',
-        'nextstop-c4dxdkh4g9apgxf5.brazilsouth-01.azurewebsites.net']
-main
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
