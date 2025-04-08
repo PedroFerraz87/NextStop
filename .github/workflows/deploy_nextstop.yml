@@ -9,6 +9,7 @@ on:
     branches:
       - deploy
   workflow_dispatch:
+  
 
 jobs:
   build:
@@ -89,4 +90,5 @@ jobs:
         with:
           app-name: 'NextStop'
           slot-name: 'Production'
+          package: release.zip
           
