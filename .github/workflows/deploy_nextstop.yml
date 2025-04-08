@@ -89,4 +89,5 @@ jobs:
         with:
           app-name: 'NextStop'
           slot-name: 'Production'
+          package: release.zip
           
