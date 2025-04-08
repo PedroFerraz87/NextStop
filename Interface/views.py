@@ -1,6 +1,5 @@
 from django.contrib import messages
 from django.http import HttpResponse
- deploy
 from django.shortcuts import redirect, render
 from .models import Interface as InterfaceModel
 from django.contrib.auth import authenticate, login
@@ -54,15 +53,5 @@ def sugestão(request):
     return render(request, 'Interface/sugestão.html')
 
 
-
-
-from django.shortcuts import render
-
-def home(request):
-    return render(request, 'static/home.html')
-
-def login(request):
-    return render(request, 'static/login.html')
-main
 
 
