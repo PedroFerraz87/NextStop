@@ -13,7 +13,7 @@ def login_view(request):
         senha = request.POST.get('senha')
 
         try:
-            usuario = InterfaceModel.nome.get(email=email, senha=senha)
+            usuario = InterfaceModel.objects.get(email=email, senha=senha)
            # login(request, Interface)  
             return redirect('home')  
         except InterfaceModel.DoesNotExist:
@@ -26,14 +26,23 @@ def cadastro(request):
         nome = request.POST.get('nome')
         email = request.POST.get('email')
         senha = request.POST.get('senha')
-        
-        usuario = InterfaceModel.objects.create(nome=nome, email=email, senha=senha)
-        usuario.save()
 
-        return redirect('login')
-    
+        print(f"[DEBUG] nome: {nome}, email: {email}, senha: {senha}")
+
+        try:
+            if InterfaceModel.objects.filter(email=email).exists():
+                print("[DEBUG] Email já existe!")
+                return render(request, 'Interface/cadastro.html', {'erro': 'Email já cadastrado.'})
+
+            usuario = InterfaceModel.objects.create(nome=nome, email=email, senha=senha)
+            print("[DEBUG] Usuário criado:", usuario)
+            return redirect('login')
+        except Exception as e:
+            print("[ERRO] Falha ao salvar no banco:", e)
+            return render(request, 'Interface/cadastro.html', {'erro': 'Erro ao salvar usuário.'})
+
     return render(request, 'Interface/cadastro.html')
-
+   
 def roteiro(request):
     return render(request, 'Interface/roteiro.html')
 

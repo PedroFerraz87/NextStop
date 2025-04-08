@@ -31,9 +31,9 @@ if NOT_PROD:
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = 'django-insecure-=^tnu3-m%70hstirp3oq+9k0_06*im*s67g=hs^zkz+iyembq!'
     ALLOWED_HOSTS = [
+        'nextstop-c4dxdkh4g9apgxf5.brazilsouth-01.azurewebsites.net',
         'localhost', 
         '127.0.0.1',
-        'nextstop-c4dxdkh4g9apgxf5.brazilsouth-01.azurewebsites.net'
         ]
     DATABASES = {
         'default': {
