@@ -1,3 +1,7 @@
+ deploy
+-
+=
+
 # Next Stop
 ## Sobre o Projeto
 O NextStop é uma solução desenvolvida em Django que fornece ao usuário um planejamento de roteiro de viagem, encontrar destinos e personalizar suas experiências. 
@@ -50,3 +54,4 @@ Nós nos juntamos em duplas e compartilhamos tela através do meeting para resol
 
 
 
+ main
