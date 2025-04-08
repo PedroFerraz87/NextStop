@@ -35,6 +35,11 @@ if NOT_PROD:
         'localhost', 
         '127.0.0.1',
         ]
+
+        'localhost',
+        '127.0.0.1',
+        'nextstop-c4dxdkh4g9apgxf5.brazilsouth-01.azurewebsites.net']
+main
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -44,7 +49,7 @@ if NOT_PROD:
 else:
     SECRET_KEY = os.getenv('SECRET_KEY')
     DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
-    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
+    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split()
     CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(' ')
 
     SECURE_SSL_REDIRECT = \
