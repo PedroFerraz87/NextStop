@@ -6,7 +6,9 @@
   <title>Destinos Recomendados - Next Stop</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-900 text-white">
+  <div id="mensagem" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-300"></div>
 
   <section class="flex flex-col items-center justify-center min-h-screen px-6 py-8">
     <a href="{% url 'home' %}" class="flex items-center mb-6 text-2xl font-semibold text-white">
@@ -54,6 +56,18 @@
 
     const favoritos = [];
 
+    function mostrarMensagem(mensagem) {
+      const msgDiv = document.getElementById('mensagem');
+      msgDiv.textContent = mensagem;
+      msgDiv.classList.remove('opacity-0');
+      msgDiv.classList.add('opacity-100');
+
+      setTimeout(() => {
+        msgDiv.classList.remove('opacity-100');
+        msgDiv.classList.add('opacity-0');
+      }, 3000);
+    }
+
     function favoritar(destino) {
       if (favoritos.includes(destino)) {
         alert(destino + " já foi adicionado aos seus favoritos!");
@@ -61,12 +75,34 @@
       }
 
       favoritos.push(destino);
+      atualizarFavoritos();
+      mostrarMensagem(`${destino} foi adicionado aos seus favoritos!`);
+    }
 
+    function desfavoritar(destino) {
+      const index = favoritos.indexOf(destino);
+      if (index !== -1) {
+        favoritos.splice(index, 1);
+        atualizarFavoritos();
+        mostrarMensagem(`${destino} foi excluído dos seus favoritos!`);
+      }
+    }
+
+    function atualizarFavoritos() {
       const favoritosList = document.getElementById('favoritosList');
-      const novoFavorito = document.createElement('li');
-      novoFavorito.textContent = destino;
-      novoFavorito.classList.add('bg-blue-600', 'p-2', 'rounded-lg', 'text-white', 'hover:bg-blue-700');
-      favoritosList.appendChild(novoFavorito);
+      favoritosList.innerHTML = "";
+
+      favoritos.forEach(destino => {
+        const li = document.createElement('li');
+        li.classList.add('bg-blue-600', 'p-2', 'rounded-lg', 'text-white', 'flex', 'justify-between', 'items-center');
+
+        li.innerHTML = `
+          <span>${destino}</span>
+          <button onclick="desfavoritar('${destino}')" class="text-red-300 hover:text-red-500 text-lg ml-4" title="Desfavoritar">🗑️</button>
+        `;
+
+        favoritosList.appendChild(li);
+      });
     }
 
     function exibirDestinosAleatorios() {
@@ -92,6 +128,4 @@
 
     window.onload = exibirDestinosAleatorios;
   </script>
-
 </body>
-</html>
