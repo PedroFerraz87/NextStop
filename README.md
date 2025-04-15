@@ -47,6 +47,10 @@ Nós nos juntamos em duplas e compartilhamos tela através do meeting para resol
 **Metodologia de Trabalho:** Utilizamos sempre e Google Meet para realizar as reuniões em grupo e em dupla, o que possibilitou que todos os intergrantes presentes pudessem colaborar com a realização do trabalho, principalmente através do compartilhamento de tela. Assim, conseguíamos realizar as tarefas em conjunto, para que tudo fosse feito sob conhecimento de todos do grupo.
 </details>
 
+## Entrega 3
+<details>
+<summary>Ver detalhes</summary>
+<br/>
 
 
 
