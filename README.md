@@ -52,5 +52,3 @@ Nós nos juntamos em duplas e compartilhamos tela através do meeting para resol
 <summary>Ver detalhes</summary>
 <br/>
 
-
-
