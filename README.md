@@ -52,6 +52,19 @@ Nós nos juntamos em duplas e compartilhamos tela através do meeting para resol
 <details>
 <summary>Ver detalhes</summary>
 <br/>
+ novo sprint
+Foto 1- jira backlog
+Foto 2- jira quadro
+Foto 3- issue bug tracker
+[🎥 ScreenCast protótipo Lo-Fi]()
+
+### Relatos de Pair Programming
+reescrever
+
+
+
+
+
 
 
 
