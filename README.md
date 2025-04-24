@@ -6,6 +6,7 @@ O NextStop é uma solução desenvolvida em Django que fornece ao usuário um pl
 - <a href="https://cesar-team-v8afv3ud.atlassian.net/jira/software/projects/NS/boards/34/backlog" target="_blank">Quadro no Jira</a>
 - <a href="https://www.figma.com/design/NH6gXtqEq6ScD94R0JjhhT/Next-Stop?node-id=37-6&t=Df3CO9P0t0yYVnd6-1" target="_blank">Figma</a>
 - <a href="https://docs.google.com/document/d/1aSS9CKXjFiJVWMc2ProF_4tRzgPjE1SwDDQWuf53CP4/edit?usp=sharing" target="_blank">Docs</a>
+- <a href="https://miro.com/app/board/uXjVI-xQymA=/" target="_blank">Miro</a>
 
 ## Integrantes
 - Caio Buonora - ccmb@cesar.school
