@@ -11,12 +11,9 @@
     <header class="fixed top-0 left-0 right-0 bg-blue-800 p-4 flex justify-between items-center z-50 shadow-lg">
         <img src="https://media.istockphoto.com/id/1414160809/pt/vetorial/airplane-icon-plane-flight-pictogram-transport-symbol-travel.jpg?s=612x612&w=0&k=20&c=YFAp5pnsR_fHynqYZ8d7nWjLDUtps7vaITIfYJBkmKY=" alt="Logo do Grupo" class="w-12 h-12">
         <nav class="space-x-8">
-            <a href="{% url 'roteiro' %}" class="hover:text-blue-300 text-lg font-semibold">Adicionar viagem</a>
+            <a href="{% url 'roteiro' %}" class="hover:text-blue-300 text-lg font-semibold">Criação de Roteiros</a>
             <a href="{% url 'orçamento' %}" class="hover:text-blue-300 text-lg font-semibold">Orçamento de Viagem</a>
             <a href="{% url 'sugestão' %}" class="hover:text-blue-300 text-lg font-semibold">Sugestão de Destinos</a>
-            <a href= class="hover:text-blue-300 text-lg font-semibold">Alertas e lembretes</a>
-            <a href= class="hover:text-blue-300 text-lg font-semibold">Checklist</a>
-            <a href= class="hover:text-blue-300 text-lg font-semibold">Integração com mapas</a>
         </nav>
         <div class="space-x-4 flex items-center">
             {% if usuario %}
@@ -37,8 +34,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold text-center mb-4 text-blue-800">Adicionar viagem</h3>
-                <p class="text-center text-gray-700">Crie e personalize sua viagem do jeito que você preferir.</p>
+                <h3 class="text-xl font-semibold text-center mb-4 text-blue-800">Criação de Roteiros</h3>
+                <p class="text-center text-gray-700">Crie e personalize sua viagem do jeito que quiser.</p>
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-md">
@@ -49,21 +46,6 @@
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold text-center mb-4 text-blue-800">Sugestões de Destinos</h3>
                 <p class="text-center text-gray-700">Confira aqui algumas de nossas sugestões de lugares para visitar.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold text-center mb-4 text-blue-800">Alertas e lembretes</h3>
-                <p class="text-center text-gray-700">Não perca nada da viagem, receba notificações e fique ligado nas suas programações</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold text-center mb-4 text-blue-800">Checklist</h3>
-                <p class="text-center text-gray-700">Não esqueça nada antes de viajar! Após criar sua lista do pré-viagem, clique como concluído o que já foi feito </p>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold text-center mb-4 text-blue-800">Integração com mapas</h3>
-                <p class="text-center text-gray-700">Não fique perdido na viagem, integre-se com o mapas em nosso site e desloque-se para qualquer lugar</p>
             </div>
 
         </div>
