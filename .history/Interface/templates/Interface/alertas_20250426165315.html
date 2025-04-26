@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alertas e Lembretes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+
+  <section class="flex flex-col items-center justify-center min-h-screen px-6 py-8">
+    <h1 class="text-3xl font-bold text-white mb-8">Alertas e Lembretes</h1>
+
+    <div id="alertasContainer" class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    </div>
+
+    <div class="w-full bg-gray-800 rounded-lg shadow-md p-6 mt-8">
+      <h2 class="text-2xl font-bold text-white mb-4">Meus Lembretes</h2>
+      <ul id="lembretesList" class="list-none space-y-2"></ul>
+    </div>
+  </section>
+
+  <script>
+    const lembretes = [];
+
+    function exibirLembrete(titulo, data, descricao) {
+      const listaLembretes = document.getElementById('lembretesList');
+      const novoLembrete = document.createElement('li');
+      novoLembrete.classList.add('bg-gray-800', 'p-4', 'rounded-lg', 'shadow-md');
+      novoLembrete.innerHTML = `
+        <h3 class="text-xl font-semibold text-white">${titulo}</h3>
+        <p class="text-gray-300"><span class="font-bold">Data:</span> ${data}</p>
+        <p class="text-gray-300"><span class="font-bold">Descrição:</span> ${descricao}</p>
+      `;
+      listaLembretes.appendChild(novoLembrete);
+    }
+
+    lembretes.forEach(lembrete => {
+      exibirLembrete(lembrete.titulo, lembrete.data, lembrete.descricao);
+    });
+  </script>
+
+</body>
+</html>

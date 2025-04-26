@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destinos Recomendados - Next Stop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+  <div id="mensagem" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-300"></div>
+
+  <section class="flex flex-col items-center justify-center min-h-screen px-6 py-8">
+    <a href="{% url 'home' %}" class="flex items-center mb-6 text-2xl font-semibold text-white">
+      <img class="w-8 h-8 mr-2" src="https://media.istockphoto.com/id/1414160809/pt/vetorial/airplane-icon-plane-flight-pictogram-transport-symbol-travel.jpg?s=612x612&w=0&k=20&c=YFAp5pnsR_fHynqYZ8d7nWjLDUtps7vaITIfYJBkmKY=" alt="logo" />
+      NextStop
+    </a>
+    <h1 class="text-3xl font-bold text-white mb-8">Destinos Recomendados</h1>
+
+    <div id="destinosContainer" class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
+    <div class="w-full bg-gray-800 rounded-lg shadow-md p-6 mt-8">
+      <h2 class="text-2xl font-bold text-white mb-4">Destinos Favoritos</h2>
+      <ul id="favoritosList" class="list-none space-y-2"></ul>
+    </div>
+  </section>
+
+  <script>
+    const destinos = [
+      {
+        nome: "Paris, França",
+        descricao: "Explore este destino com paisagens incríveis e cultura rica. Um lugar perfeito para a sua próxima viagem.",
+        imagem: "https://img.static-af.com/transform/45cb9a13-b167-4842-8ea8-05d0cc7a4d04/"
+      },
+      {
+        nome: "Madrid, Espanha",
+        descricao: "Mergulhe na energia vibrante da capital espanhola, onde arte, gastronomia e vida noturna transformam cada esquina em uma celebração.
+        imagem: "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/348000/348698-Madrid.jpg"
+      },
+      {
+        nome: "Porto, Portugal",
+        descricao: "Viva momentos inesquecíveis neste destino que combina cultura, gastronomia e belas paisagens.",
+        imagem: "https://media.staticontent.com/media/pictures/7b7ac5b8-e960-4258-902b-a08c53129efa"
+      },
+      {
+        nome: "Roma, Itália",
+        descricao: "Mergulhe na história milenar da capital italiana, com monumentos icônicos e gastronomia irresistível.",
+        imagem: "https://s5.static.brasilescola.uol.com.br/be/2023/11/nascer-do-sol-nas-proximidades-do-coliseu-um-dos-principais-simbolos-historicos-e-culturais-de-roma-capital-da-italia.jpg"
+      },
+      {
+        nome: "Cusco, Peru",
+        descricao: "Encante-se com a antiga capital do Império Inca, onde história, cultura e paisagens montanhosas se encontram em uma experiência única.",
+        imagem: "URL_DA_IMAGEM"
+      }
+      
+      {
+        nome: "Cusco, Peru",
+        descricao: "Descubra uma metrópole vibrante que mistura tradição e tecnologia como nenhuma outra cidade.",
+        imagem: "https://wp.rotadeferias.com.br/wp-content/uploads/2020/11/Akihabara.jpg"
+      }
+    ];
+
+    const favoritos = [];
+
+    function mostrarMensagem(mensagem) {
+      const msgDiv = document.getElementById('mensagem');
+      msgDiv.textContent = mensagem;
+      msgDiv.classList.remove('opacity-0');
+      msgDiv.classList.add('opacity-100');
+
+      setTimeout(() => {
+        msgDiv.classList.remove('opacity-100');
+        msgDiv.classList.add('opacity-0');
+      }, 3000);
+    }
+
+    function favoritar(destino) {
+      if (favoritos.includes(destino)) {
+        alert(destino + " já foi adicionado aos seus favoritos!");
+        return;
+      }
+
+      favoritos.push(destino);
+      atualizarFavoritos();
+      mostrarMensagem(`${destino} foi adicionado aos seus favoritos!`);
+    }
+
+    function desfavoritar(destino) {
+      const index = favoritos.indexOf(destino);
+      if (index !== -1) {
+        favoritos.splice(index, 1);
+        atualizarFavoritos();
+        mostrarMensagem(`${destino} foi excluído dos seus favoritos!`);
+      }
+    }
+
+    function atualizarFavoritos() {
+      const favoritosList = document.getElementById('favoritosList');
+      favoritosList.innerHTML = "";
+
+      favoritos.forEach(destino => {
+        const li = document.createElement('li');
+        li.classList.add('bg-blue-600', 'p-2', 'rounded-lg', 'text-white', 'flex', 'justify-between', 'items-center');
+
+        li.innerHTML = `
+          <span>${destino}</span>
+          <button onclick="desfavoritar('${destino}')" class="text-red-300 hover:text-red-500 text-lg ml-4" title="Desfavoritar">🗑️</button>
+        `;
+
+        favoritosList.appendChild(li);
+      });
+    }
+
+    function exibirTodosDestinos() {
+      const container = document.getElementById('destinosContainer');
+      container.innerHTML = "";
+
+      destinos.forEach(destino => {
+        const card = document.createElement('div');
+        card.className = "bg-gray-800 rounded-lg shadow-md p-4";
+
+        card.innerHTML = `
+          <img src="${destino.imagem}" alt="${destino.nome}" class="w-full h-48 object-cover rounded-lg">
+          <h2 class="mt-4 text-xl font-semibold text-white">${destino.nome}</h2>
+          <p class="mt-2 text-gray-300">${destino.descricao}</p>
+          <button class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg p-2"
+            onclick="favoritar('${destino.nome}')">Favoritar</button>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    window.onload = exibirTodosDestinos;
+  </script>
+</body>
+</html>

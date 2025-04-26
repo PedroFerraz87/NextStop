@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destinos Recomendados - Next Stop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+  <div id="mensagem" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-300"></div>
+
+  <section class="flex flex-col items-center justify-center min-h-screen px-6 py-8">
+    <a href="{% url 'home' %}" class="flex items-center mb-6 text-2xl font-semibold text-white">
+      <img class="w-8 h-8 mr-2" src="https://media.istockphoto.com/id/1414160809/pt/vetorial/airplane-icon-plane-flight-pictogram-transport-symbol-travel.jpg?s=612x612&w=0&k=20&c=YFAp5pnsR_fHynqYZ8d7nWjLDUtps7vaITIfYJBkmKY=" alt="logo" />
+      NextStop
+    </a>
+    <h1 class="text-3xl font-bold text-white mb-8">Destinos Recomendados</h1>
+
+    <div id="destinosContainer" class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
+    <div class="w-full bg-gray-800 rounded-lg shadow-md p-6 mt-8">
+      <h2 class="text-2xl font-bold text-white mb-4">Destinos Favoritos</h2>
+      <ul id="favoritosList" class="list-none space-y-2"></ul>
+    </div>
+  </section>
+
+  <script>
+    const destinos = [
+      {
+        nome: "Paris, França",
+        descricao: "Explore este destino com paisagens incríveis e cultura rica. Um lugar perfeito para a sua próxima viagem.",
+        imagem: "https://img.static-af.com/transform/45cb9a13-b167-4842-8ea8-05d0cc7a4d04/"
+      },
+      {
+        nome: "Madrid, Espanha",
+        descricao: "Mergulhe na energia vibrante da capital espanhola, onde arte, gastronomia e vida noturna transformam cada esquina em uma celebração.",
+        imagem: "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/348000/348698-Madrid.jpg"
+      },
+      {
+        nome: "Roma, Itália",
+        descricao: "Viaje no tempo pela Cidade Eterna, repleta de monumentos históricos, fontes magníficas e uma culinária que conquista corações.",
+        imagem: "https://s5.static.brasilescola.uol.com.br/be/2023/11/nascer-do-sol-nas-proximidades-do-coliseu-um-dos-principais-simbolos-historicos-e-culturais-de-roma-capital-da-italia.jpg"
+      },
+      {
+        nome: "Tóquio, Japão",
+        descricao: "Descubra uma metrópole vibrante que mistura tradição e tecnologia como nenhuma outra cidade.",
+        imagem: "https://wp.rotadeferias.com.br/wp-content/uploads/2020/11/Akihabara.jpg"
+      },
+      {
+        nome: "Cusco, Peru",
+        descricao: "Encante-se com a antiga capital do Império Inca, onde história, cultura e paisagens montanhosas se encontram em uma experiência única.",
+        imagem: "data:image/jpeg;base64,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"
+      },
+      {
+        nome: "Auckland, Nova Zelândia",
+        descricao: "Descubra a cidade das velas, onde praias deslumbrantes, vulcões adormecidos e cultura vibrante se misturam em um cenário inesquecível.",
+        imagem: "https://www.newzealand.com/assets/Tourism-NZ/Auckland/59db551557/img-1535713823-7592-4553-p-1600x1200-0c80b3d3.jpg"
+      },
+      {
+        nome: "Cidade do Cabo, África do Sul",
+        descricao: "Maravilhe-se com montanhas, praias e vinícolas nesta cidade multicultural aos pés da icônica Table Mountain.",
+        imagem: "https://upload.wikimedia.org/wikipedia/commons/e/ed/Cape_Town_View_from_Table_Mountain.jpg"
+      },
+      {
+        nome: "Vancouver, Canadá",
+        descricao: "Entre oceanos e montanhas, Vancouver oferece natureza exuberante e uma atmosfera moderna vibrante.",
+        imagem: "https://upload.wikimedia.org/wikipedia/commons/5/5d/Vancouver_BC_Canada_Skyline.jpg"
+      },
+      {
+        nome: "Dubai, Emirados Árabes Unidos",
+        descricao: "Explore uma metrópole futurista no meio do deserto, onde arranha-céus, ilhas artificiais e cultura árabe se encontram.",
+        imagem: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Dubai_Skyline_from_Sheikh_Zayed_Road_2015.jpg"
+      }
+    ];
+
+    const favoritos = [];
+
+    function mostrarMensagem(mensagem) {
+      const msgDiv = document.getElementById('mensagem');
+      msgDiv.textContent = mensagem;
+      msgDiv.classList.remove('opacity-0');
+      msgDiv.classList.add('opacity-100');
+
+      setTimeout(() => {
+        msgDiv.classList.remove('opacity-100');
+        msgDiv.classList.add('opacity-0');
+      }, 3000);
+    }
+
+    function favoritar(destino) {
+      if (favoritos.includes(destino)) {
+        alert(destino + " já foi adicionado aos seus favoritos!");
+        return;
+      }
+
+      favoritos.push(destino);
+      atualizarFavoritos();
+      mostrarMensagem(`${destino} foi adicionado aos seus favoritos!`);
+    }
+
+    function desfavoritar(destino) {
+      const index = favoritos.indexOf(destino);
+      if (index !== -1) {
+        favoritos.splice(index, 1);
+        atualizarFavoritos();
+        mostrarMensagem(`${destino} foi excluído dos seus favoritos!`);
+      }
+    }
+
+    function atualizarFavoritos() {
+      const favoritosList = document.getElementById('favoritosList');
+      favoritosList.innerHTML = "";
+
+      favoritos.forEach(destino => {
+        const li = document.createElement('li');
+        li.classList.add('bg-blue-600', 'p-2', 'rounded-lg', 'text-white', 'flex', 'justify-between', 'items-center');
+
+        li.innerHTML = `
+          <span>${destino}</span>
+          <button onclick="desfavoritar('${destino}')" class="text-red-300 hover:text-red-500 text-lg ml-4" title="Desfavoritar">🗑️</button>
+        `;
+
+        favoritosList.appendChild(li);
+      });
+    }
+
+    function exibirTodosDestinos() {
+      const container = document.getElementById('destinosContainer');
+      container.innerHTML = "";
+
+      destinos.forEach(destino => {
+        const card = document.createElement('div');
+        card.className = "bg-gray-800 rounded-lg shadow-md p-4";
+
+        card.innerHTML = `
+          <img src="${destino.imagem}" alt="${destino.nome}" class="w-full h-48 object-cover rounded-lg">
+          <h2 class="mt-4 text-xl font-semibold text-white">${destino.nome}</h2>
+          <p class="mt-2 text-gray-300">${destino.descricao}</p>
+          <button class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg p-2"
+            onclick="favoritar('${destino.nome}')">Favoritar</button>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    window.onload = exibirTodosDestinos;
+  </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checklist - Next Stop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+
+  <section class="flex flex-col items-center justify-center min-h-screen px-6 py-8">
+    <h1 class="text-3xl font-bold text-white mb-8">Checklist de Viagem</h1>
+
+    <div id="checklistContainer" class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    </div>
+
+    <div class="w-full bg-gray-800 rounded-lg shadow-md p-6 mt-8">
+      <h2 class="text-2xl font-bold text-white mb-4">Meu Checklist</h2>
+      <ul id="checklistList" class="list-none space-y-2">
+      </ul>
+    </div>
+
+    <div class="w-full bg-gray-800 rounded-lg shadow-md p-6 mt-8">
+      <h2 class="text-2xl font-bold text-white mb-4">Adicionar Novo Item</h2>
+      <form id="formChecklist" class="space-y-4">
+        <label for="item" class="text-gray-300">Item do Checklist:</label>
+        <input type="text" id="item" name="item" placeholder="Ex: Passaporte" 
+          class="w-full p-3 rounded-lg bg-gray-700 text-white border-2 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+
+        <button type="submit" 
+          class="w-full p-3 mt-4 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition duration-300">Adicionar Item</button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    const checklistItems = [];
+
+    function exibirItemChecklist(item) {
+      const listaChecklist = document.getElementById('checklistList');
+      const novoItem = document.createElement('li');
+      novoItem.classList.add('bg-gray-800', 'p-4', 'rounded-lg', 'shadow-md', 'flex', 'items-center');
+      novoItem.innerHTML = `
+        <input type="checkbox" class="mr-4 rounded border-gray-600 text-green-600 focus:ring-2 focus:ring-green-500" />
+        <span class="text-white">${item}</span>
+      `;
+      listaChecklist.appendChild(novoItem);
+    }
+
+    document.getElementById('formChecklist').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const item = document.getElementById('item').value;
+
+      if (item) {
+        checklistItems.push(item);
+        exibirItemChecklist(item);
+        document.getElementById('formChecklist').reset();
+      } else {
+        alert('Por favor, insira um item para o checklist!');
+      }
+    });
+  </script>
+
+</body>
+</html>
