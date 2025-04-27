@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viagens Cadastradas - NextStop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+
+  <div id="mensagem" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-300"></div>
+
+  <section class="flex flex-col items-center justify-center min-h-screen px-6 py-8">
+
+    <a href="{% url 'home' %}" class="flex items-center mb-6 text-2xl font-semibold text-white">
+      <img class="w-8 h-8 mr-2" src="https://media.istockphoto.com/id/1414160809/pt/vetorial/airplane-icon-plane-flight-pictogram-transport-symbol-travel.jpg?s=612x612&w=0&k=20&c=YFAp5pnsR_fHynqYZ8d7nWjLDUtps7vaITIfYJBkmKY=" alt="logo" />
+      NextStop
+    </a>
+  <h1 class="text-3xl font-bold text-white mb-8">Viagens Cadastradas</h1>
+
+    <div class="w-full max-w-6xl bg-gray-800 rounded-lg shadow-md p-6">
+      <h2 class="text-2xl font-bold text-white mb-4">Minhas viagens</h2>
+      <ul class="list-none space-y-4">
+        {% empty %}
+          <li class="text-gray-400">Nenhum lembrete recente.</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </section>
+
+    {% if viagens %}
+      <div class="overflow-x-auto">
+        <table class="min-w-full border border-gray-600 rounded-lg overflow-hidden">
+          <thead class="bg-blue-600 text-white">
+            <tr>
+              <th class="px-4 py-3 text-left">Destino</th>
+              <th class="px-4 py-3 text-left">Data de Ida</th>
+              <th class="px-4 py-3 text-left">Data de Volta</th>
+              <th class="px-4 py-3 text-left">Horário</th>
+              <th class="px-4 py-3 text-left">Lugar</th>
+              <th class="px-4 py-3 text-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody class="bg-gray-700 divide-y divide-gray-600">
+            {% for viagem in viagens %}
+              <tr>
+                <td class="px-4 py-3">{{ viagem.destino }}</td>
+                <td class="px-4 py-3">{{ viagem.data_ida }}</td>
+                <td class="px-4 py-3">{{ viagem.data_volta }}</td>
+                <td class="px-4 py-3">{{ viagem.horario }}</td>
+                <td class="px-4 py-3">{{ viagem.lugar }}</td>
+                <td class="px-4 py-3 text-center">
+                  <form action="{% url 'deletar_viagem' viagem.id %}" method="POST" class="inline-block">
+                    {% csrf_token %}
+                    <button type="submit" class="text-red-400 hover:underline mr-2">Deletar</button>
+                  </form>
+                  <a href="{% url 'editar_viagem' viagem.id %}" class="text-blue-400 hover:underline">Editar</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="text-center text-gray-400">Nenhuma viagem cadastrada ainda.</p>
+    {% endif %}
+
+  </div>
+</body>
+</html>
