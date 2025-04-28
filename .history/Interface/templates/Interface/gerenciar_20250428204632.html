@@ -31,6 +31,7 @@
               <p class="text-gray-300"><span class="font-bold">Horário:</span> {{ viagem.horario }}</p>
               <p class="text-gray-300"><span class="font-bold">Lugar:</span> {{ viagem.lugar }}</p>
               <div class="mt-4 text-right">
+                <!-- Formulário para excluir o roteiro -->
                 <form method="POST" action="{% url 'excluir_roteiro' roteiro_id=viagem.id %}">
                   {% csrf_token %}
                   <button type="submit" class="text-red-400 hover:underline mr-2">Deletar</button>

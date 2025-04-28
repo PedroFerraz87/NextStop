@@ -14,7 +14,6 @@ class Roteiro(models.Model):
     destino = models.CharField(max_length=100)
     data_ida = models.DateField()
     data_volta = models.DateField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='roteiros') 
 
     def __str__(self):
         return f"Roteiro para {self.destino}" if self.destino else "Roteiro sem destino"
@@ -33,7 +32,7 @@ class Programacao(models.Model):
 class ChecklistItem(models.Model):
     nome = models.CharField(max_length=255)
     concluido = models.BooleanField(default=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="checklist_items") 
+    usuario = models.ForeignKey(Interface, on_delete=models.CASCADE, related_name="checklist_items")
 
     def __str__(self):
         return self.nome
@@ -42,7 +41,6 @@ class Lembrete(models.Model):
     titulo = models.CharField(max_length=255)
     data = models.DateField()
     descricao = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="lembretes")  
 
     def __str__(self):
         return self.titulo

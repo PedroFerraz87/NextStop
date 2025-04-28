@@ -112,7 +112,7 @@ def roteiro(request):
             destino=destino,
             data_ida=data_ida,
             data_volta=data_volta,
-            user=request.user 
+            user=request.user  # <<< IMPORTANTE! Ligando ao usuário logado
         )
 
         for dia, horario, local in zip(dias, horarios, locais):

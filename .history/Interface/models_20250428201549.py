@@ -1,20 +1,10 @@
-from django.db import models
 from django.contrib.auth.models import User
-
-class Interface(models.Model):
-    nome = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-    senha = models.CharField(max_length=128)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="interface")
-
-    def __str__(self):
-        return self.nome
 
 class Roteiro(models.Model):
     destino = models.CharField(max_length=100)
     data_ida = models.DateField()
     data_volta = models.DateField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='roteiros') 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='roteiros')  # <- adicionar isso
 
     def __str__(self):
         return f"Roteiro para {self.destino}" if self.destino else "Roteiro sem destino"
@@ -33,7 +23,7 @@ class Programacao(models.Model):
 class ChecklistItem(models.Model):
     nome = models.CharField(max_length=255)
     concluido = models.BooleanField(default=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="checklist_items") 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="checklist_items")  # <- mudar para User
 
     def __str__(self):
         return self.nome
@@ -42,7 +32,7 @@ class Lembrete(models.Model):
     titulo = models.CharField(max_length=255)
     data = models.DateField()
     descricao = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="lembretes")  
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="lembretes")  # <- adicionar isso
 
     def __str__(self):
         return self.titulo

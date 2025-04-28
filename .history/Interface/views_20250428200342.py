@@ -6,14 +6,13 @@ from django.contrib.auth.hashers import make_password
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from .models import Interface as InterfaceModel
-from .models import Roteiro, Programacao
+from .models import Programacao, Roteiro
 from .models import Lembrete
 from .models import ChecklistItem
 from .models import DestinoFavorito
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from django.urls import reverse
 
 @login_required
 def home(request):
@@ -89,7 +88,6 @@ def cadastro(request):
 
      return render(request, 'Interface/cadastro.html')
 
-
 @login_required
 def roteiro(request):
     if request.method == 'POST':
@@ -102,19 +100,17 @@ def roteiro(request):
 
         if not destino or not data_ida or not data_volta:
             messages.error(request, 'Preencha todos os campos obrigatórios.')
-            return redirect('roteiro')
+            return redirect('Interface/roteiro')
 
         if not dias or not horarios or not locais:
             messages.error(request, 'Adicione pelo menos uma programação.')
-            return redirect('roteiro')
+            return redirect('Interface/roteiro.html')
 
         roteiro = Roteiro.objects.create(
             destino=destino,
             data_ida=data_ida,
-            data_volta=data_volta,
-            user=request.user 
+            data_volta=data_volta
         )
-
         for dia, horario, local in zip(dias, horarios, locais):
             if dia and horario and local:
                 Programacao.objects.create(
@@ -126,7 +122,7 @@ def roteiro(request):
 
         messages.success(request, 'Roteiro criado com sucesso!')
         print(f"[DEBUG] Roteiro criado: {roteiro}")
-        return redirect('gerenciar')
+        return redirect('home') 
 
     return render(request, 'Interface/roteiro.html')
 
@@ -134,27 +130,27 @@ def roteiro(request):
 def gerenciar_viagens(request):
     viagens = []
 
-    roteiros = Roteiro.objects.filter(user=request.user).prefetch_related('programacoes') 
+    roteiros = Roteiro.objects.prefetch_related('programacoes').all()
 
     for roteiro in roteiros:
         for programacao in roteiro.programacoes.all():
             viagens.append({
-                'id': roteiro.id,
+                'id': roteiro.id, 
                 'destino': roteiro.destino,
                 'data_ida': roteiro.data_ida,
                 'data_volta': roteiro.data_volta,
                 'horario': programacao.horario,
                 'lugar': programacao.local,
             })
-
     context = {
         'viagens': viagens
     }
     return render(request, 'Interface/gerenciar.html', context)
 
+
 @login_required
 def editar_roteiro(request, roteiro_id):
-    roteiro = get_object_or_404(Roteiro, id=roteiro_id, user=request.user)  
+    roteiro = get_object_or_404(Roteiro, id=roteiro_id)
 
     if request.method == 'POST':
         destino = request.POST.get('destino')
@@ -185,7 +181,7 @@ def editar_roteiro(request, roteiro_id):
                 )
 
         messages.success(request, 'Roteiro atualizado com sucesso!')
-        return redirect('gerenciar')
+        return redirect('home')
 
     programacoes = roteiro.programacoes.all()
 
@@ -195,17 +191,16 @@ def editar_roteiro(request, roteiro_id):
     }
     return render(request, 'Interface/editar.html', context)
 
-@login_required
+
 def excluir_roteiro(request, roteiro_id):
+    roteiro = get_object_or_404(Roteiro, id=roteiro_id)
 
-    roteiro = get_object_or_404(Roteiro, id=roteiro_id, user=request.user)
+    if request.method == 'POST':
+        roteiro.delete()
+        messages.success(request, 'Roteiro excluído com sucesso!')
+        return redirect('Interface/gerenciar.html')
 
-    if request.method == 'POST': 
-        roteiro.delete()  
-        messages.success(request, 'Roteiro excluído com sucesso!')  
-        return redirect('gerenciar') 
-
-    return redirect('gerenciar') 
+    return render(request, 'home')
 
 @login_required
 def orcamento(request):

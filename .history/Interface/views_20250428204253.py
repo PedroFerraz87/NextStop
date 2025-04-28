@@ -112,7 +112,7 @@ def roteiro(request):
             destino=destino,
             data_ida=data_ida,
             data_volta=data_volta,
-            user=request.user 
+            user=request.user  # <<< IMPORTANTE! Ligando ao usuário logado
         )
 
         for dia, horario, local in zip(dias, horarios, locais):
@@ -134,7 +134,7 @@ def roteiro(request):
 def gerenciar_viagens(request):
     viagens = []
 
-    roteiros = Roteiro.objects.filter(user=request.user).prefetch_related('programacoes') 
+    roteiros = Roteiro.objects.filter(user=request.user).prefetch_related('programacoes')  # <<< Filtrar pelo user!
 
     for roteiro in roteiros:
         for programacao in roteiro.programacoes.all():
@@ -154,7 +154,7 @@ def gerenciar_viagens(request):
 
 @login_required
 def editar_roteiro(request, roteiro_id):
-    roteiro = get_object_or_404(Roteiro, id=roteiro_id, user=request.user)  
+    roteiro = get_object_or_404(Roteiro, id=roteiro_id, user=request.user)  # <<< Só edita o que é dele!
 
     if request.method == 'POST':
         destino = request.POST.get('destino')
