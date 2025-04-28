@@ -49,7 +49,16 @@
     </div>
 
     <div class="w-full bg-gray-800 rounded-lg shadow-md p-6 mt-8">
-      <h2 class="text-2xl font-bold text-white mb-4">Adicionar Novo Item</h2>
+      <h2 href="{% url 'checklist' %}" class="text-2xl font-bold text-white mb-4">Adicionar Novo Item</h2><form method="post" action="{% url 'checklist' %}" class="space-y-4">
+    {% csrf_token %}
+    <div>
+      <input type="text" id="item" name="item" placeholder="Ex: Passaporte"
+        class="w-full p-3 rounded-lg bg-gray-700 text-white border-2 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+    <button type="submit"
+      class="w-full p-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition duration-300">Adicionar Item</button>
+</form>
+
       <form method="post" action="{% url 'checklist' %}" class="space-y-4">
         {% csrf_token %}
         <div>

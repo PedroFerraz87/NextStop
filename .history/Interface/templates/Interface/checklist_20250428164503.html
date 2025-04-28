@@ -49,7 +49,7 @@
     </div>
 
     <div class="w-full bg-gray-800 rounded-lg shadow-md p-6 mt-8">
-      <h2 class="text-2xl font-bold text-white mb-4">Adicionar Novo Item</h2>
+      <h2 href="{% url 'cadastro' %}" class="text-2xl font-bold text-white mb-4">Adicionar Novo Item</h2>
       <form method="post" action="{% url 'checklist' %}" class="space-y-4">
         {% csrf_token %}
         <div>

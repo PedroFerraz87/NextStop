@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 from django.views.decorators.csrf import csrf_exempt
@@ -92,7 +93,7 @@ def roteiro(request):
 
         if not dias or not horarios or not locais:
             messages.error(request, 'Adicione pelo menos uma programação.')
-            return redirect('Interface/roteiro.html')
+            return redirect('Interface/roteiro')
 
         roteiro = Roteiro.objects.create(
             destino=destino,
@@ -196,22 +197,19 @@ def orçamento(request):
 
 @login_required
 def checklist(request):
-    if request.method == "POST":
-        novo_item = request.POST.get('item')
-        if novo_item:
-            ChecklistItem.objects.create(nome=novo_item, concluido=False)
-            return redirect('checklist')
+    if request.method == 'POST':
+        nome_item = request.POST.get('item')
+        if nome_item:
+            ChecklistItem.objects.create(nome=nome_item, feito=False)
+        return redirect('checklist')
 
-    pendentes = ChecklistItem.objects.filter(concluido=False)
-    concluidos = ChecklistItem.objects.filter(concluido=True)
-    return render(request, 'Interface/checklist.html', {'pendentes': pendentes, 'concluidos': concluidos})
+    pendentes = ChecklistItem.objects.filter(feito=False)
+    concluidos = ChecklistItem.objects.filter(feito=True)
 
-@login_required
-def marcar_concluido(request, item_id):
-    item = get_object_or_404(ChecklistItem, id=item_id)
-    item.concluido = not item.concluido
-    item.save()
-    return redirect('checklist')
+    return render(request, 'Interface/checklist.html', {
+        'pendentes': pendentes,
+        'concluidos': concluidos,
+    })
 
 @login_required
 def lembretes_view(request):
@@ -235,10 +233,7 @@ def adicionar_favorito(request):
 @login_required
 def listar_favoritos(request):
     favoritos = DestinoFavorito.objects.filter(user=request.user)
-    return render(request, "Interface/sugestão.html", {"favoritos": favoritos})
-
-
-
+    return render(request, "suggestao.html", {"favoritos": favoritos})
 
 
 

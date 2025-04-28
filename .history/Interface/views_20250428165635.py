@@ -211,7 +211,7 @@ def marcar_concluido(request, item_id):
     item = get_object_or_404(ChecklistItem, id=item_id)
     item.concluido = not item.concluido
     item.save()
-    return redirect('checklist')
+    return redirect('Interface/checklist')
 
 @login_required
 def lembretes_view(request):

@@ -200,7 +200,7 @@ def checklist(request):
         novo_item = request.POST.get('item')
         if novo_item:
             ChecklistItem.objects.create(nome=novo_item, concluido=False)
-            return redirect('checklist')
+            return redirect('Interface/checklist')
 
     pendentes = ChecklistItem.objects.filter(concluido=False)
     concluidos = ChecklistItem.objects.filter(concluido=True)

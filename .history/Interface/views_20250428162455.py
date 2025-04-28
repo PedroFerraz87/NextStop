@@ -204,7 +204,7 @@ def checklist(request):
 
     pendentes = ChecklistItem.objects.filter(concluido=False)
     concluidos = ChecklistItem.objects.filter(concluido=True)
-    return render(request, 'Interface/checklist.html', {'pendentes': pendentes, 'concluidos': concluidos})
+    return render(request, 'checklist.html', {'pendentes': pendentes, 'concluidos': concluidos})
 
 @login_required
 def marcar_concluido(request, item_id):

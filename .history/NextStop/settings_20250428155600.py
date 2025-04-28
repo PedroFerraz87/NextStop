@@ -94,7 +94,7 @@ ROOT_URLCONF = 'NextStop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

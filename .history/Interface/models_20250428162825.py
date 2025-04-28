@@ -32,7 +32,6 @@ class Programacao(models.Model):
 class ChecklistItem(models.Model):
     nome = models.CharField(max_length=255)
     concluido = models.BooleanField(default=False)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nome

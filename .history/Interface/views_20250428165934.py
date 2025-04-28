@@ -196,7 +196,7 @@ def orçamento(request):
 
 @login_required
 def checklist(request):
-    if request.method == "POST":
+    if request.method == "POST" 'item' in request.POST:
         novo_item = request.POST.get('item')
         if novo_item:
             ChecklistItem.objects.create(nome=novo_item, concluido=False)
