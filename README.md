@@ -43,7 +43,7 @@ O NextStop é uma solução desenvolvida em Django que fornece ao usuário um pl
 ### Relatos de Pair Programming
 Nós nos juntamos em duplas e compartilhamos tela através do meeting para resolver todos requisitos do projeto, assim, otimizando tempo. O objetivo era fazer com que as entregas fossem feitas de forma eficiente e concluídas nos tempos determinados.
 
-**Divisão de tarefas:** Em cada reunião, nós nos dividíamos em duplas e decidíamos o que cada uma ficaria responsável por fazer, possibilitando uma aceleração na produção das entregas. Isso era colocado em um grupo no WhatsApp para que cada integrante ficasse sempre ciente do que deveria ser feito e os prazos determinados, para que nada deixasse de ser entregue. Uma dupla ficou responsável pelo deploy, html e css; já a outra ficou responsável pelas urls, views e models do código no vs code. Já o readme foi feito em conjunto por todos.
+**Divisão de tarefas:** Em cada reunião, nós nos dividíamos em duplas e decidíamos o que cada uma ficaria responsável por fazer, possibilitando uma aceleração na produção das entregas. Isso era colocado em um grupo no WhatsApp para que cada integrante ficasse sempre ciente do que deveria ser feito e os prazos determinados, para que nada deixasse de ser entregue. Uma dupla ficou responsável pelo deploy, HTML e CSS, já a outra ficou responsável pelas urls, views e models do código no vs code. Já o readme foi feito em conjunto por todos.
 
 **Metodologia de Trabalho:** Utilizamos sempre e Google Meet para realizar as reuniões em grupo e em dupla, o que possibilitou que todos os intergrantes presentes pudessem colaborar com a realização do trabalho, principalmente através do compartilhamento de tela. Assim, conseguíamos realizar as tarefas em conjunto, para que tudo fosse feito sob conhecimento de todos do grupo.
 </details>
@@ -59,7 +59,11 @@ Foto 3- issue bug tracker
 [🎥 ScreenCast protótipo Lo-Fi]()
 
 ### Relatos de Pair Programming
-reescrever
+Formamos duplas para trabalhar nas tarefas necessárias para o projeto e utilizamos o Google Meet com compartilhamento de tela para resolver todos os requisitos do projeto em conjunto. O nosso principal objetivo com esse método foi garantir que as entregas fossem realizadas dentro dos prazos estabelecidos e com maior eficiência e rapidez.
+
+**Distribuição de Tarefas**: Durante cada reunião, as atividades foram divididas entre as duplas, definindo-se claramente as responsabilidades de cada grupo. Essa divisão acelerou o processo de desenvolvimento e foi registrada em um grupo no WhatsApp, garantindo que todos estivessem cientes das tarefas e prazos. Uma das duplas, formada por Caio e Rafael, ficou encarregada da estrutura HTML e da estilização com CSS das novas histórias implementadas, do Figma e dos Screencasts. A outra dupla, formada por Eduardo e Pedro, ficou responsável pelas configurações no VS Code, pelo banco de dados e pelo deploy. O arquivo README foi elaborado de forma colaborativa por todos os integrantes.
+
+**Metodologia de Trabalho**: As reuniões, tanto em grupo quanto em duplas, foram realizadas pelo Google Meet, o que facilitou a colaboração entre todos os membros. O compartilhamento de tela foi essencial para que as atividades fossem desenvolvidas em conjunto, garantindo que todos tivessem pleno conhecimento do andamento do projeto e contribuíssem ativamente na execução das tarefas. Além disso, cada alteração feita por alguma das duplas era verificada e compartilhada com todos os integrantes, com o objetivo de manter o grupo inteiro integrado no processo.
 
 
 
