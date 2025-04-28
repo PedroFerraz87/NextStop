@@ -13,6 +13,15 @@ from .models import DestinoFavorito
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from functools import wraps
+
+def login_required(view_func):
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        if not request.user.is_authenticated: 
+            return redirect('login')
+        return view_func(request, *args, **kwargs)
+    return wrapper
 
 @login_required
 def home(request):
@@ -196,7 +205,7 @@ def excluir_roteiro(request, roteiro_id):
     return render(request, 'home')
 
 @login_required
-def orcamento(request):
+def orçamento(request):
     return render(request, 'Interface/orçamento.html')
 
 @login_required
@@ -224,7 +233,7 @@ def lembretes_view(request):
     return render(request, 'Interface/lembretes.html')
 
 @login_required
-def sugestao(request):
+def sugestão(request):
     return render(request, 'Interface/sugestão.html')
 
 @login_required

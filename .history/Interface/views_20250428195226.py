@@ -13,6 +13,15 @@ from .models import DestinoFavorito
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from functools import wraps
+
+def login_required(view_func):
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        if not request.user.is_authenticated: 
+            return redirect('login')
+        return view_func(request, *args, **kwargs)
+    return wrapper
 
 @login_required
 def home(request):
@@ -52,7 +61,7 @@ def logout_view(request):
     
 @transaction.atomic
 def cadastro(request):
-     if request.method == 'POST':
+    if request.method == 'POST':
         nome = request.POST.get('nome')
         email = request.POST.get('email')
         senha = request.POST.get('senha')
@@ -64,23 +73,7 @@ def cadastro(request):
                 print("[DEBUG] Email já existe!")
                 return render(request, 'Interface/cadastro.html', {'erro': 'Email já cadastrado.'})
 
-            user = User.objects.create_user(username=email, email=email, password=senha)
-
-            interface = InterfaceModel.objects.create(
-                nome=nome,
-                email=email,
-                user=user 
-            )
-
-            print("[DEBUG] Usuário criado:", interface)
-            return redirect('login')
-
-        except Exception as e:
-            print("[ERRO] Falha ao salvar no banco:", e)
-            return render(request, 'Interface/cadastro.html', {'erro': 'Erro ao salvar usuário.'})
-
-     return render(request, 'Interface/cadastro.html')
-
+            user = User.objects.create
 @login_required
 def roteiro(request):
     if request.method == 'POST':
@@ -196,7 +189,7 @@ def excluir_roteiro(request, roteiro_id):
     return render(request, 'home')
 
 @login_required
-def orcamento(request):
+def orçamento(request):
     return render(request, 'Interface/orçamento.html')
 
 @login_required
@@ -224,7 +217,7 @@ def lembretes_view(request):
     return render(request, 'Interface/lembretes.html')
 
 @login_required
-def sugestao(request):
+def sugestão(request):
     return render(request, 'Interface/sugestão.html')
 
 @login_required

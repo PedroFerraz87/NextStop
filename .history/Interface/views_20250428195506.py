@@ -196,7 +196,7 @@ def excluir_roteiro(request, roteiro_id):
     return render(request, 'home')
 
 @login_required
-def orcamento(request):
+def orçamento(request):
     return render(request, 'Interface/orçamento.html')
 
 @login_required
@@ -224,7 +224,7 @@ def lembretes_view(request):
     return render(request, 'Interface/lembretes.html')
 
 @login_required
-def sugestao(request):
+def sugestão(request):
     return render(request, 'Interface/sugestão.html')
 
 @login_required

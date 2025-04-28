@@ -197,7 +197,7 @@ def excluir_roteiro(request, roteiro_id):
 
 @login_required
 def orcamento(request):
-    return render(request, 'Interface/orçamento.html')
+    return render(request, 'Interface/oramento.html')
 
 @login_required
 def checklist(request):
