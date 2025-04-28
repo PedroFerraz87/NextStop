@@ -21,7 +21,7 @@
         </div>
       {% endif %}
   
-      <form id="cadastroForm" method="POST" action="{% url 'cadastro' %}">
+      <form id="cadastroForm" method="POST">  
         {% csrf_token %}
         <div class="mb-4">
           <label for="nome" class="block text-sm font-medium text-white">Nome</label>

@@ -23,10 +23,7 @@ def login_required(view_func):
 
 @login_required
 def home(request):
-     if request.user.is_authenticated:
-        return render(request, 'Interface/home.html', {'usuario': request.user})
-     else:
-        return redirect('login') 
+    return render(request, 'Interface/home.html')
 
 def login(request):
     if request.method == 'POST':
@@ -56,7 +53,7 @@ def login(request):
     return render(request, 'Interface/login.html')
 
 @login_required
-def logout_view(request):
+def logout(request):
     auth_logout(request)
     return redirect('login')
     

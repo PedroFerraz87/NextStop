@@ -15,9 +15,6 @@ import os
 from dotenv import load_dotenv
 
 LOGIN_URL = '/'
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Isso usa o banco de dados para armazenar sessões
-SESSION_COOKIE_AGE = 3600  # A duração da sessão em segundos (1 hora)
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

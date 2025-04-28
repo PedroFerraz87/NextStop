@@ -25,13 +25,13 @@ def login_required(view_func):
 def home(request):
      if request.user.is_authenticated:
         return render(request, 'Interface/home.html', {'usuario': request.user})
-     else:
+    else:
         return redirect('login') 
 
 def login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
-        senha = request.POST.get('password')
+        senha = request.POST.get('password')#
 
         try:
             interface = InterfaceModel.objects.get(email=email)

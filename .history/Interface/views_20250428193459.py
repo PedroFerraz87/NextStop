@@ -31,7 +31,7 @@ def home(request):
 def login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
-        senha = request.POST.get('password')
+        senha = request.POST.get('password')#
 
         try:
             interface = InterfaceModel.objects.get(email=email)
