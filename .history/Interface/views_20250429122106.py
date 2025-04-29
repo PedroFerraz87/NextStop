@@ -224,7 +224,7 @@ def orcamento(request):
         roteiro.custo_total = total_orcamento
         roteiro.save()
 
-        return redirect('ver_orcamentos')
+        return redirect('home')
     else:
         return render(request, 'orcamento.html', {
             'roteiros': Roteiro.objects.all()

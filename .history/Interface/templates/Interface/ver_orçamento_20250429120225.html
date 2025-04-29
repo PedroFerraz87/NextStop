@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Orçamentos Salvos - Next Stop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+
+  <section class="flex flex-col items-center justify-center min-h-screen px-6 py-8">
+    <a href="{% url 'home' %}" class="flex items-center mb-6 text-2xl font-semibold text-white">
+      <img class="w-8 h-8 mr-2" src="https://media.istockphoto.com/id/1414160809/pt/vetorial/airplane-icon-plane-flight-pictogram-transport-symbol-travel.jpg?s=612x612&w=0&k=20&c=YFAp5pnsR_fHynqYZ8d7nWjLDUtps7vaITIfYJBkmKY=" alt="logo"/>
+      NextStop
+    </a>
+
+    <div class="w-full max-w-3xl bg-gray-800 rounded-lg shadow-md p-8">
+      <h1 class="text-2xl font-bold mb-6 text-center">Orçamentos Salvos</h1>
+
+      {% if roteiros %}
+        <ul class="space-y-4">
+          {% for roteiro in roteiros %}
+            <li class="bg-gray-700 rounded-lg p-4 shadow">
+              <h2 class="text-xl font-semibold mb-2">{{ roteiro.destino }}</h2>
+              <p class="text-sm text-gray-300">Duração: {{ roteiro.duracao }} dia(s)</p>
+              <p class="text-lg font-bold mt-2">Custo Total: R$ {{ roteiro.custo_total|floatformat:2 }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-center text-gray-400">Nenhum orçamento cadastrado ainda.</p>
+      {% endif %}
+
+      <div class="mt-6">
+        <a href="{% url 'orcamento' %}" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium rounded-lg px-5 py-2.5 text-sm">
+          Adicionar Novo Orçamento
+        </a>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

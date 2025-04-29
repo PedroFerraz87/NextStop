@@ -8,7 +8,6 @@ urlpatterns = [
     path('cadastro/', views.cadastro, name='cadastro'),
     path('logout/', views.logout_view, name='logout'),
     path('orcamento/', views.orcamento, name='orcamento'),
-    path('ver_orcamentos/', views.ver_orcamentos, name='ver_orcamentos'),
     path('sugestao/', views.sugestao, name='sugestao'),
     path('adicionar_favorito/', views.adicionar_favorito, name='adicionar_favorito'),
     path('favoritos/', views.listar_favoritos, name='listar_favoritos'),
@@ -20,6 +19,8 @@ urlpatterns = [
     path('editar/<int:roteiro_id>/', views.editar_roteiro, name='editar'),
     path('excluir/<int:roteiro_id>/', views.excluir_roteiro, name='excluir_roteiro'),
     path('programacao/excluir/<int:programacao_id>/', views.excluir_programacao, name='excluir_programacao'),
+        path('salvar_orcamento/', views.salvar_orcamento, name='salvar_orcamento'),
+
 ]
 
 

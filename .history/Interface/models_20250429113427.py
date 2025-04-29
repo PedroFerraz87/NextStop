@@ -15,7 +15,7 @@ class Roteiro(models.Model):
     data_ida = models.DateField()
     data_volta = models.DateField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='roteiros')
-    custo_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
+    custo_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  # Custo total da viagem
 
     def __str__(self):
         return f"Roteiro para {self.destino}" if self.destino else "Roteiro sem destino"

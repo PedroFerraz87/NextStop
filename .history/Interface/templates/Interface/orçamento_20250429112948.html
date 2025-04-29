@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Gastos - Next Stop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+  <div id="mensagem" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-300"></div>
+
+  <section class="flex flex-col items-center justify-center min-h-screen px-6 py-8">
+    <a href="{% url 'home' %}" class="flex items-center mb-6 text-2xl font-semibold text-white">
+      <img class="w-8 h-8 mr-2" src="https://media.istockphoto.com/id/1414160809/pt/vetorial/airplane-icon-plane-flight-pictogram-transport-symbol-travel.jpg?s=612x612&w=0&k=20&c=YFAp5pnsR_fHynqYZ8d7nWjLDUtps7vaITIfYJBkmKY=" alt="logo" />
+      NextStop
+    </a>
+
+    <div class="w-full max-w-md bg-gray-800 rounded-lg shadow-md p-8">
+      <h1 class="text-2xl font-bold mb-6">Calculadora de Gastos da Viagem</h1>
+
+      <form id="formGastos" method="post" action="{% url 'salvar_orcamento' %}">
+        {% csrf_token %}
+        
+        <!-- Seleção da viagem -->
+        <div class="mb-6">
+          <label for="viagem" class="block text-sm font-medium mb-2">Escolha a Viagem</label>
+          <select id="viagem" name="viagem" class="w-full p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg" required>
+            {% for viagem in viagens %}
+              <option value="{{ viagem.id }}">{{ viagem.destino }} - R$ {{ viagem.custo_diario }} /dia</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-medium">Gasto com Hospedagem (R$)</label>
+          <input type="number" id="hospedagem" name="hospedagem" class="w-full p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg" min="0" step="0.01">
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-medium">Gasto com Passagem (R$)</label>
+          <input type="number" id="passagem" name="passagem" class="w-full p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg" min="0" step="0.01">
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-medium">Gasto com Alimentação (R$)</label>
+          <input type="number" id="alimentacao" name="alimentacao" class="w-full p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg" min="0" step="0.01">
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-medium">Gasto com Passeios (R$)</label>
+          <input type="number" id="passeios" name="passeios" class="w-full p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg" min="0" step="0.01">
+        </div>
+        <div class="mb-6">
+          <label class="block mb-2 text-sm font-medium">Gastos Extras (R$)</label>
+          <input type="number" id="extras" name="extras" class="w-full p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg" min="0" step="0.01">
+        </div>
+
+        <button type="button" onclick="calcularTotal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+          Calcular
+        </button>
+
+        <div id="resultado" class="mt-6 text-lg font-semibold text-green-400 hidden"></div>
+
+        <div id="voltarBtn" class="hidden mt-4">
+          <a href="{% url 'home' %}" class="block w-full bg-gray-600 hover:bg-gray-700 text-white text-center font-medium rounded-lg px-5 py-2.5 text-sm">
+            Voltar para a Página Inicial
+          </a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    function calcularTotal() {
+      const hospedagem = parseFloat(document.getElementById('hospedagem').value) || 0;
+      const passagem = parseFloat(document.getElementById('passagem').value) || 0;
+      const alimentacao = parseFloat(document.getElementById('alimentacao').value) || 0;
+      const passeios = parseFloat(document.getElementById('passeios').value) || 0;
+      const extras = parseFloat(document.getElementById('extras').value) || 0;
+
+      const total = hospedagem + passagem + alimentacao + passeios + extras;
+
+      const resultado = document.getElementById('resultado');
+      resultado.textContent = `Gasto total estimado: R$ ${total.toFixed(2)}`;
+      resultado.classList.remove('hidden');
+
+      document.getElementById('voltarBtn').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>

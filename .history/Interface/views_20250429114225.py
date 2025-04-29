@@ -208,32 +208,31 @@ def excluir_programacao(request, programacao_id):
     programacao.delete()
     return redirect('editar', roteiro_id)
 
+@login_required
 def orcamento(request):
+    roteiros = Roteiro.objects.all()  # Certifique-se de que esta linha está retornando os roteiros
+    return render(request, 'orcamento.html', {'roteiros': roteiros})
+def salvar_orcamento(request):
     if request.method == "POST":
         roteiro_id = request.POST.get('roteiro') 
         roteiro = Roteiro.objects.get(id=roteiro_id)
 
-        hospedagem = float(request.POST.get('hospedagem', 0) or 0)
-        passagem = float(request.POST.get('passagem', 0) or 0)
-        alimentacao = float(request.POST.get('alimentacao', 0) or 0)
-        passeios = float(request.POST.get('passeios', 0) or 0)
-        extras = float(request.POST.get('extras', 0) or 0)
+        hospedagem = float(request.POST.get('hospedagem', 0))
+        passagem = float(request.POST.get('passagem', 0))
+        alimentacao = float(request.POST.get('alimentacao', 0))
+        passeios = float(request.POST.get('passeios', 0))
+        extras = float(request.POST.get('extras', 0))
 
         total_orcamento = hospedagem + passagem + alimentacao + passeios + extras
 
         roteiro.custo_total = total_orcamento
         roteiro.save()
 
-        return redirect('ver_orcamentos')
+        return redirect('home')  
     else:
         return render(request, 'orcamento.html', {
             'roteiros': Roteiro.objects.all()
         })
-
-@login_required
-def ver_orcamentos(request):
-    roteiros = Roteiro.objects.exclude(custo_total=0).order_by('-id')
-    return render(request, 'ver_orcamentos.html', {'roteiros': roteiros})
 
 @login_required
 def checklist(request):

@@ -213,6 +213,7 @@ def orcamento(request):
         roteiro_id = request.POST.get('roteiro') 
         roteiro = Roteiro.objects.get(id=roteiro_id)
 
+        # Tratar os valores vazios, atribuindo 0 caso o campo esteja vazio
         hospedagem = float(request.POST.get('hospedagem', 0) or 0)
         passagem = float(request.POST.get('passagem', 0) or 0)
         alimentacao = float(request.POST.get('alimentacao', 0) or 0)
@@ -224,7 +225,7 @@ def orcamento(request):
         roteiro.custo_total = total_orcamento
         roteiro.save()
 
-        return redirect('ver_orcamentos')
+        return redirect('home')
     else:
         return render(request, 'orcamento.html', {
             'roteiros': Roteiro.objects.all()
