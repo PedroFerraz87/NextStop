@@ -32,14 +32,10 @@
         <h2 class="text-lg font-semibold mb-2">Programações</h2>
         <div id="roteirosContainer" class="mb-4">
           {% for prog in programacoes %}
-          <div class="flex flex-col md:flex-row gap-4 mb-4 items-center">
+          <div class="flex flex-col md:flex-row gap-4 mb-4">
             <input type="date" name="dias[]" value="{{ prog.dia|date:'Y-m-d' }}" class="w-full md:w-1/3 p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg" required>
             <input type="time" name="horarios[]" value="{{ prog.horario|time:'H:i' }}" class="w-full md:w-1/3 p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg" required>
             <input type="text" name="locais[]" value="{{ prog.local }}" class="w-full md:w-1/3 p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg" required>
-
-            <button type="button" onclick="excluirProgramacao('{% url 'excluir_programacao' prog.id %}')" title="Excluir programação" class="ml-2 text-red-500 hover:text-red-700 text-xl">
-              🗑️
-            </button>
           </div>
           {% endfor %}
         </div>
@@ -54,10 +50,6 @@
       </form>
 
       <div id="mensagemErro" class="mt-4 text-red-500"></div>
-
-      <form method="POST" id="formExcluir" style="display: none;">
-        {% csrf_token %}
-      </form>
     </div>
   </section>
 
@@ -99,13 +91,8 @@
           return false;
         }
       }
-      return true;
-    }
 
-    function excluirProgramacao(url) {
-      const form = document.getElementById('formExcluir');
-      form.action = url;
-      form.submit();
+      return true;
     }
   </script>
 </body>

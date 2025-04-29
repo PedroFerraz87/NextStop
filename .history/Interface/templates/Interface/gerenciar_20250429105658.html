@@ -38,7 +38,8 @@
               </div>
 
               <div class="mt-4 text-right">
-                <form method="POST" action="{% url 'excluir_roteiro' roteiro_id=item.viagem.id %}">
+                <form method="POST" action="{% url 'excluir_roteiro' roteiro_id=item.id %}">
+zz
                   {% csrf_token %}
                   <button type="submit" class="text-red-400 hover:underline mr-2">Deletar</button>
                 </form>

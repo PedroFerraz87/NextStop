@@ -1,3 +1,14 @@
+{% comment %}
+Pré-requisito: sua view precisa passar um dicionário chamado "roteiros" no seguinte formato:
+roteiros = [
+  {
+    'viagem': <objeto Roteiro>,
+    'programacoes': [<lista de programações associadas a essa viagem>]
+  },
+  ...
+]
+{% endcomment %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

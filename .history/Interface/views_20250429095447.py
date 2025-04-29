@@ -129,22 +129,7 @@ def roteiro(request):
 
     return render(request, 'Interface/roteiro.html')
 
-@login_required
-def gerenciar_viagens(request):
-    roteiros_queryset = Roteiro.objects.filter(user=request.user).prefetch_related('programacoes')
-    
-    roteiros = []
 
-    for roteiro in roteiros_queryset:
-        roteiros.append({
-            'viagem': roteiro,
-            'programacoes': roteiro.programacoes.all()
-        })
-
-    context = {
-        'roteiros': roteiros
-    }
-    return render(request, 'Interface/gerenciar.html', context)
 
 @login_required
 def editar_roteiro(request, roteiro_id):
@@ -200,13 +185,6 @@ def excluir_roteiro(request, roteiro_id):
         return redirect('gerenciar') 
 
     return redirect('gerenciar') 
-
-@login_required
-def excluir_programacao(request, programacao_id):
-    programacao = get_object_or_404(Programacao, id=programacao_id, roteiro__user=request.user)
-    roteiro_id = programacao.roteiro.id
-    programacao.delete()
-    return redirect('editar', roteiro_id)
 
 @login_required
 def orcamento(request):

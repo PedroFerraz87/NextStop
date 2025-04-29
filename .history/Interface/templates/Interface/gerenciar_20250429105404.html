@@ -15,6 +15,15 @@
     </a>
 
     <h1 class="text-3xl font-bold text-white mb-8">Viagens Cadastradas</h1>
+    {% if messages %}
+  <div class="w-full max-w-6xl mb-6">
+    {% for message in messages %}
+      <div class="{% if message.tags == 'success' %}bg-green-600{% elif message.tags == 'error' %}bg-red-600{% else %}bg-gray-700{% endif %} text-white p-4 rounded-lg shadow mb-2">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
 
     <div class="w-full max-w-6xl bg-gray-800 rounded-lg shadow-md p-6">
       <h2 class="text-2xl font-bold text-white mb-4">Minhas Viagens</h2>
@@ -38,7 +47,7 @@
               </div>
 
               <div class="mt-4 text-right">
-                <form method="POST" action="{% url 'excluir_roteiro' roteiro_id=item.viagem.id %}">
+                <form method="POST" action="{% url 'excluir_roteiro' roteiro_id=item.id %}">
                   {% csrf_token %}
                   <button type="submit" class="text-red-400 hover:underline mr-2">Deletar</button>
                 </form>

@@ -37,9 +37,7 @@
             <input type="time" name="horarios[]" value="{{ prog.horario|time:'H:i' }}" class="w-full md:w-1/3 p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg" required>
             <input type="text" name="locais[]" value="{{ prog.local }}" class="w-full md:w-1/3 p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg" required>
 
-            <button type="button" onclick="excluirProgramacao('{% url 'excluir_programacao' prog.id %}')" title="Excluir programação" class="ml-2 text-red-500 hover:text-red-700 text-xl">
-              🗑️
-            </button>
+            <button type="button" onclick="excluirProgramacao({{ prog.id }})" title="Excluir programação" class="ml-2 text-red-500 hover:text-red-700 text-xl">🗑️</button>
           </div>
           {% endfor %}
         </div>
@@ -53,11 +51,11 @@
         </button>
       </form>
 
-      <div id="mensagemErro" class="mt-4 text-red-500"></div>
-
-      <form method="POST" id="formExcluir" style="display: none;">
+      <form id="formExcluir" method="POST" style="display: none;">
         {% csrf_token %}
       </form>
+
+      <div id="mensagemErro" class="mt-4 text-red-500"></div>
     </div>
   </section>
 
@@ -75,6 +73,12 @@
       `;
 
       container.appendChild(novoRoteiro);
+    }
+
+    function excluirProgramacao(progId) {
+      const form = document.getElementById('formExcluir');
+      form.action = `/excluir_programacao/${progId}/`;
+      form.submit();
     }
 
     function validarFormulario() {
@@ -100,12 +104,6 @@
         }
       }
       return true;
-    }
-
-    function excluirProgramacao(url) {
-      const form = document.getElementById('formExcluir');
-      form.action = url;
-      form.submit();
     }
   </script>
 </body>

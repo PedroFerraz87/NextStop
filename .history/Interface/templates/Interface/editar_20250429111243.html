@@ -37,6 +37,7 @@
             <input type="time" name="horarios[]" value="{{ prog.horario|time:'H:i' }}" class="w-full md:w-1/3 p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg" required>
             <input type="text" name="locais[]" value="{{ prog.local }}" class="w-full md:w-1/3 p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg" required>
 
+            <!-- Botão de excluir -->
             <button type="button" onclick="excluirProgramacao('{% url 'excluir_programacao' prog.id %}')" title="Excluir programação" class="ml-2 text-red-500 hover:text-red-700 text-xl">
               🗑️
             </button>
@@ -55,6 +56,7 @@
 
       <div id="mensagemErro" class="mt-4 text-red-500"></div>
 
+      <!-- Formulário oculto para excluir programação -->
       <form method="POST" id="formExcluir" style="display: none;">
         {% csrf_token %}
       </form>

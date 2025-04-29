@@ -202,13 +202,6 @@ def excluir_roteiro(request, roteiro_id):
     return redirect('gerenciar') 
 
 @login_required
-def excluir_programacao(request, programacao_id):
-    programacao = get_object_or_404(Programacao, id=programacao_id, roteiro__user=request.user)
-    roteiro_id = programacao.roteiro.id
-    programacao.delete()
-    return redirect('editar', roteiro_id)
-
-@login_required
 def orcamento(request):
     return render(request, 'Interface/orçamento.html')
 

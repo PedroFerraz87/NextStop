@@ -208,6 +208,7 @@ def excluir_programacao(request, programacao_id):
     programacao.delete()
     return redirect('editar', roteiro_id)
 
+
 @login_required
 def orcamento(request):
     return render(request, 'Interface/orçamento.html')

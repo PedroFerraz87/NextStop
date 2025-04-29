@@ -8,7 +8,10 @@
 </head>
 <body class="bg-gray-900 text-white">
 
+  <div id="mensagem" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-300"></div>
+
   <section class="flex flex-col items-center justify-center min-h-screen px-6 py-8">
+
     <a href="{% url 'home' %}" class="flex items-center mb-6 text-2xl font-semibold text-white">
       <img class="w-8 h-8 mr-2" src="https://media.istockphoto.com/id/1414160809/pt/vetorial/airplane-icon-plane-flight-pictogram-transport-symbol-travel.jpg?s=612x612&w=0&k=20&c=YFAp5pnsR_fHynqYZ8d7nWjLDUtps7vaITIfYJBkmKY=" alt="logo" />
       NextStop
@@ -18,31 +21,21 @@
 
     <div class="w-full max-w-6xl bg-gray-800 rounded-lg shadow-md p-6">
       <h2 class="text-2xl font-bold text-white mb-4">Minhas Viagens</h2>
-      {% if roteiros %}
+      {% if viagens %}
         <ul class="list-none space-y-4">
-          {% for item in roteiros %}
+          {% for viagem in viagens %}
             <li class="bg-gray-700 p-4 rounded-lg shadow-md">
-              <h3 class="text-xl font-semibold">{{ item.viagem.destino }}</h3>
-              <p class="text-gray-300"><span class="font-bold">Data de Ida:</span> {{ item.viagem.data_ida }}</p>
-              <p class="text-gray-300"><span class="font-bold">Data de Volta:</span> {{ item.viagem.data_volta }}</p>
-
-              <div class="mt-4">
-                <h4 class="font-semibold mb-2">Programações:</h4>
-                {% for prog in item.programacoes %}
-                  <div class="ml-4 text-gray-300 mb-2">
-                    <p><span class="font-bold">Dia:</span> {{ prog.dia }}</p>
-                    <p><span class="font-bold">Horário:</span> {{ prog.horario }}</p>
-                    <p><span class="font-bold">Lugar:</span> {{ prog.local }}</p>
-                  </div>
-                {% endfor %}
-              </div>
-
+              <h3 class="text-xl font-semibold text-white">{{ viagem.destino }}</h3>
+              <p class="text-gray-300"><span class="font-bold">Data de Ida:</span> {{ viagem.data_ida }}</p>
+              <p class="text-gray-300"><span class="font-bold">Data de Volta:</span> {{ viagem.data_volta }}</p>
+              <p class="text-gray-300"><span class="font-bold">Horário:</span> {{ viagem.horario }}</p>
+              <p class="text-gray-300"><span class="font-bold">Lugar:</span> {{ viagem.lugar }}</p>
               <div class="mt-4 text-right">
-                <form method="POST" action="{% url 'excluir_roteiro' roteiro_id=item.viagem.id %}">
+                <form method="POST" action="{% url 'excluir_roteiro' roteiro_id=viagem.id %}">
                   {% csrf_token %}
                   <button type="submit" class="text-red-400 hover:underline mr-2">Deletar</button>
                 </form>
-                <a href="{% url 'editar' item.viagem.id %}" class="text-blue-400 hover:underline">Editar</a>
+                <a href="{% url 'editar' viagem.id %}" class="text-blue-400 hover:underline">Editar</a>
               </div>
             </li>
           {% endfor %}
@@ -51,6 +44,8 @@
         <p class="text-gray-400">Nenhuma viagem cadastrada ainda.</p>
       {% endif %}
     </div>
+
   </section>
+
 </body>
 </html>
