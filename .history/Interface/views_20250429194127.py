@@ -284,16 +284,3 @@ def adicionar_favorito(request):
 def listar_favoritos(request):
     favoritos = DestinoFavorito.objects.filter(user=request.user)
     return render(request, "Interface/sugestão.html", {"favoritos": favoritos})
-
-@login_required
-def desfavoritar_destino(request):
-    if request.method == "POST":
-        nome_destino = request.POST.get("nome_destino")
-
-        destino = DestinoFavorito.objects.filter(user=request.user, nome_destino=nome_destino).first()
-        if destino:
-            destino.delete()
-            return JsonResponse({"status": "ok", "mensagem": "Destino removido com sucesso!"})
-        return JsonResponse({"status": "erro", "mensagem": "Destino não encontrado."})
-    
-    return JsonResponse({"status": "erro", "mensagem": "Método não permitido."})

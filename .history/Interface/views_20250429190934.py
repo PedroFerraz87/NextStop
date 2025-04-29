@@ -5,7 +5,6 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
-from .models import DestinoFavorito
 from .models import Interface as InterfaceModel
 from .models import Roteiro, Programacao
 from .models import Lembrete
@@ -14,8 +13,7 @@ from .models import DestinoFavorito
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from django.http import HttpResponse
-from django.http import JsonResponse
+from django.urls import reverse
 
 @login_required
 def home(request):
@@ -278,22 +276,9 @@ def adicionar_favorito(request):
         if not DestinoFavorito.objects.filter(user=request.user, nome_destino=nome_destino).exists():
             DestinoFavorito.objects.create(user=request.user, nome_destino=nome_destino)
 
-    return HttpResponse(status=200)
+    return redirect("Interface/sugestão.html") 
 
 @login_required
 def listar_favoritos(request):
     favoritos = DestinoFavorito.objects.filter(user=request.user)
     return render(request, "Interface/sugestão.html", {"favoritos": favoritos})
-
-@login_required
-def desfavoritar_destino(request):
-    if request.method == "POST":
-        nome_destino = request.POST.get("nome_destino")
-
-        destino = DestinoFavorito.objects.filter(user=request.user, nome_destino=nome_destino).first()
-        if destino:
-            destino.delete()
-            return JsonResponse({"status": "ok", "mensagem": "Destino removido com sucesso!"})
-        return JsonResponse({"status": "erro", "mensagem": "Destino não encontrado."})
-    
-    return JsonResponse({"status": "erro", "mensagem": "Método não permitido."})

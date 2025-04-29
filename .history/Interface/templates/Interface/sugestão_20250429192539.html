@@ -6,6 +6,7 @@
   <title>Destinos Recomendados - Next Stop</title>
   <script src="https://cdn.tailwindcss.com"></script>
   {% load static %}
+<script src="{% static 'nextstop/favoritos.js' %}"></script>
 </head>
 <body class="bg-gray-900 text-white">
   <div id="mensagem" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-300"></div>
@@ -21,12 +22,21 @@
 
     <div class="w-full bg-gray-800 rounded-lg shadow-md p-6 mt-8">
       <h2 class="text-2xl font-bold text-white mb-4">Destinos Favoritos</h2>
-      <ul id="favoritosList" class="list-none space-y-2"></ul>
+      <ul id="favoritosList" class="list-none space-y-2">
+        {% for favorito in favoritos %}
+          <li class="bg-blue-600 p-2 rounded-lg text-white flex justify-between items-center">
+            <span>{{ favorito.nome_destino }}</span>
+            <button onclick="desfavoritar('{{ favorito.nome_destino }}')" class="text-red-300 hover:text-red-500 text-lg ml-4" title="Desfavoritar">🗑️</button>
+          </li>
+        {% endfor %}
+      </ul>
+      
     </div>
   </section>
-
   <script>
     const nomesFavoritosServidor = {{ nomes_favoritos|safe }};
+  </script>  
+  <script>
     const destinos = [
       {
         nome: "Paris, França",
@@ -75,20 +85,7 @@
       }
     ];
 
-    function getCookie(name) {
-      let cookieValue = null;
-      if (document.cookie && document.cookie !== "") {
-        const cookies = document.cookie.split(";");
-        for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i].trim();
-          if (cookie.substring(0, name.length + 1) === name + "=") {
-            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-            break;
-          }
-        }
-      }
-      return cookieValue;
-    }
+    const favoritos = [];
 
     function mostrarMensagem(mensagem) {
       const msgDiv = document.getElementById('mensagem');
@@ -103,67 +100,42 @@
     }
 
     function favoritar(destino) {
-      if (nomesFavoritosServidor.includes(destino)) {
+      if (favoritos.includes(destino)) {
         alert(destino + " já foi adicionado aos seus favoritos!");
         return;
       }
 
-      fetch("{% url 'adicionar_favorito' %}", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "X-CSRFToken": "{{ csrf_token }}"
-        },
-        body: new URLSearchParams({ nome_destino: destino })
-      })
-      .then(response => {
-        if (response.ok) {
-          nomesFavoritosServidor.push(destino);
-          mostrarMensagem(`${destino} foi adicionado aos seus favoritos!`);
-          exibirTodosDestinos();
-          atualizarFavoritosUI();
-        } else {
-          alert("Erro ao salvar favorito.");
-        }
-      });
+      favoritos.push(destino);
+      atualizarFavoritos();
+      mostrarMensagem(`${destino} foi adicionado aos seus favoritos!`);
+
+      console.log(`Favorito adicionado no servidor: ${destino}`);
     }
 
     function desfavoritar(destino) {
-      fetch("/desfavoritar/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "X-CSRFToken": getCookie("csrftoken"),
-        },
-        body: `nome_destino=${encodeURIComponent(destino)}`
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === "ok") {
-          const index = nomesFavoritosServidor.indexOf(destino);
-          if (index > -1) {
-            nomesFavoritosServidor.splice(index, 1);
-          }
-          mostrarMensagem(`${destino} foi removido dos seus favoritos!`);
-          exibirTodosDestinos();
-          atualizarFavoritosUI();
-        } else {
-          alert(data.mensagem);
-        }
-      });
+      const index = favoritos.indexOf(destino);
+      if (index !== -1) {
+        favoritos.splice(index, 1);
+        atualizarFavoritos();
+        mostrarMensagem(`${destino} foi excluído dos seus favoritos!`);
+
+        console.log(`Favorito removido no servidor: ${destino}`);
+      }
     }
 
-    function atualizarFavoritosUI() {
+    function atualizarFavoritos() {
       const favoritosList = document.getElementById('favoritosList');
       favoritosList.innerHTML = "";
 
-      nomesFavoritosServidor.forEach(destino => {
+      favoritos.forEach(destino => {
         const li = document.createElement('li');
-        li.className = 'bg-blue-600 p-2 rounded-lg text-white flex justify-between items-center';
+        li.classList.add('bg-blue-600', 'p-2', 'rounded-lg', 'text-white', 'flex', 'justify-between', 'items-center');
+
         li.innerHTML = `
           <span>${destino}</span>
           <button onclick="desfavoritar('${destino}')" class="text-red-300 hover:text-red-500 text-lg ml-4" title="Desfavoritar">🗑️</button>
         `;
+
         favoritosList.appendChild(li);
       });
     }
@@ -175,12 +147,11 @@
       destinos.forEach(destino => {
         const card = document.createElement('div');
         card.className = "bg-gray-800 rounded-lg shadow-md p-4";
-
         const isFavorito = nomesFavoritosServidor.includes(destino.nome);
-        const botaoHtml = isFavorito
-          ? `<button class="w-full mt-4 bg-gray-500 text-white font-medium rounded-lg p-2 cursor-not-allowed" disabled>Salvo</button>`
-          : `<button class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg p-2"
-              onclick="favoritar('${destino.nome}')">Favoritar</button>`;
+const botaoHtml = isFavorito
+  ? `<button class="w-full mt-4 bg-gray-500 text-white font-medium rounded-lg p-2 cursor-not-allowed" disabled>Salvo</button>`
+  : `<button class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg p-2"
+        onclick="favoritar('${destino.nome}')">Favoritar</button>`;
 
         card.innerHTML = `
           <img src="${destino.imagem}" alt="${destino.nome}" class="w-full h-48 object-cover rounded-lg">
@@ -193,10 +164,7 @@
       });
     }
 
-    window.onload = () => {
-      exibirTodosDestinos();
-      atualizarFavoritosUI();
-    };
+    window.onload = exibirTodosDestinos;
   </script>
 </body>
 </html>

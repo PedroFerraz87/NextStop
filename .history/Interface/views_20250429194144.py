@@ -285,6 +285,9 @@ def listar_favoritos(request):
     favoritos = DestinoFavorito.objects.filter(user=request.user)
     return render(request, "Interface/sugestão.html", {"favoritos": favoritos})
 
+from django.http import JsonResponse
+from .models import DestinoFavorito
+
 @login_required
 def desfavoritar_destino(request):
     if request.method == "POST":

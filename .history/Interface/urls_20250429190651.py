@@ -20,7 +20,6 @@ urlpatterns = [
     path('adicionar_favorito/', views.adicionar_favorito, name='adicionar_favorito'),
     path('favoritos/', views.listar_favoritos, name='listar_favoritos'),
     path('lembretes/', views.lembretes_view, name='lembretes'),
-    path("desfavoritar/", views.desfavoritar_destino, name="desfavoritar_destino"),
 ]
 
 

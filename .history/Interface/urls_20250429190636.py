@@ -14,13 +14,12 @@ urlpatterns = [
     path('programacao/excluir/<int:programacao_id>/', views.excluir_programacao, name='excluir_programacao'),
     path('orcamento/', views.orcamento, name='orcamento'),
     path('ver_orcamentos/', views.ver_orcamentos, name='ver_orcamentos'),
-    path('checklist/', views.checklist, name='checklist'),
-    path('checklist/marcar_concluido/<int:item_id>/', views.marcar_concluido, name='marcar_concluido'),
     path('sugestao/', views.sugestao, name='sugestao'),
     path('adicionar_favorito/', views.adicionar_favorito, name='adicionar_favorito'),
     path('favoritos/', views.listar_favoritos, name='listar_favoritos'),
+    path('checklist/', views.checklist, name='checklist'),
+    path('checklist/marcar_concluido/<int:item_id>/', views.marcar_concluido, name='marcar_concluido'),
     path('lembretes/', views.lembretes_view, name='lembretes'),
-    path("desfavoritar/", views.desfavoritar_destino, name="desfavoritar_destino"),
 ]
 
 
