@@ -89,6 +89,7 @@ def cadastro(request):
 
      return render(request, 'Interface/cadastro.html')
 
+
 @login_required
 def roteiro(request):
     if request.method == 'POST':

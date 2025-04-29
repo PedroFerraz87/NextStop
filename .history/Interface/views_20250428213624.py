@@ -89,6 +89,7 @@ def cadastro(request):
 
      return render(request, 'Interface/cadastro.html')
 
+
 @login_required
 def roteiro(request):
     if request.method == 'POST':
@@ -220,7 +221,8 @@ def checklist(request):
             return redirect('checklist')
 
     pendentes = ChecklistItem.objects.filter(concluido=False, user=request.user)
-    concluidos = ChecklistItem.objects.filter(concluido=True, user=request.user)
+concluidos = ChecklistItem.objects.filter(concluido=True, user=request.user)
+
     return render(request, 'Interface/checklist.html', {'pendentes': pendentes, 'concluidos': concluidos})
 
 @login_required
