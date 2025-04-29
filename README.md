@@ -52,12 +52,15 @@ Nós nos juntamos em duplas e compartilhamos tela através do meeting para resol
 <details>
 <summary>Ver detalhes</summary>
 <br/>
-[Foto 1- jira backlog]()
-[Foto 2- jira quadro]()
+  
+![image](https://github.com/user-attachments/assets/15441d19-f0e7-4dd8-803f-1cb37c0e4119)
+
+![image](https://github.com/user-attachments/assets/43ca6d34-c3ad-423b-882e-a43ffd0dc67d)
+
 [Foto 3- issue bug tracker]()
 [🎥 ScreenCast protótipo Lo-Fi]()
 
-### Relatos de Pair Programming
+### Relatos 2 de Pair Programming 
 Formamos duplas para trabalhar nas tarefas necessárias para o projeto e utilizamos o Google Meet com compartilhamento de tela para resolver todos os requisitos do projeto em conjunto. O nosso principal objetivo com esse método foi garantir que as entregas fossem realizadas dentro dos prazos estabelecidos e com maior eficiência e rapidez.
 
 **Distribuição de Tarefas**: Durante cada reunião, as atividades foram divididas entre as duplas, definindo-se claramente as responsabilidades de cada grupo. Essa divisão acelerou o processo de desenvolvimento e foi registrada em um grupo no WhatsApp, garantindo que todos estivessem cientes das tarefas e prazos. Uma das duplas, formada por Caio e Rafael, ficou encarregada da estrutura HTML e da estilização com CSS das novas histórias implementadas, do Figma e dos Screencasts. A outra dupla, formada por Eduardo e Pedro, ficou responsável pelas configurações no VS Code, pelo banco de dados e pelo deploy. O arquivo README foi elaborado de forma colaborativa por todos os integrantes.
