@@ -211,7 +211,7 @@ def excluir_programacao(request, programacao_id):
 def orcamento(request):
     if request.method == "POST":
         roteiro_id = request.POST.get('roteiro') 
-        roteiro = Roteiro.objects.get(id=roteiro_id, user=request.user)
+        roteiro = Roteiro.objects.get(id=roteiro_id, usuario=request)
 
         hospedagem = float(request.POST.get('hospedagem', 0) or 0)
         passagem = float(request.POST.get('passagem', 0) or 0)
@@ -226,8 +226,9 @@ def orcamento(request):
 
         return redirect('ver_orcamentos')
     else:
-        roteiros = Roteiro.objects.filter(user=request.user)
-        return render(request, 'orcamento.html', {'roteiros': roteiros})
+        return render(request, 'orcamento.html', {
+            'roteiros': Roteiro.objects.all()
+        })
 
 @login_required
 def ver_orcamentos(request):

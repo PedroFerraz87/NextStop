@@ -226,7 +226,7 @@ def orcamento(request):
 
         return redirect('ver_orcamentos')
     else:
-        roteiros = Roteiro.objects.filter(user=request.user)
+        roteiros = Roteiro.objects.filter(usuario=request.user)
         return render(request, 'orcamento.html', {'roteiros': roteiros})
 
 @login_required
