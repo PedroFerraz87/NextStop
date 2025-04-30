@@ -15,10 +15,8 @@ from django.db import transaction
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.http import HttpResponse
 from django.http import JsonResponse
-from django.utils.timezone import is_naive, make_aware, localtime
+from django.utils.timezone import is_naive
 from datetime import datetime, time, timedelta
-from django.utils.dateparse import parse_date, parse_time
-
 
 @login_required
 def home(request):
@@ -116,25 +114,15 @@ def roteiro(request):
             destino=destino,
             data_ida=data_ida,
             data_volta=data_volta,
-            user=request.user
+            user=request.user 
         )
-
-        horarios_ocupados = set()
 
         for dia, horario, local in zip(dias, horarios, locais):
             if dia and horario and local:
-                dia_obj = parse_date(dia)
-                horario_obj = parse_time(horario)
-
-                if Programacao.objects.filter(roteiro=roteiro, dia=dia_obj, horario=horario_obj).exists():
-                    messages.error(request, f'Horário {horario} em {dia} já está preenchido.')
-                    roteiro.delete()  
-                    return redirect('roteiro')
-
                 Programacao.objects.create(
                     roteiro=roteiro,
-                    dia=dia_obj,
-                    horario=horario_obj,
+                    dia=dia,
+                    horario=horario,
                     local=local
                 )
 
@@ -143,7 +131,6 @@ def roteiro(request):
         return redirect('gerenciar')
 
     return render(request, 'Interface/roteiro.html')
-
 
 @login_required
 def gerenciar_viagens(request):
@@ -178,21 +165,6 @@ def editar_roteiro(request, roteiro_id):
             messages.error(request, 'Preencha todos os campos obrigatórios.')
             return redirect(reverse('editar', args=[roteiro_id]))
 
-        if not dias or not horarios or not locais:
-            messages.error(request, 'Adicione pelo menos uma programação.')
-            return redirect(reverse('editar', args=[roteiro_id]))
-
-        combinacoes = set()
-        for dia, horario in zip(dias, horarios):
-            dia_obj = parse_date(dia)
-            horario_obj = parse_time(horario)
-            chave = (dia_obj, horario_obj)
-
-            if chave in combinacoes:
-                messages.error(request, f'Horário duplicado: {horario} em {dia}.')
-                return redirect(reverse('editar', args=[roteiro_id]))
-            combinacoes.add(chave)
-
         roteiro.destino = destino
         roteiro.data_ida = data_ida
         roteiro.data_volta = data_volta
@@ -202,12 +174,10 @@ def editar_roteiro(request, roteiro_id):
 
         for dia, horario, local in zip(dias, horarios, locais):
             if dia and horario and local:
-                dia_obj = parse_date(dia)
-                horario_obj = parse_time(horario)
                 Programacao.objects.create(
                     roteiro=roteiro,
-                    dia=dia_obj,
-                    horario=horario_obj,
+                    dia=dia,
+                    horario=horario,
                     local=local
                 )
 
@@ -325,25 +295,21 @@ def desfavoritar_destino(request):
     
     return JsonResponse({"status": "erro", "mensagem": "Método não permitido."})
 
-from django.utils.timezone import localtime
-
 @login_required
 def lembretes_view(request):
-    programacoes = Programacao.objects.select_related('roteiro').filter(
-        roteiro__user=request.user
-    )
+    programacoes = Programacao.objects.select_related('roteiro').all()
     lembretes_json = []
 
     agora = localtime()
 
     for p in programacoes:
-        evento_datetime = p.get_evento_datetime()
-        diff = (evento_datetime - agora).total_seconds() / 60 + 180
-        if (0 <= diff <= 60):
+        evento_datetime = make_aware(datetime.combine(p.dia, p.horario))
+        diff = (evento_datetime - agora).total_seconds() / 60  
+
+        if 59 <= diff <= 60 or 9 <= diff <= 10:
             lembretes_json.append({
-                'titulo': p.local,
+                'titulo': f'{p.local} ({evento_datetime.strftime("%d/%m/%Y %H:%M")})',
                 'evento_iso': evento_datetime.isoformat(),
-                'min10': 1#+(diff <= 10)
             })
 
     return render(request, 'Interface/lembretes.html', {

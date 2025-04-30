@@ -94,7 +94,7 @@
 
         else if (diffMin <= 60 && !lembrete.alertou10min) {
           mostrarMensagem(`⚠️ Faltam ${parseInt(diffMin)} minutos para: ${lembrete.titulo}`);
-          mensagens.push(`⚠️ Faltam ${parseInt(diffMin)} minutos para: ${lembrete.titulo}`)
+          mensagens.push(`⚠️ Faltam ${diffMin} minutos para: ${lembrete.titulo}`)
           lembrete.alertou10min = true;
         }
 

@@ -19,7 +19,6 @@ from django.utils.timezone import is_naive, make_aware, localtime
 from datetime import datetime, time, timedelta
 from django.utils.dateparse import parse_date, parse_time
 
-
 @login_required
 def home(request):
      if request.user.is_authenticated:
@@ -162,65 +161,7 @@ def gerenciar_viagens(request):
     }
     return render(request, 'Interface/gerenciar.html', context)
 
-@login_required
-def editar_roteiro(request, roteiro_id):
-    roteiro = get_object_or_404(Roteiro, id=roteiro_id, user=request.user)  
 
-    if request.method == 'POST':
-        destino = request.POST.get('destino')
-        data_ida = request.POST.get('dataIda')
-        data_volta = request.POST.get('dataVolta')
-        dias = request.POST.getlist('dias[]')
-        horarios = request.POST.getlist('horarios[]')
-        locais = request.POST.getlist('locais[]')
-
-        if not destino or not data_ida or not data_volta:
-            messages.error(request, 'Preencha todos os campos obrigatórios.')
-            return redirect(reverse('editar', args=[roteiro_id]))
-
-        if not dias or not horarios or not locais:
-            messages.error(request, 'Adicione pelo menos uma programação.')
-            return redirect(reverse('editar', args=[roteiro_id]))
-
-        combinacoes = set()
-        for dia, horario in zip(dias, horarios):
-            dia_obj = parse_date(dia)
-            horario_obj = parse_time(horario)
-            chave = (dia_obj, horario_obj)
-
-            if chave in combinacoes:
-                messages.error(request, f'Horário duplicado: {horario} em {dia}.')
-                return redirect(reverse('editar', args=[roteiro_id]))
-            combinacoes.add(chave)
-
-        roteiro.destino = destino
-        roteiro.data_ida = data_ida
-        roteiro.data_volta = data_volta
-        roteiro.save()
-
-        roteiro.programacoes.all().delete()
-
-        for dia, horario, local in zip(dias, horarios, locais):
-            if dia and horario and local:
-                dia_obj = parse_date(dia)
-                horario_obj = parse_time(horario)
-                Programacao.objects.create(
-                    roteiro=roteiro,
-                    dia=dia_obj,
-                    horario=horario_obj,
-                    local=local
-                )
-
-        messages.success(request, 'Roteiro atualizado com sucesso!')
-        return redirect('gerenciar')
-
-    programacoes = roteiro.programacoes.all()
-
-    context = {
-        'roteiro': roteiro,
-        'programacoes': programacoes,
-    }
-    return render(request, 'Interface/editar.html', context)
 
 @login_required
 def excluir_roteiro(request, roteiro_id):
@@ -325,25 +266,24 @@ def desfavoritar_destino(request):
     
     return JsonResponse({"status": "erro", "mensagem": "Método não permitido."})
 
-from django.utils.timezone import localtime
-
 @login_required
 def lembretes_view(request):
-    programacoes = Programacao.objects.select_related('roteiro').filter(
-        roteiro__user=request.user
-    )
+    programacoes = Programacao.objects.select_related('roteiro').all()
     lembretes_json = []
 
     agora = localtime()
 
     for p in programacoes:
-        evento_datetime = p.get_evento_datetime()
-        diff = (evento_datetime - agora).total_seconds() / 60 + 180
-        if (0 <= diff <= 60):
+        evento_datetime = datetime.combine(p.dia, p.horario)
+        if is_naive(evento_datetime):
+            evento_datetime = make_aware(evento_datetime)
+
+        diff = (evento_datetime - agora).total_seconds() / 60
+
+        if 59 <= diff <= 60 or 9 <= diff <= 10:
             lembretes_json.append({
-                'titulo': p.local,
+                'titulo': f'{p.local}',
                 'evento_iso': evento_datetime.isoformat(),
-                'min10': 1#+(diff <= 10)
             })
 
     return render(request, 'Interface/lembretes.html', {

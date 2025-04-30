@@ -19,7 +19,6 @@ from django.utils.timezone import is_naive, make_aware, localtime
 from datetime import datetime, time, timedelta
 from django.utils.dateparse import parse_date, parse_time
 
-
 @login_required
 def home(request):
      if request.user.is_authenticated:
@@ -182,6 +181,7 @@ def editar_roteiro(request, roteiro_id):
             messages.error(request, 'Adicione pelo menos uma programação.')
             return redirect(reverse('editar', args=[roteiro_id]))
 
+        # Verificação de horários duplicados
         combinacoes = set()
         for dia, horario in zip(dias, horarios):
             dia_obj = parse_date(dia)
@@ -193,11 +193,13 @@ def editar_roteiro(request, roteiro_id):
                 return redirect(reverse('editar', args=[roteiro_id]))
             combinacoes.add(chave)
 
+        # Atualiza o roteiro
         roteiro.destino = destino
         roteiro.data_ida = data_ida
         roteiro.data_volta = data_volta
         roteiro.save()
 
+        # Apaga programações antigas e recria com base nas novas
         roteiro.programacoes.all().delete()
 
         for dia, horario, local in zip(dias, horarios, locais):
@@ -325,25 +327,24 @@ def desfavoritar_destino(request):
     
     return JsonResponse({"status": "erro", "mensagem": "Método não permitido."})
 
-from django.utils.timezone import localtime
-
 @login_required
 def lembretes_view(request):
-    programacoes = Programacao.objects.select_related('roteiro').filter(
-        roteiro__user=request.user
-    )
+    programacoes = Programacao.objects.select_related('roteiro').all()
     lembretes_json = []
 
     agora = localtime()
 
     for p in programacoes:
-        evento_datetime = p.get_evento_datetime()
-        diff = (evento_datetime - agora).total_seconds() / 60 + 180
-        if (0 <= diff <= 60):
+        evento_datetime = datetime.combine(p.dia, p.horario)
+        if is_naive(evento_datetime):
+            evento_datetime = make_aware(evento_datetime)
+
+        diff = (evento_datetime - agora).total_seconds() / 60
+
+        if 59 <= diff <= 60 or 9 <= diff <= 10:
             lembretes_json.append({
-                'titulo': p.local,
+                'titulo': f'{p.local}',
                 'evento_iso': evento_datetime.isoformat(),
-                'min10': 1#+(diff <= 10)
             })
 
     return render(request, 'Interface/lembretes.html', {

@@ -22,32 +22,31 @@ class Roteiro(models.Model):
     def __str__(self):
         return f"Roteiro para {self.destino}" if self.destino else "Roteiro sem destino"
 
-from django.utils.timezone import make_aware, is_naive, now
-
 class Programacao(models.Model):
     roteiro = models.ForeignKey(Roteiro, related_name='programacoes', on_delete=models.CASCADE)
     dia = models.DateField()
     horario = models.TimeField()
     local = models.CharField(max_length=255)
-
     class Meta:
         unique_together = ('roteiro', 'dia', 'horario')
+
 
     def __str__(self):
         if self.local and self.dia and self.horario:
             return f"{self.local} em {self.dia.strftime('%d/%m/%Y')} às {self.horario.strftime('%H:%M')}"
         return "Programação incompleta"
-
-    def get_evento_datetime(self):
-        evento = datetime.combine(self.dia, self.horario)
-        return make_aware(evento) if is_naive(evento) else evento
-
+        
     def lembrete_1h(self):
-        return now() >= self.get_evento_datetime() - timedelta(hours=1)
+        evento_datetime = datetime.combine(self.dia, self.horario)
+        if is_naive(evento_datetime):
+            evento_datetime = make_aware(evento_datetime)
+        return now() >= evento_datetime - timedelta(hours=1)
 
     def lembrete_10min(self):
-        return now() >= self.get_evento_datetime() - timedelta(minutes=10)
-
+        evento_datetime = datetime.combine(self.dia, self.horario)
+        if is_naive(evento_datetime):
+            evento_datetime = make_aware(evento_datetime)
+        return now() >= evento_datetime - timedelta(minutes=10)
 
 class ChecklistItem(models.Model):
     nome = models.CharField(max_length=255)

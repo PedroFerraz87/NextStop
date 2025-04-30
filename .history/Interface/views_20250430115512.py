@@ -329,21 +329,19 @@ from django.utils.timezone import localtime
 
 @login_required
 def lembretes_view(request):
-    programacoes = Programacao.objects.select_related('roteiro').filter(
-        roteiro__user=request.user
-    )
+    programacoes = Programacao.objects.select_related('roteiro')
     lembretes_json = []
 
     agora = localtime()
 
     for p in programacoes:
+        print(p.roteiro.user_id)
         evento_datetime = p.get_evento_datetime()
         diff = (evento_datetime - agora).total_seconds() / 60 + 180
-        if (0 <= diff <= 60):
+        if (0 <= diff <= 60 and ):
             lembretes_json.append({
                 'titulo': p.local,
                 'evento_iso': evento_datetime.isoformat(),
-                'min10': 1#+(diff <= 10)
             })
 
     return render(request, 'Interface/lembretes.html', {

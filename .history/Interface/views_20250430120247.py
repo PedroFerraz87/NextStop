@@ -343,7 +343,7 @@ def lembretes_view(request):
             lembretes_json.append({
                 'titulo': p.local,
                 'evento_iso': evento_datetime.isoformat(),
-                'min10': 1#+(diff <= 10)
+                'min10': 1
             })
 
     return render(request, 'Interface/lembretes.html', {
