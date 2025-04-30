@@ -7,7 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   {% load static %}
 </head>
-
 <script>
   const lembretes = {{ lembretes_json|safe }}.map(l => ({
     ...l,
@@ -32,21 +31,21 @@
 
     lembretes.forEach(lembrete => {
       const dataLembrete = new Date(lembrete.data);
-      const diffMin = Math.floor((dataLembrete - agora) / 60000); 
+      const diffMin = Math.floor((dataLembrete - agora) / 60000); // diferença em minutos
 
       if (diffMin <= 60 && diffMin >= 59 && !lembrete.alertou1h) {
-        mostrarMensagem(`⏰ Falta 1 hora para sua ida a ${lembrete.local}`);
+        mostrarMensagem(`⏰ Faltam 1 hora para: ${lembrete.titulo}`);
         lembrete.alertou1h = true;
       }
 
       if (diffMin <= 10 && diffMin >= 9 && !lembrete.alertou10min) {
-        mostrarMensagem(`⚠️ Faltam 10 minutos para sua ida a ${lembrete.local}`);
+        mostrarMensagem(`⚠️ Faltam 10 minutos para: ${lembrete.titulo}`);
         lembrete.alertou10min = true;
       }
     });
   }
-
-  setInterval(verificarLembretes, 60000); 
+// a cada minut
+  setInterval(verificarLembretes, 60000); o
   verificarLembretes(); 
 </script>
 
@@ -64,15 +63,16 @@
     <h1 class="text-3xl font-bold text-white mb-8">Alertas e Lembretes</h1>
 
     <div class="w-full max-w-6xl bg-gray-800 rounded-lg shadow-md p-6">
-      <h2 class="text-2xl font-bold text-white mb-4">Próximas Programações</h2>
+      <h2 class="text-2xl font-bold text-white mb-4">Meus Lembretes</h2>
       <ul class="list-none space-y-4">
-        {% for lembrete in lembretes_json %}
+        {% for lembrete in lembretes %}
           <li class="bg-gray-700 p-4 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-white">{{ lembrete.local }}</h3>
-            <p class="text-gray-300"><span class="font-bold">Data e hora:</span> {{ lembrete.data|date:"d/m/Y H:i" }}</p>
+            <h3 class="text-xl font-semibold text-white">{{ lembrete.titulo }}</h3>
+            <p class="text-gray-300"><span class="font-bold">Data:</span> {{ lembrete.data }}</p>
+            <p class="text-gray-300"><span class="font-bold">Descrição:</span> {{ lembrete.descricao }}</p>
           </li>
         {% empty %}
-          <li class="text-gray-400">Nenhuma programação nas próximas horas.</li>
+          <li class="text-gray-400">Nenhum lembrete recente.</li>
         {% endfor %}
       </ul>
     </div>

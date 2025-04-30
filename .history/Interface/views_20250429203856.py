@@ -234,7 +234,7 @@ def orcamento(request):
 
 @login_required
 def ver_orcamentos(request):
-    roteiros = Roteiro.objects.filter(user=request.user).exclude(custo_total=0).order_by('-id')
+    roteiros = Roteiro.objects.exclude(custo_total=0).order_by('-id')
     return render(request, 'ver_orcamentos.html', {'roteiros': roteiros})
 
 @login_required
@@ -295,32 +295,5 @@ def desfavoritar_destino(request):
     
     return JsonResponse({"status": "erro", "mensagem": "Método não permitido."})
 
-@login_required
-def lembretes_view(request):
-    agora = localtime(datetime.now())
-    programacoes = Programacao.objects.filter(roteiro__usuario=request.user)
-
-    lembretes = []
-    lembretes_json = []
-
-    for p in programacoes:
-        evento_datetime = datetime.combine(p.dia, p.horario)
-        if evento_datetime > agora:  
-            diff = evento_datetime - agora
-            if timedelta(minutes=9) < diff <= timedelta(minutes=11):
-                lembrete = f"Faltam 10 minutos para sua ida a {p.local}."
-            elif timedelta(minutes=59) < diff <= timedelta(minutes=61):
-                lembrete = f"Falta 1 hora para sua ida a {p.local}."
-            else:
-                continue
-
-            lembretes.append(lembrete)
-            lembretes_json.append({
-                'mensagem': lembrete,
-                'data': evento_datetime.strftime('%Y-%m-%dT%H:%M:%S'),
-            })
-
-    return render(request, 'Interface/lembretes.html', {
-        'lembretes': lembretes,
-        'lembretes_json': lembretes_json,
+retes_json': lembretes_json,
     })

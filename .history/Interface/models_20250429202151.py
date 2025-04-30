@@ -52,6 +52,10 @@ class ChecklistItem(models.Model):
     def __str__(self):
         return self.nome
 
+
+    def __str__(self):
+        return self.titulo
+
 class DestinoFavorito(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  
     nome_destino = models.CharField(max_length=255)

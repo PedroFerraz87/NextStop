@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime, timedelta
 
 class Interface(models.Model):
     nome = models.CharField(max_length=100)
@@ -31,18 +30,11 @@ class Programacao(models.Model):
         if self.local and self.dia and self.horario:
             return f"{self.local} em {self.dia.strftime('%d/%m/%Y')} às {self.horario.strftime('%H:%M')}"
         return "Programação incompleta"
-        
-    def lembrete_1h(self):
-        """Calcula se a programação está a 1 hora ou menos do horário."""
-        evento_datetime = datetime.combine(self.dia, self.horario)
-        lembrete_1h = evento_datetime - timedelta(hours=1)
-        return lembrete_1h <= datetime.now()
-
-    def lembrete_10min(self):
-        """Calcula se a programação está a 10 minutos ou menos do horário."""
-        evento_datetime = datetime.combine(self.dia, self.horario)
-        lembrete_10min = evento_datetime - timedelta(minutes=10)
-        return lembrete_10min <= datetime.now()
+class Lembrete(models.Model):
+    titulo = models.CharField(max_length=255)
+    data = models.DateField()
+    descricao = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="lembretes")  
 
 class ChecklistItem(models.Model):
     nome = models.CharField(max_length=255)
@@ -51,6 +43,10 @@ class ChecklistItem(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+    def __str__(self):
+        return self.titulo
 
 class DestinoFavorito(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  

@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime, timedelta
 
 class Interface(models.Model):
     nome = models.CharField(max_length=100)
@@ -31,8 +30,7 @@ class Programacao(models.Model):
         if self.local and self.dia and self.horario:
             return f"{self.local} em {self.dia.strftime('%d/%m/%Y')} às {self.horario.strftime('%H:%M')}"
         return "Programação incompleta"
-        
-    def lembrete_1h(self):
+     def lembrete_1h(self):
         """Calcula se a programação está a 1 hora ou menos do horário."""
         evento_datetime = datetime.combine(self.dia, self.horario)
         lembrete_1h = evento_datetime - timedelta(hours=1)
@@ -51,6 +49,10 @@ class ChecklistItem(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+    def __str__(self):
+        return self.titulo
 
 class DestinoFavorito(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  
