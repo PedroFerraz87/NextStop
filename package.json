@@ -1,0 +1,22 @@
+{
+  "name": "nextstop",
+  "version": "1.0.0",
+  "description": "O NextStop é uma solução desenvolvida em Django que fornece ao usuário um planejamento de roteiro de viagem, encontrar destinos e personalizar suas experiências.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PedroFerraz87/NextStop.git"
+  },
+  "author": "\"\",",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PedroFerraz87/NextStop/issues"
+  },
+  "homepage": "https://github.com/PedroFerraz87/NextStop#readme",
+  "dependencies": {
+    "cypress": "^14.3.2"
+  }
+}
