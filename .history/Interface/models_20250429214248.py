@@ -34,16 +34,16 @@ class Programacao(models.Model):
         return "Programação incompleta"
         
     def lembrete_1h(self):
+        """Calcula se a programação está a 1 hora ou menos do horário."""
         evento_datetime = datetime.combine(self.dia, self.horario)
-        if is_naive(evento_datetime):
-            evento_datetime = make_aware(evento_datetime)
-        return now() >= evento_datetime - timedelta(hours=1)
+        lembrete_1h = evento_datetime - timedelta(hours=1)
+        return lembrete_1h <= datetime.now()
 
     def lembrete_10min(self):
+        """Calcula se a programação está a 10 minutos ou menos do horário."""
         evento_datetime = datetime.combine(self.dia, self.horario)
-        if is_naive(evento_datetime):
-            evento_datetime = make_aware(evento_datetime)
-        return now() >= evento_datetime - timedelta(minutes=10)
+        lembrete_10min = evento_datetime - timedelta(minutes=10)
+        return lembrete_10min <= datetime.now()
 
 class ChecklistItem(models.Model):
     nome = models.CharField(max_length=255)

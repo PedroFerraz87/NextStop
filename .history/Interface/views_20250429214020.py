@@ -15,8 +15,8 @@ from django.db import transaction
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.http import HttpResponse
 from django.http import JsonResponse
-from django.utils.timezone import localtime, make_aware, is_naive
-from datetime import datetime, time, timedelta
+from django.utils.timezone import localtime, make_aware, is_
+from datetime import datetime, timedelta
 
 @login_required
 def home(request):

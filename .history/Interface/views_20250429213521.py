@@ -15,8 +15,8 @@ from django.db import transaction
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.http import HttpResponse
 from django.http import JsonResponse
-from django.utils.timezone import localtime, make_aware, is_naive
-from datetime import datetime, time, timedelta
+from django.utils.timezone import localtime
+from datetime import datetime, timedelta
 
 @login_required
 def home(request):
@@ -232,7 +232,7 @@ def orcamento(request):
         roteiros = Roteiro.objects.filter(user=request.user)
         return render(request, 'orcamento.html', {'roteiros': roteiros})
 
-@login_required
+@data
 def ver_orcamentos(request):
     roteiros = Roteiro.objects.filter(user=request.user).exclude(custo_total=0).order_by('-id')
     return render(request, 'ver_orcamentos.html', {'roteiros': roteiros})
@@ -297,26 +297,30 @@ def desfavoritar_destino(request):
 
 @login_required
 def lembretes_view(request):
-    programacoes = Programacao.objects.filter(
-        roteiro__user=request.user
-    ).order_by('dia', 'horario')
+    agora = localtime(datetime.now())
+    programacoes = Programacao.objects.filter(roteiro__usuario=request.user)
 
+    lembretes = []
     lembretes_json = []
 
     for p in programacoes:
         evento_datetime = datetime.combine(p.dia, p.horario)
+        if evento_datetime > agora:  
+            diff = evento_datetime - agora
+            if timedelta(minutes=9) < diff <= timedelta(minutes=11):
+                lembrete = f"Faltam 10 minutos para sua ida a {p.local}."
+            elif timedelta(minutes=59) < diff <= timedelta(minutes=61):
+                lembrete = f"Falta 1 hora para sua ida a {p.local}."
+            else:
+                continue
 
-        if is_naive(evento_datetime):
-            evento_datetime = make_aware(evento_datetime)
-
-        evento_local = localtime(evento_datetime)
-
-        lembretes_json.append({
-            'local': p.local,
-            'data': evento_local.strftime('%Y-%m-%dT%H:%M:%S'),
-        })
+            lembretes.append(lembrete)
+            lembretes_json.append({
+                'mensagem': lembrete,
+                'data': evento_datetime.strftime('%Y-%m-%dT%H:%M:%S'),
+            })
 
     return render(request, 'Interface/lembretes.html', {
-        'lembretes': programacoes,
+        'lembretes': lembretes,
         'lembretes_json': lembretes_json,
     })

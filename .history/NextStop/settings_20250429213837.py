@@ -15,9 +15,9 @@ import os
 from dotenv import load_dotenv
 
 USE_TZ = True
-TIME_ZONE = 'America/Sao_Paulo' # fuso horario
+TIME_ZONE = 'America/Sao_Paulo'
 
-LOGIN_URL = '/' # adicionado depois
+LOGIN_URL = '/'
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Isso usa o banco de dados para armazenar sessões
 SESSION_COOKIE_AGE = 3600  # A duração da sessão em segundos (1 hora)
 

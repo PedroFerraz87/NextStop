@@ -15,8 +15,9 @@ from django.db import transaction
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.http import HttpResponse
 from django.http import JsonResponse
-from django.utils.timezone import localtime, make_aware, is_naive
-from datetime import datetime, time, timedelta
+from django.utils.timezone import localtime
+from datetime import datetime, timedelta
+from django.utils.timezone import make_aware
 
 @login_required
 def home(request):
@@ -306,9 +307,11 @@ def lembretes_view(request):
     for p in programacoes:
         evento_datetime = datetime.combine(p.dia, p.horario)
 
+        # Verifica e converte para timezone-aware
         if is_naive(evento_datetime):
             evento_datetime = make_aware(evento_datetime)
 
+        # Converte para hora local (Brasil, GMT-3)
         evento_local = localtime(evento_datetime)
 
         lembretes_json.append({
