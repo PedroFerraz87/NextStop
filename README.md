@@ -63,7 +63,7 @@ Nós nos juntamos em duplas e compartilhamos tela através do meeting para resol
 [🎥 ScreenCast protótipo Lo-Fi](https://youtu.be/XTNIRQdcREM)
 [🎥 ScreenCast site](https://youtu.be/JKMpc0fvCaM)
 [🎥 ScreenCast CI/CD](https://youtu.be/yLOWrzj_KhE)
-[🎥 ScreenCast testes automatizados]()
+[🎥 ScreenCast testes automatizados](https://youtu.be/fG6us-cIIEA)
 
 ### Relatos de Pair Programming 2
 Formamos duplas para trabalhar nas tarefas necessárias para o projeto e utilizamos o Google Meet com compartilhamento de tela para resolver todos os requisitos do projeto em conjunto. O nosso principal objetivo com esse método foi garantir que as entregas fossem realizadas dentro dos prazos estabelecidos e com maior eficiência e rapidez.
