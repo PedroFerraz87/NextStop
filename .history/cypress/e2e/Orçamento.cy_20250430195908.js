@@ -1,0 +1,26 @@
+describe('Funcionalidade: Orçamento de Viagem', () => {
+
+  it('Cenário favorável 1: Deve calcular o valor total estimado da viagem', () => {
+    cy.get('input[name="Gasto com Hospedagem (R$)"]').type('1000');
+    cy.get('input[name="passagem"]').type('1500');
+    cy.get('input[name="alimentacao"]').type('800');
+    cy.get('input[name="passeios"]').type('500');
+    cy.get('input[name="extras"]').type('500');
+    cy.get('#salvar-orcamento').click();
+    cy.contains('Custo Total: R$ 4300,00').should('be.visible');
+  });
+
+  it('Cenário desfavorável 1: O valor deve ser 0 ou maior que 0', () => {
+    cy.get('input[name="hospedagem"]').type('-1');
+    cy.get('#salvar-orcamento').click();
+    cy.contains('O valor deve ser maior igual a 0.').should('be.visible');
+  });
+
+  it('Cenário favorável 2: Deve permitir ajustar centavos com botão lateral', () => {
+    cy.get('input[name="alimentacao"]').type('300');
+    cy.get('button#incrementar-centavos').click().click();
+    cy.get('#salvar-orcamento').click();
+    cy.contains('Total estimado: R$ 300,02').should('be.visible');
+  });
+
+});
