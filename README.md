@@ -60,9 +60,9 @@ Nós nos juntamos em duplas e compartilhamos tela através do meeting para resol
 ![image](https://github.com/user-attachments/assets/430fa280-8572-420c-9b96-ce2bdca8b6b9)
 
 
-[🎥 ScreenCast protótipo Lo-Fi]()
-[🎥 ScreenCast site]()
-[🎥 ScreenCast CI/CD]()
+[🎥 ScreenCast protótipo Lo-Fi](https://youtu.be/XTNIRQdcREM)
+[🎥 ScreenCast site](https://youtu.be/JKMpc0fvCaM)
+[🎥 ScreenCast CI/CD](https://youtu.be/yLOWrzj_KhE)
 [🎥 ScreenCast testes automatizados]()
 
 ### Relatos de Pair Programming 2
