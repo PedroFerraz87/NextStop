@@ -16,7 +16,7 @@
     </a>
 
     <div class="w-full max-w-md bg-gray-800 rounded-lg shadow-md p-8">
-      <h1 class="text-2xl font-bold mb-6">Calculadora de Gastos da Viagem</h1>
+      <h1 class="text-2xl font-bold mb-6">Calculadora de gastos da viagem</h1>
 
       <form id="formGastos" method="post" action="{% url 'orcamento' %}">
         {% csrf_token %}
@@ -54,6 +54,11 @@
         <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center">
           Salvar Orçamento
         </button>
+        <div class="mt-4">
+        <a href="{% url 'ver_orcamentos' %}" class="block w-full bg-gray-600 hover:bg-gray-700 text-white text-center font-medium rounded-lg px-5 py-2.5 text-sm">
+          Ver orçamentos salvos
+        </a>
+        </div>
       </form>
 
       <div id="voltarBtn" class="hidden mt-4">
