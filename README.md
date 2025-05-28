@@ -7,7 +7,6 @@ O NextStop é uma solução desenvolvida em Django que fornece ao usuário um pl
 - <a href="https://www.figma.com/design/NH6gXtqEq6ScD94R0JjhhT/Next-Stop?node-id=37-6&t=Df3CO9P0t0yYVnd6-1" target="_blank">Figma</a>
 - <a href="https://docs.google.com/document/d/1aSS9CKXjFiJVWMc2ProF_4tRzgPjE1SwDDQWuf53CP4/edit?usp=sharing" target="_blank">Docs</a>
 
-
 ## Integrantes
 - Caio Buonora - ccmb@cesar.school
 - Pedro Valença - pvf@cesar.school
@@ -68,8 +67,31 @@ Nós nos juntamos em duplas e compartilhamos tela através do meeting para resol
 ### Relatos de Pair Programming 2
 Formamos duplas para trabalhar nas tarefas necessárias para o projeto e utilizamos o Google Meet com compartilhamento de tela para resolver todos os requisitos do projeto em conjunto. O nosso principal objetivo com esse método foi garantir que as entregas fossem realizadas dentro dos prazos estabelecidos e com maior eficiência e rapidez.
 
-**Distribuição de Tarefas**: Durante cada reunião, as atividades foram divididas entre as duplas, definindo-se claramente as responsabilidades de cada grupo. Essa divisão acelerou o processo de desenvolvimento e foi registrada em um grupo no WhatsApp, garantindo que todos estivessem cientes das tarefas e prazos. Uma das duplas, formada por Caio e Rafael, ficou encarregada da estrutura HTML e da estilização com CSS das novas histórias implementadas, do Figma e dos Screencasts. A outra dupla, formada por Eduardo e Pedro, ficou responsável pelas configurações no VS Code, pelo banco de dados e pelo deploy. O README foi elaborado de forma colaborativa por todos os integrantes.
+**Distribuição de tarefas**: Durante cada reunião, as atividades foram divididas entre as duplas, definindo-se claramente as responsabilidades de cada grupo. Essa divisão acelerou o processo de desenvolvimento e foi registrada em um grupo no WhatsApp, garantindo que todos estivessem cientes das tarefas e prazos. Uma das duplas, formada por Caio e Rafael, ficou encarregada da estrutura HTML e da estilização com CSS das novas histórias implementadas, do Figma e dos Screencasts. A outra dupla, formada por Eduardo e Pedro, ficou responsável pelas configurações no VS Code, pelo banco de dados e pelo deploy. O README foi elaborado de forma colaborativa por todos os integrantes.
 
-**Metodologia de Trabalho**: As reuniões, tanto em grupo quanto em duplas, foram realizadas pelo Google Meet, o que facilitou a colaboração entre todos os membros. O compartilhamento de tela foi essencial para que as atividades fossem desenvolvidas em conjunto, garantindo que todos tivessem pleno conhecimento do andamento do projeto e contribuíssem ativamente na execução das tarefas. Além disso, várias alterações feitas por alguma das duplas eram compartilhadas com todos os integrantes, com o objetivo de manter o grupo inteiro integrado no processo.
+**Metodologia de trabalho**: As reuniões, tanto em grupo quanto em duplas, foram realizadas pelo Google Meet, o que facilitou a colaboração entre todos os membros. O compartilhamento de tela foi essencial para que as atividades fossem desenvolvidas em conjunto, garantindo que todos tivessem pleno conhecimento do andamento do projeto e contribuíssem ativamente na execução das tarefas. Além disso, várias alterações feitas por alguma das duplas eram compartilhadas com todos os integrantes, com o objetivo de manter o grupo inteiro integrado no processo.
+
+</details>
+
+## Entrega 4
+<details>
+<summary>Ver detalhes</summary>
+<br/>
+
+jira (quadro e backlog)
+issue/bugtracker
+
+[🎥 ScreenCast protótipo Lo-Fi]()
+[🎥 ScreenCast site]()
+[🎥 ScreenCast CI/CD]()
+[🎥 ScreenCast testes automatizados]()
+
+### Relatos de Pair Programming 3
+
+**Distribuição de tarefas**:
+**Metodologia de trabalho**:
+
+</details>
+
 
 
