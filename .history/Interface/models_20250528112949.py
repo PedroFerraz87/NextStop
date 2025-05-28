@@ -43,6 +43,7 @@ class Roteiro(models.Model):
     def __str__(self):
         return f"Roteiro para {self.destino}" if self.destino else "Roteiro sem destino"
 
+
 class Programacao(models.Model):
     roteiro = models.ForeignKey(Roteiro, related_name='programacoes', on_delete=models.CASCADE)
     dia = models.DateField()

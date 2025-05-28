@@ -244,16 +244,19 @@ def excluir_programacao(request, programacao_id):
 @login_required
 def orcamento(request):
     if request.method == "POST":
-        roteiro_id = request.POST.get('roteiro')
+        roteiro_id = request.POST.get('roteiro') 
         roteiro = Roteiro.objects.get(id=roteiro_id, user=request.user)
 
-        roteiro.hospedagem = float(request.POST.get('hospedagem', 0) or 0)
-        roteiro.passagem = float(request.POST.get('passagem', 0) or 0)
-        roteiro.alimentacao = float(request.POST.get('alimentacao', 0) or 0)
-        roteiro.passeios = float(request.POST.get('passeios', 0) or 0)
-        roteiro.extras = float(request.POST.get('extras', 0) or 0)
+        hospedagem = float(request.POST.get('hospedagem', 0) or 0)
+        passagem = float(request.POST.get('passagem', 0) or 0)
+        alimentacao = float(request.POST.get('alimentacao', 0) or 0)
+        passeios = float(request.POST.get('passeios', 0) or 0)
+        extras = float(request.POST.get('extras', 0) or 0)
 
-        roteiro.save()  
+        total_orcamento = hospedagem + passagem + alimentacao + passeios + extras
+
+        roteiro.custo_total = total_orcamento
+        roteiro.save()
 
         return redirect('ver_orcamentos')
     else:
@@ -262,36 +265,8 @@ def orcamento(request):
 
 @login_required
 def ver_orcamentos(request):
-    roteiros = Roteiro.objects.filter(user=request.user).exclude(custo_total=0)
+    roteiros = Roteiro.objects.filter(user=request.user).exclude(custo_total=0).order_by('-id')
     return render(request, 'ver_orcamentos.html', {'roteiros': roteiros})
-
-@login_required
-def editar_orcamento(request, roteiro_id):
-    roteiro = get_object_or_404(Roteiro, id=roteiro_id, user=request.user)
-
-    if request.method == 'POST':
-        roteiro.hospedagem = float(request.POST.get('hospedagem', 0) or 0)
-        roteiro.passagem = float(request.POST.get('passagem', 0) or 0)
-        roteiro.alimentacao = float(request.POST.get('alimentacao', 0) or 0)
-        roteiro.passeios = float(request.POST.get('passeios', 0) or 0)
-        roteiro.extras = float(request.POST.get('extras', 0) or 0)
-
-        roteiro.save()
-
-        return redirect('ver_orcamentos')
-
-    return render(request, 'editar_orcamento.html', {'roteiro': roteiro})
-
-@login_required
-def excluir_orcamento(request, roteiro_id):
-    roteiro = get_object_or_404(Roteiro, id=roteiro_id, user=request.user)
-    roteiro.hospedagem = 0
-    roteiro.passagem = 0
-    roteiro.alimentacao = 0
-    roteiro.passeios = 0
-    roteiro.extras = 0
-    roteiro.save()
-    return redirect('ver_orcamentos')
 
 @login_required
 def checklist(request):

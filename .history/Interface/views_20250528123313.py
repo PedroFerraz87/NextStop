@@ -263,6 +263,7 @@ def orcamento(request):
 @login_required
 def ver_orcamentos(request):
     roteiros = Roteiro.objects.filter(user=request.user).exclude(custo_total=0)
+
     return render(request, 'ver_orcamentos.html', {'roteiros': roteiros})
 
 @login_required

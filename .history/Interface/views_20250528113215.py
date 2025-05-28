@@ -262,7 +262,7 @@ def orcamento(request):
 
 @login_required
 def ver_orcamentos(request):
-    roteiros = Roteiro.objects.filter(user=request.user).exclude(custo_total=0)
+    roteiros = Roteiro.objects.filter(user=request.user).exclude(custo_total=0).order_by('-id')
     return render(request, 'ver_orcamentos.html', {'roteiros': roteiros})
 
 @login_required
@@ -282,14 +282,11 @@ def editar_orcamento(request, roteiro_id):
 
     return render(request, 'editar_orcamento.html', {'roteiro': roteiro})
 
+
 @login_required
 def excluir_orcamento(request, roteiro_id):
     roteiro = get_object_or_404(Roteiro, id=roteiro_id, user=request.user)
-    roteiro.hospedagem = 0
-    roteiro.passagem = 0
-    roteiro.alimentacao = 0
-    roteiro.passeios = 0
-    roteiro.extras = 0
+    roteiro.custo_total = 0  
     roteiro.save()
     return redirect('ver_orcamentos')
 

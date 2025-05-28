@@ -17,31 +17,11 @@ class Roteiro(models.Model):
     data_ida = models.DateField()
     data_volta = models.DateField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='roteiros')
-
-    hospedagem = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    passagem = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    alimentacao = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    passeios = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    extras = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-
-    custo_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-
-    def calcular_custo_total(self):
-        self.custo_total = (
-            self.hospedagem +
-            self.passagem +
-            self.alimentacao +
-            self.passeios +
-            self.extras
-        )
-        return self.custo_total
-
-    def save(self, *args, **kwargs):
-        self.calcular_custo_total()
-        super().save(*args, **kwargs)
+    custo_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
 
     def __str__(self):
         return f"Roteiro para {self.destino}" if self.destino else "Roteiro sem destino"
+
 
 class Programacao(models.Model):
     roteiro = models.ForeignKey(Roteiro, related_name='programacoes', on_delete=models.CASCADE)
