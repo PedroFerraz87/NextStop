@@ -313,6 +313,27 @@ def marcar_concluido(request, item_id):
     item.save()
     return redirect('checklist')
 
+@login_required
+def editar_item(request, item_id):
+    item = get_object_or_404(ChecklistItem, id=item_id, user=request.user)
+
+    if request.method == "POST":
+        novo_nome = request.POST.get('item')
+        if novo_nome:
+            item.nome = novo_nome
+            item.save()
+        return redirect('checklist')
+
+    return render(request, 'Interface/editar_item.html', {'item': item})
+
+
+@login_required
+def deletar_item(request, item_id):
+    item = get_object_or_404(ChecklistItem, id=item_id, user=request.user)
+    item.delete()
+    return redirect('checklist')
+
+    return render(request, 'Interface/confirma_delete.html', {'item': item})
 
 @login_required
 def sugestao(request):
