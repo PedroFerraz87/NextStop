@@ -77,10 +77,10 @@ Formamos duplas para trabalhar nas tarefas necessárias para o projeto e utiliza
 <details>
 <summary>Ver detalhes</summary>
 <br/>
+  
+![jira quadro](https://github.com/user-attachments/assets/1b3c6cbd-07ec-4509-b40d-5a1c0a4c7522)
 
-jira quadro 
-
-jira backlog
+![jira backlog](https://github.com/user-attachments/assets/b5aada92-a919-4cd6-baa6-0e215d50b37a)
 
 ![issue/bugtracker](https://github.com/user-attachments/assets/b1317154-ef88-46dc-8a4e-22e19d7760f0)
 
