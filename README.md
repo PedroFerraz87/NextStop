@@ -78,8 +78,12 @@ Formamos duplas para trabalhar nas tarefas necessárias para o projeto e utiliza
 <summary>Ver detalhes</summary>
 <br/>
 
-jira (quadro e backlog)
-issue/bugtracker
+jira quadro 
+
+jira backlog
+
+![issue/bugtracker](https://github.com/user-attachments/assets/b1317154-ef88-46dc-8a4e-22e19d7760f0)
+
 
 [🎥 ScreenCast protótipo Lo-Fi]()
 [🎥 ScreenCast site]()
