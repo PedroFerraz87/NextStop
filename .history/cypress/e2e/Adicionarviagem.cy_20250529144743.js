@@ -1,8 +1,8 @@
 describe('Página de Criar Roteiro', () => {
   beforeEach(() => {
     cy.deleteAllUsers();
-    cy.createUser('robotestes', 'robo@example.com', 'senha1234');
-    cy.login('robo@example.com', 'senha1234');
+    cy.createUser('robotestes', 'user@example.com', 'senha1234');
+    cy.login('user@example.com', 'senha1234');
     cy.visit('/roteiro');  
   });
 
@@ -32,20 +32,7 @@ describe('Página de Criar Roteiro', () => {
     });
     cy.url().should('include', '/roteiro');
   });
-
-  it('Cenário desfavorável 2: Exibe mensagem de erro se o usuário tentar salvar um roteiro sem nenhuma programação', () => {
-    cy.contains('Destino');
-    cy.contains('Data de Ida');
-    cy.contains('Data de Volta');
-
-    cy.get('input[name="destino"]').type('Paris');
-    cy.get('input[name="dataIda"]').type('2025-06-15');
-    cy.get('input[name="dataVolta"]').type('2025-06-22');
-
-    cy.get('form').within(() => {
-      cy.get('button[type="submit"]').click();
-    });
-    cy.url().should('include', '/roteiro');
-  });
 });
+
+  it('Cenário desfavorável 2: Exibe mensagem de erro se o usuário tentar ', () => {
 

@@ -18,7 +18,7 @@ describe('Página de Destinos Recomendados', () => {
     cy.contains('Dubai, Emirados Árabes Unidos');
   });
 
-  it('Cenário favorável 2: remove destinos dos favoritos', () => {
+  it('Adiciona e remove destinos dos favoritos', () => {
     const destinoFavorito = 'Paris, França';
 
     cy.contains(destinoFavorito).parent().find('button').click();
@@ -32,7 +32,7 @@ describe('Página de Destinos Recomendados', () => {
     cy.get('#favoritosList').should('not.contain', destinoFavorito);
   });
 
-  it('Cenário desfavorável 1: Não permite adicionar um destino já favoritado novamente', () => {
+  it('Cenário desfavorável 2: Não permite adicionar um destino já favoritado novamente', () => {
     const destinoFavorito = 'Paris, França';
 
     // Adiciona o destino aos favoritos

@@ -32,7 +32,7 @@ describe('Página de Destinos Recomendados', () => {
     cy.get('#favoritosList').should('not.contain', destinoFavorito);
   });
 
-  it('Cenário desfavorável 1: Não permite adicionar um destino já favoritado novamente', () => {
+  it('Cenário desfavorável 2: Não permite adicionar um destino já favoritado novamente', () => {
     const destinoFavorito = 'Paris, França';
 
     // Adiciona o destino aos favoritos

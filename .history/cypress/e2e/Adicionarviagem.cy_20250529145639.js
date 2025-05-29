@@ -40,7 +40,7 @@ describe('Página de Criar Roteiro', () => {
 
     cy.get('input[name="destino"]').type('Paris');
     cy.get('input[name="dataIda"]').type('2025-06-15');
-    cy.get('input[name="dataVolta"]').type('2025-06-22');
+    cy.get('input[name="dataVolta"]').type('2025-06-22');x
 
     cy.get('form').within(() => {
       cy.get('button[type="submit"]').click();
