@@ -59,9 +59,9 @@ Nós nos juntamos em duplas e compartilhamos tela através do meeting para resol
 ![image](https://github.com/user-attachments/assets/430fa280-8572-420c-9b96-ce2bdca8b6b9)
 
 
-[🎥 ScreenCast protótipo Lo-Fi](https://youtu.be/XTNIRQdcREM)
-[🎥 ScreenCast site](https://youtu.be/JKMpc0fvCaM)
-[🎥 ScreenCast CI/CD](https://youtu.be/yLOWrzj_KhE)
+[🎥 ScreenCast protótipo Lo-Fi](https://youtu.be/XTNIRQdcREM) <br>
+[🎥 ScreenCast site](https://youtu.be/JKMpc0fvCaM) <br>
+[🎥 ScreenCast CI/CD](https://youtu.be/yLOWrzj_KhE) <br>
 [🎥 ScreenCast testes automatizados](https://youtu.be/fG6us-cIIEA)
 
 ### Relatos de Pair Programming 2
@@ -77,19 +77,25 @@ Formamos duplas para trabalhar nas tarefas necessárias para o projeto e utiliza
 <details>
 <summary>Ver detalhes</summary>
 <br/>
+  
+![jira quadro](https://github.com/user-attachments/assets/1b3c6cbd-07ec-4509-b40d-5a1c0a4c7522)
 
-jira (quadro e backlog)
-issue/bugtracker
+![jira backlog](https://github.com/user-attachments/assets/b5aada92-a919-4cd6-baa6-0e215d50b37a)
 
-[🎥 ScreenCast protótipo Lo-Fi]()
-[🎥 ScreenCast site]()
-[🎥 ScreenCast CI/CD]()
-[🎥 ScreenCast testes automatizados]()
+![issue/bugtracker](https://github.com/user-attachments/assets/b1317154-ef88-46dc-8a4e-22e19d7760f0)
+
+
+[🎥 ScreenCast protótipo Lo-Fi]() <br>
+[🎥 ScreenCast site]() <br>
+[🎥 ScreenCast CI/CD]() <br>
+[🎥 ScreenCast testes automatizados]() <br>
 
 ### Relatos de Pair Programming 3
+Nós nos reunimos em duplas para desenvolver as atividades com maior eficiência e para entregar tudo no prazo correto. Utilizamos o Google Meet com compartilhamento de tela para as duplas e o grupo como um todo tomar decisões em conjunto.
 
-**Distribuição de tarefas**:
-**Metodologia de trabalho**:
+**Distribuição de tarefas**: As duplas eram feitas aleatoriamente de acordo com a disponibilidade de cada integrante durante a semana. Cada objetivo era combinado pelo grupo a ser feito pelas duplas e tinham certo prazo para irmos avançando, sempre atualizando pelo grupo de Whatsapp. Rafael e Eduardo formaram uma dupla durante uma semana para resolver os templates (novos htmls), além disso fizeram os novos frames no figma. Já Pedro e Caio, ficaram responsáveis pela implementação das novas histórias e dos screencasts.
+
+**Metodologia de trabalho**: As reuniões, as quais foram realizadas no meeting pela equipe, ajudaram muito o avanço do projeto. O compartilhamento de tela era necessário para que as tarefas fossem discutidas e feitas pela dupla, ainda com opiniões entre duplas diferentes, assim, garantindo uma maior coesão e união do grupo para a execução das tarefas.
 
 </details>
 
