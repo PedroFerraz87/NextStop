@@ -50,9 +50,11 @@
       return true;
     }
   </script>
-</head>
 
+</head>
 <body class="bg-gray-900 text-white">
+
+  <div id="mensagem" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-300"></div>
 
   <section class="flex flex-col items-center justify-center min-h-screen px-6 py-8">
     <a href="{% url 'home' %}" class="flex items-center mb-6 text-2xl font-semibold text-white">
@@ -61,27 +63,18 @@
     </a>
 
     <div class="w-full bg-gray-800 rounded-lg shadow-md sm:max-w-md p-8">
-      <h1 class="text-2xl font-bold text-white mb-4">Criar Roteiro</h1>
-
-      {% if messages %}
-        <div class="mb-4">
-          {% for message in messages %}
-            <div class="px-4 py-2 rounded-lg 
-                        {% if message.tags == 'success' %}
-                          bg-green-600
-                        {% elif message.tags == 'error' or message.tags == 'danger' %}
-                          bg-red-600
-                        {% else %}
-                          bg-gray-700
-                        {% endif %}">
-              {{ message }}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
+      <h1 class="text-2xl font-bold text-white">Criar Roteiro</h1>
 
       <form class="mt-6" method="POST" action="{% url 'roteiro' %}" onsubmit="return validarFormulario(event)">
         {% csrf_token %}
+
+        {% if messages %}
+          {% for message in messages %}
+            <div id="{% if message.tags %}mensagem{{ message.tags|capfirst }}{% endif %}" class="mb-4 text-sm {% if message.tags == 'success' %}text-green-500{% elif message.tags == 'error' %}text-red-500{% else %}text-white{% endif %}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
 
         <div class="mb-4">
           <label for="destino" class="block mb-2 text-sm font-medium">Destino</label>
@@ -117,7 +110,9 @@
         </button>
       </form>
 
+      <div id="mensagemSucesso" class="mt-4 text-green-500"></div>
       <div id="mensagemErro" class="mt-4 text-red-500"></div>
+
     </div>
   </section>
 

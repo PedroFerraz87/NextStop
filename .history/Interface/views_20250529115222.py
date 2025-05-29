@@ -139,7 +139,8 @@ def roteiro(request):
                 )
 
         messages.success(request, 'Roteiro criado com sucesso!')
-        return redirect('roteiro')
+        print(f"[DEBUG] Roteiro criado: {roteiro}")
+        return redirect('gerenciar')
 
     return render(request, 'Interface/roteiro.html')
 
@@ -159,6 +160,22 @@ def gerenciar_viagens(request):
     context = {
         'roteiros': roteiros
     }
+    @login_required
+def gerenciar_viagens(request):
+    roteiros_queryset = Roteiro.objects.filter(user=request.user).prefetch_related('programacoes')
+    
+    roteiros = []
+
+    for roteiro in roteiros_queryset:
+        roteiros.append({
+            'viagem': roteiro,
+            'programacoes': roteiro.programacoes.all()
+        })
+
+    context = {
+        'roteiros': roteiros
+    }
+    return render(request, 'Interface/gerenciar.html', context)
     return render(request, 'Interface/gerenciar.html', context)
 
 @login_required

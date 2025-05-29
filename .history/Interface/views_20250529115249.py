@@ -139,7 +139,8 @@ def roteiro(request):
                 )
 
         messages.success(request, 'Roteiro criado com sucesso!')
-        return redirect('roteiro')
+        print(f"[DEBUG] Roteiro criado: {roteiro}")
+        return redirect('gerenciar')
 
     return render(request, 'Interface/roteiro.html')
 
@@ -159,6 +160,7 @@ def gerenciar_viagens(request):
     context = {
         'roteiros': roteiros
     }
+    messages.success(request, 'Roteiro criado com sucesso!')
     return render(request, 'Interface/gerenciar.html', context)
 
 @login_required

@@ -2,7 +2,7 @@ describe('Página de Criar Roteiro', () => {
   beforeEach(() => {
     cy.deleteAllUsers();
     cy.createUser('usuario', 'user@example.com', 'senha1234');
-    cy.login('user@example.com', 'senha1234');
+    cy.login('usuario@example.com', 'senha123');
     cy.visit('/roteiro');  
   });
 
@@ -18,6 +18,11 @@ describe('Página de Criar Roteiro', () => {
     cy.get('input[name="dias[]"]').first().type('2025-06-16');
     cy.get('input[name="horarios[]"]').first().type('09:00');
     cy.get('input[name="locais[]"]').first().type('Eiffel Tower');
+
+    cy.get('button').contains('+ Adicionar Programação').click();
+    cy.get('input[name="dias[]"]').should('have.length', 2);  
+    cy.get('input[name="horarios[]"]').should('have.length', 2);
+    cy.get('input[name="locais[]"]').should('have.length', 2);
 
     cy.intercept('POST', '/roteiro/').as('postRoteiro');
     cy.get('form').within(() => {
