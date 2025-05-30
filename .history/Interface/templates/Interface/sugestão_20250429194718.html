@@ -8,15 +8,13 @@
   {% load static %}
 </head>
 <body class="bg-gray-900 text-white">
-
   <div id="mensagem" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-300"></div>
 
   <section class="flex flex-col items-center justify-center min-h-screen px-6 py-8">
     <a href="{% url 'home' %}" class="flex items-center mb-6 text-2xl font-semibold text-white">
-      <img class="w-8 h-8 mr-2" src="https://media.istockphoto.com/id/1414160809/pt/vetorial/airplane-icon-plane-flight-pictogram-transport-symbol-travel.jpg" alt="logo" />
+      <img class="w-8 h-8 mr-2" src="https://media.istockphoto.com/id/1414160809/pt/vetorial/airplane-icon-plane-flight-pictogram-transport-symbol-travel.jpg?s=612x612&w=0&k=20&c=YFAp5pnsR_fHynqYZ8d7nWjLDUtps7vaITIfYJBkmKY=" alt="logo" />
       NextStop
     </a>
-
     <h1 class="text-3xl font-bold text-white mb-8">Destinos Recomendados</h1>
 
     <div id="destinosContainer" class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
@@ -30,15 +28,51 @@
   <script>
     const nomesFavoritosServidor = {{ nomes_favoritos|safe }};
     const destinos = [
-      { nome: "Paris, França", descricao: "Explore este destino com paisagens incríveis e cultura rica. Um lugar perfeito para a sua próxima viagem.", imagem: "https://img.static-af.com/transform/45cb9a13-b167-4842-8ea8-05d0cc7a4d04/" },
-      { nome: "Madrid, Espanha", descricao: "Mergulhe na energia vibrante da capital espanhola, onde arte, gastronomia e vida noturna transformam cada esquina em uma celebração.", imagem: "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/348000/348698-Madrid.jpg" },
-      { nome: "Roma, Itália", descricao: "Viaje no tempo pela Cidade Eterna, repleta de monumentos históricos, fontes magníficas e uma culinária que conquista corações.", imagem: "https://s5.static.brasilescola.uol.com.br/be/2023/11/nascer-do-sol-nas-proximidades-do-coliseu-um-dos-principais-simbolos-historicos-e-culturais-de-roma-capital-da-italia.jpg" },
-      { nome: "Tóquio, Japão", descricao: "Descubra uma metrópole vibrante que mistura tradição e tecnologia como nenhuma outra cidade.", imagem: "https://wp.rotadeferias.com.br/wp-content/uploads/2020/11/Akihabara.jpg" },
-      { nome: "Cusco, Peru", descricao: "Encante-se com a antiga capital do Império Inca, onde história, cultura e paisagens montanhosas se encontram em uma experiência única.", imagem: "https://viagemegastronomia.cnnbrasil.com.br/wp-content/uploads/sites/5/2018/05/Cusco-Peru-1.jpg" },
-      { nome: "Auckland, Nova Zelândia", descricao: "Descubra a cidade das velas, onde praias deslumbrantes, vulcões adormecidos e cultura vibrante se misturam em um cenário inesquecível.", imagem: "https://novazelandiabrasil.com.br/wp-content/uploads/sites/3/2022/08/discover-viaduct-harbour-auckland-view.jpg" },
-      { nome: "Cidade do Cabo, África do Sul", descricao: "Maravilhe-se com montanhas, praias e vinícolas nesta cidade multicultural aos pés da icônica Table Mountain.", imagem: "https://newr7-r7-prod.web.arc-cdn.net/resizer/v2/L2WBFMGBCZDAPB6SC7ERHNCEBA.jpeg" },
-      { nome: "Vancouver, Canadá", descricao: "Entre oceanos e montanhas, Vancouver oferece natureza exuberante e uma atmosfera moderna vibrante.", imagem: "https://media.timeout.com/images/106148123/750/562/image.jpg" },
-      { nome: "Dubai, Emirados Árabes Unidos", descricao: "Explore uma metrópole futurista no meio do deserto, onde arranha-céus, ilhas artificiais e cultura árabe se encontram.", imagem: "https://www.cloud-europamundo.com/img/carousel/hd/Dubai_20210222195612.jpg" }
+      {
+        nome: "Paris, França",
+        descricao: "Explore este destino com paisagens incríveis e cultura rica. Um lugar perfeito para a sua próxima viagem.",
+        imagem: "https://img.static-af.com/transform/45cb9a13-b167-4842-8ea8-05d0cc7a4d04/"
+      },
+      {
+        nome: "Madrid, Espanha",
+        descricao: "Mergulhe na energia vibrante da capital espanhola, onde arte, gastronomia e vida noturna transformam cada esquina em uma celebração.",
+        imagem: "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/348000/348698-Madrid.jpg"
+      },
+      {
+        nome: "Roma, Itália",
+        descricao: "Viaje no tempo pela Cidade Eterna, repleta de monumentos históricos, fontes magníficas e uma culinária que conquista corações.",
+        imagem: "https://s5.static.brasilescola.uol.com.br/be/2023/11/nascer-do-sol-nas-proximidades-do-coliseu-um-dos-principais-simbolos-historicos-e-culturais-de-roma-capital-da-italia.jpg"
+      },
+      {
+        nome: "Tóquio, Japão",
+        descricao: "Descubra uma metrópole vibrante que mistura tradição e tecnologia como nenhuma outra cidade.",
+        imagem: "https://wp.rotadeferias.com.br/wp-content/uploads/2020/11/Akihabara.jpg"
+      },
+      {
+        nome: "Cusco, Peru",
+        descricao: "Encante-se com a antiga capital do Império Inca, onde história, cultura e paisagens montanhosas se encontram em uma experiência única.",
+        imagem: "https://viagemegastronomia.cnnbrasil.com.br/wp-content/uploads/sites/5/2018/05/Cusco-Peru-1.jpg"
+      },
+      {
+        nome: "Auckland, Nova Zelândia",
+        descricao: "Descubra a cidade das velas, onde praias deslumbrantes, vulcões adormecidos e cultura vibrante se misturam em um cenário inesquecível.",
+        imagem: "https://novazelandiabrasil.com.br/wp-content/uploads/sites/3/2022/08/discover-viaduct-harbour-auckland-view.jpg"
+      },
+      {
+        nome: "Cidade do Cabo, África do Sul",
+        descricao: "Maravilhe-se com montanhas, praias e vinícolas nesta cidade multicultural aos pés da icônica Table Mountain.",
+        imagem: "https://newr7-r7-prod.web.arc-cdn.net/resizer/v2/L2WBFMGBCZDAPB6SC7ERHNCEBA.jpeg?auth=17e19bb1be71066b3bfbecaab89a1cab9a8ca08a44e6767c0986e6d003764f15&width=1290&height=1226"
+      },
+      {
+        nome: "Vancouver, Canadá",
+        descricao: "Entre oceanos e montanhas, Vancouver oferece natureza exuberante e uma atmosfera moderna vibrante.",
+        imagem: "https://media.timeout.com/images/106148123/750/562/image.jpg"
+      },
+      {
+        nome: "Dubai, Emirados Árabes Unidos",
+        descricao: "Explore uma metrópole futurista no meio do deserto, onde arranha-céus, ilhas artificiais e cultura árabe se encontram.",
+        imagem: "https://www.cloud-europamundo.com/img/carousel/hd/Dubai_20210222195612.jpg"
+      }
     ];
 
     function getCookie(name) {
@@ -70,7 +104,7 @@
 
     function favoritar(destino) {
       if (nomesFavoritosServidor.includes(destino)) {
-        mostrarMensagem(destino + " já foi adicionado aos seus favoritos!");
+        alert(destino + " já foi adicionado aos seus favoritos!");
         return;
       }
 
@@ -143,13 +177,10 @@
         card.className = "bg-gray-800 rounded-lg shadow-md p-4";
 
         const isFavorito = nomesFavoritosServidor.includes(destino.nome);
-        const botaoHtml = `
-          <button 
-            class="w-full mt-4 ${isFavorito ? 'bg-gray-500' : 'bg-green-600 hover:bg-green-700'} text-white font-medium rounded-lg p-2"
-            onclick="favoritar('${destino.nome}')">
-            ${isFavorito ? 'Salvo' : 'Favoritar'}
-          </button>
-        `;
+        const botaoHtml = isFavorito
+          ? `<button class="w-full mt-4 bg-gray-500 text-white font-medium rounded-lg p-2 cursor-not-allowed" disabled>Salvo</button>`
+          : `<button class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg p-2"
+              onclick="favoritar('${destino.nome}')">Favoritar</button>`;
 
         card.innerHTML = `
           <img src="${destino.imagem}" alt="${destino.nome}" class="w-full h-48 object-cover rounded-lg">

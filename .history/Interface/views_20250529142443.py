@@ -341,7 +341,7 @@ def sugestao(request):
     return render(request, 'Interface/sugestão.html', {
         'favoritos': favoritos,
         'nomes_favoritos': nomes_favoritos 
-    })  
+    })
 
 @login_required
 def adicionar_favorito(request):

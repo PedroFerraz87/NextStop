@@ -3,10 +3,11 @@ describe('Página de Destinos Recomendados', () => {
     cy.deleteAllUsers();
     cy.createUser('usuario', 'usuario@example.com', 'senha123');
     cy.login('usuario@example.com', 'senha123');
-    cy.visit('/sugestao');  
+    cy.visit('/destinos-recomendados');  // Ajuste a URL para a página correta
   });
 
-  it('Cenário favorável 1: Exibe todos os destinos recomendados e permite favoritar', () => {
+  it('Exibe todos os destinos recomendados', () => {
+    // Verifica se todos os destinos são exibidos corretamente
     cy.contains('Paris, França');
     cy.contains('Madrid, Espanha');
     cy.contains('Roma, Itália');
@@ -16,26 +17,34 @@ describe('Página de Destinos Recomendados', () => {
     cy.contains('Cidade do Cabo, África do Sul');
     cy.contains('Vancouver, Canadá');
     cy.contains('Dubai, Emirados Árabes Unidos');
-
-     destinoFavorito =  'Madrid, Espanha';
-    cy.contains(destinoFavorito).parent().find('button').click();
-    cy.get('#mensagem').should('contain', `${destinoFavorito} foi adicionado aos seus favoritos!`);
-
   });
 
-  it('Cenário favorável 2: remove destinos dos favoritos', () => {
-     destinoFavorito = 'Madrid, Espanha';
+  it('Adiciona e remove destinos dos favoritos', () => {
+    const destinoFavorito = 'Paris, França';
+
+    // Tenta adicionar o destino aos favoritos
+    cy.contains(destinoFavorito).parent().find('button').click();
+    cy.get('#mensagem').should('contain', `${destinoFavorito} foi adicionado aos seus favoritos!`);
     
+    // Verifica se o destino foi adicionado à lista de favoritos
     cy.get('#favoritosList').contains(destinoFavorito);
+
+    // Tenta remover o destino dos favoritos
     cy.get('#favoritosList').contains(destinoFavorito).parent().find('button').click();
     cy.get('#mensagem').should('contain', `${destinoFavorito} foi removido dos seus favoritos!`);
 
+    // Verifica se o destino foi removido da lista de favoritos
     cy.get('#favoritosList').should('not.contain', destinoFavorito);
   });
 
-  it('Cenário desfavorável 1: Não permite adicionar um destino já favoritado novamente', () => {
-    destinoFavorito = 'Madrid, Espanha';
+  it('Não permite adicionar um destino já favoritado novamente', () => {
+    const destinoFavorito = 'Paris, França';
 
+    // Adiciona o destino aos favoritos
+    cy.contains(destinoFavorito).parent().find('button').click();
+    cy.get('#mensagem').should('contain', `${destinoFavorito} foi adicionado aos seus favoritos!`);
+
+    // Tenta adicionar novamente o mesmo destino
     cy.contains(destinoFavorito).parent().find('button').click();
     cy.get('#mensagem').should('contain', `${destinoFavorito} já foi adicionado aos seus favoritos!`);
   });
