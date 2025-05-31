@@ -34,7 +34,7 @@ describe('História 4: Orçamento de Viagem', () => {
 
     cy.get('[name="alimentacao"]').parent().find('.increment').click();
     cy.get('[name="alimentacao"]').should('have.value', '100.01');
-
+    // Simula clique no botão lateral de decremento (suponha que exista com a classe .decrement)
     cy.get('[name="alimentacao"]').parent().find('.decrement').click();
     cy.get('[name="alimentacao"]').should('have.value', '100.00');
   });

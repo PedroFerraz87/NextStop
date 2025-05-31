@@ -32,9 +32,11 @@ describe('História 4: Orçamento de Viagem', () => {
   it('Cenário favorável 2: Permite alterar centavos com os botões laterais', () => {
     cy.get('input[name="alimentacao"]').clear().type('100.00');
 
+    // Simula clique no botão lateral de incremento (suponha que exista com a classe .increment)
     cy.get('[name="alimentacao"]').parent().find('.increment').click();
     cy.get('[name="alimentacao"]').should('have.value', '100.01');
 
+    // Simula clique no botão lateral de decremento (suponha que exista com a classe .decrement)
     cy.get('[name="alimentacao"]').parent().find('.decrement').click();
     cy.get('[name="alimentacao"]').should('have.value', '100.00');
   });
