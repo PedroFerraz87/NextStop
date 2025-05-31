@@ -21,7 +21,7 @@ describe('História 3: Gerenciar viagens', () => {
 
     cy.visit('/gerenciar'); 
 
-    cy.get('.text-blue-400').contains('Editar').click();
+    cy.get('button').contains('Editar').click();
 
     cy.contains('Destino')
     cy.get('input[name="destino"]').clear().type('Londres');

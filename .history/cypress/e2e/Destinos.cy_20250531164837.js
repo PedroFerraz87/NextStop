@@ -1,4 +1,4 @@
-describe('História 1: Sugestão de destinos', () => {
+describe('História 1: ', () => {
    const destinoFavorito = 'Paris, França';
   beforeEach(() => {
     cy.deleteAllUsers();

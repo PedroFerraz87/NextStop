@@ -1,4 +1,4 @@
-describe('História 1: Sugestão de destinos', () => {
+describe('Página de Destinos Recomendados', () => {
    const destinoFavorito = 'Paris, França';
   beforeEach(() => {
     cy.deleteAllUsers();
@@ -32,9 +32,12 @@ describe('História 1: Sugestão de destinos', () => {
     cy.get('#favoritosList').should('not.contain', destinoFavorito);
   });
 
-  it('Cenário desfavorável 1: Não permite adicionar um destino já favoritado novamente', () => {
-    cy.contains(destinoFavorito).parent().find('button').click();
-    cy.contains(destinoFavorito).parent().find('button').click();
-    cy.get('#mensagem').should('contain', `${destinoFavorito} já foi adicionado aos seus favoritos!`);
-  });
+});it('Cenário desfavorável 1: Não permite adicionar um destino já favoritado novamente', () => {
+  cy.contains(destinoFavorito).parent().find('button').click();
+
+  cy.contains(destinoFavorito).parent().find('button').click();
+
+  // Verifica que aparece a mensagem de que já foi adicionado
+  cy.get('#mensagem').should('contain', `${destinoFavorito} já foi adicionado aos seus favoritos!`);
 });
+

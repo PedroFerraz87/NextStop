@@ -1,0 +1,33 @@
+describe('História 3: Gerenciar viagens', () => {
+  beforeEach(() => {
+    cy.deleteAllUsers();
+    cy.createUser('usuario', 'usuario@example.com', 'senha123');
+    cy.login('usuario@example.com', 'senha123');
+    cy.visit('/gerenciar'); 
+  });
+
+   it('Cenário favorável 1: Permite editar informações do roteiro salvo', () => {
+    
+    
+    
+    cy.contains('Destino')
+    cy.contains('Data de volta')
+    cy.get('input[name="titulo"]').clear().type('Roteiro para Paris Atualizado');
+    cy.get('textarea[name="descricao"]').clear().type('Descrição atualizada da viagem para Paris.');
+    cy.get('button').contains('Salvar alterações').click();
+    cy.contains('Roteiro para Paris Atualizado').should('exist');
+    cy.contains('Descrição atualizada da viagem para Paris.').should('exist');
+  });
+
+  it('Cenário desfavorável 1: Exibe mensagem quando não há roteiros salvos', () => {
+    cy.visit('http://localhost:8000/gerenciar/');
+    cy.contains('Nenhuma viagem cadastrada ainda').should('exist');
+  });
+
+  it('Cenário favorável 2: Permite excluir um roteiro salvo', () => {
+    cy.contains(roteiroExemplo).should('exist');
+    cy.contains(roteiroExemplo).parent().find('button').contains('Deletar').click();
+    cy.on('window:confirm', () => true); 
+    cy.contains(roteiroExemplo).should('not.exist');
+  });
+});

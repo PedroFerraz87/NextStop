@@ -1,4 +1,4 @@
-describe('História 2: Adicionar viagem', () => {
+describe('Página de Criar Roteiro', () => {
   beforeEach(() => {
     cy.deleteAllUsers();
     cy.createUser('robotestes', 'robo@example.com', 'senha1234');
@@ -21,7 +21,7 @@ describe('História 2: Adicionar viagem', () => {
 
     cy.intercept('POST', '/roteiro/').as('postRoteiro');
     cy.get('form').within(() => {
-    cy.get('button[type="submit"]').click();
+      cy.get('button[type="submit"]').click();
     });
 
   });

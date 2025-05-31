@@ -34,7 +34,6 @@ describe('História 3: Gerenciar viagens', () => {
     cy.visit('/gerenciar'); 
     cy.get('button').contains('Deletar').click();
     cy.on('window:confirm', () => true); 
-    
   });
 
   it('Cenário desfavorável 1: Exibe mensagem quando não há roteiros salvos', () => {

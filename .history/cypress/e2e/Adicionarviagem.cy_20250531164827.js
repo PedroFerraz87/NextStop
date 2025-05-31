@@ -21,7 +21,7 @@ describe('História 2: Adicionar viagem', () => {
 
     cy.intercept('POST', '/roteiro/').as('postRoteiro');
     cy.get('form').within(() => {
-    cy.get('button[type="submit"]').click();
+      cy.get('button[type="submit"]').click();
     });
 
   });
