@@ -8,22 +8,19 @@
 </head>
 <body class="bg-gray-900 text-white">
   {% if messages %}
-  <div id="mensagem" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-    {% for message in messages %}
-      <div class="px-4 py-2 mb-2 rounded-lg shadow-lg 
-        {% if message.tags == 'success' %}
-          bg-green-600
-        {% elif message.tags == 'error' %}
-          bg-red-600
-        {% elif message.tags == 'warning' %}
-          bg-yellow-500
-        {% else %}
-          bg-blue-600
-        {% endif %}
-        ">
-        {{ message }}
-      </div>
-    {% endfor %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const mensagemDiv = document.getElementById('mensagem');
+      {% for message in messages %}
+        mensagemDiv.textContent = '{{ message }}';
+        mensagemDiv.classList.remove('opacity-0');
+        setTimeout(() => {
+          mensagemDiv.classList.add('opacity-0');
+        }, 3000);
+      {% endfor %}
+    });
+  </script>
+{% endif %}
   </div>
 {% endif %}
   <div id="mensagem" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-300"></div>

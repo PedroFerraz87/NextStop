@@ -7,12 +7,7 @@ describe('História 4: Orçamento de Viagem', () => {
   });
 
   it('Cenário favorável 1: Calcula e salva orçamento corretamente', () => {
-    cy.get('select[name="roteiro"] option').should('have.length.greaterThan', 0);
-
-    cy.get('select[name="roteiro"]').then(select => {
-      const firstOption = select.find('option').first().text();
-      cy.get('select[name="roteiro"]').select(firstOption);
-    });
+    cy.get('select[name="roteiro"]').select(1); // Seleciona o primeiro roteiro disponível
 
     cy.get('input[name="passagem"]').type('1200');
     cy.get('input[name="hospedagem"]').type('800');
@@ -22,19 +17,27 @@ describe('História 4: Orçamento de Viagem', () => {
 
     cy.get('button[type="submit"]').click();
 
+    // Valida que apareceu uma mensagem de sucesso
+    cy.get('#mensagem')
+      .should('be.visible')
+      .and('contain', 'Orçamento salvo com sucesso');
   });
 
   it('Cenário desfavorável 1: Não permite números negativos', () => {
-      cy.get('select[name="roteiro"] option').should('have.length.greaterThan', 0);
+    cy.get('select[name="roteiro"]').select(1);
 
-      cy.get('input[name="passagem"]').type('-500');
-      cy.get('button[type="submit"]').click();
+    cy.get('input[name="passagem"]').type('-500');
+    cy.get('button[type="submit"]').click();
 
+    cy.get('#mensagem')
+      .should('be.visible')
+      .and('contain', 'O número deve ser maior ou igual a zero');
   });
 
   it('Cenário favorável 2: Permite alterar centavos manualmente', () => {
     cy.get('input[name="alimentacao"]').clear().type('100.00');
 
+    // Incrementa centavos
     cy.get('input[name="alimentacao"]').invoke('val').then(valor => {
       const novoValor = (parseFloat(valor) + 0.01).toFixed(2);
       cy.get('input[name="alimentacao"]').clear().type(novoValor);
@@ -42,6 +45,7 @@ describe('História 4: Orçamento de Viagem', () => {
 
     cy.get('input[name="alimentacao"]').should('have.value', '100.01');
 
+    // Decrementa centavos
     cy.get('input[name="alimentacao"]').invoke('val').then(valor => {
       const novoValor = (parseFloat(valor) - 0.01).toFixed(2);
       cy.get('input[name="alimentacao"]').clear().type(novoValor);

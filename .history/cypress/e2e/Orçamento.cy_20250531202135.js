@@ -3,10 +3,10 @@ describe('História 4: Orçamento de Viagem', () => {
     cy.deleteAllUsers();
     cy.createUser('usuario', 'usuario@example.com', 'senha123');
     cy.login('usuario@example.com', 'senha123');
-    cy.visit('/orcamento');
   });
 
   it('Cenário favorável 1: Calcula e salva orçamento corretamente', () => {
+    cy.visit('/orcamento');
     cy.get('select[name="roteiro"] option').should('have.length.greaterThan', 0);
 
     cy.get('select[name="roteiro"]').then(select => {
@@ -30,6 +30,8 @@ describe('História 4: Orçamento de Viagem', () => {
       cy.get('input[name="passagem"]').type('-500');
       cy.get('button[type="submit"]').click();
 
+      cy.get('#mensagem')
+      .should('contain', 'O valor deve ser maior ou igual a 0');
   });
 
   it('Cenário favorável 2: Permite alterar centavos manualmente', () => {

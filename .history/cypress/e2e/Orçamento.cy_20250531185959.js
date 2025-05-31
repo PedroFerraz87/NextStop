@@ -22,14 +22,19 @@ describe('História 4: Orçamento de Viagem', () => {
 
     cy.get('button[type="submit"]').click();
 
+    cy.get('#mensagem')
+      .should('be.visible')
+      .and('contain', 'Orçamento salvo com sucesso');
   });
-
   it('Cenário desfavorável 1: Não permite números negativos', () => {
-      cy.get('select[name="roteiro"] option').should('have.length.greaterThan', 0);
+    cy.get('select[name="roteiro"]').select(1);
 
-      cy.get('input[name="passagem"]').type('-500');
-      cy.get('button[type="submit"]').click();
+    cy.get('input[name="passagem"]').type('-500');
+    cy.get('button[type="submit"]').click();
 
+    cy.get('#mensagem')
+      .should('be.visible')
+      .and('contain', 'O número deve ser maior ou igual a zero');
   });
 
   it('Cenário favorável 2: Permite alterar centavos manualmente', () => {

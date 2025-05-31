@@ -255,6 +255,7 @@ def orcamento(request):
             messages.error(request, "Roteiro não encontrado.")
             return redirect('orcamento')
 
+        # Captura os valores
         hospedagem = float(request.POST.get('hospedagem', 0) or 0)
         passagem = float(request.POST.get('passagem', 0) or 0)
         alimentacao = float(request.POST.get('alimentacao', 0) or 0)

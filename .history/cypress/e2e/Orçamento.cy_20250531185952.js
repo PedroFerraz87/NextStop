@@ -7,29 +7,34 @@ describe('História 4: Orçamento de Viagem', () => {
   });
 
   it('Cenário favorável 1: Calcula e salva orçamento corretamente', () => {
-    cy.get('select[name="roteiro"] option').should('have.length.greaterThan', 0);
+  cy.get('select[name="roteiro"] option').should('have.length.greaterThan', 0);
 
-    cy.get('select[name="roteiro"]').then(select => {
-      const firstOption = select.find('option').first().text();
-      cy.get('select[name="roteiro"]').select(firstOption);
-    });
-
-    cy.get('input[name="passagem"]').type('1200');
-    cy.get('input[name="hospedagem"]').type('800');
-    cy.get('input[name="alimentacao"]').type('500');
-    cy.get('input[name="passeios"]').type('300');
-    cy.get('input[name="extras"]').type('200');
-
-    cy.get('button[type="submit"]').click();
-
+  cy.get('select[name="roteiro"]').then(select => {
+    const firstOption = select.find('option').first().text();
+    cy.get('select[name="roteiro"]').select(firstOption);
   });
 
+  cy.get('input[name="passagem"]').type('1200');
+  cy.get('input[name="hospedagem"]').type('800');
+  cy.get('input[name="alimentacao"]').type('500');
+  cy.get('input[name="passeios"]').type('300');
+  cy.get('input[name="extras"]').type('200');
+
+  cy.get('button[type="submit"]').click();
+
+  cy.get('#mensagem')
+    .should('be.visible')
+    .and('contain', 'Orçamento salvo com sucesso');
+});
   it('Cenário desfavorável 1: Não permite números negativos', () => {
-      cy.get('select[name="roteiro"] option').should('have.length.greaterThan', 0);
+    cy.get('select[name="roteiro"]').select(1);
 
-      cy.get('input[name="passagem"]').type('-500');
-      cy.get('button[type="submit"]').click();
+    cy.get('input[name="passagem"]').type('-500');
+    cy.get('button[type="submit"]').click();
 
+    cy.get('#mensagem')
+      .should('be.visible')
+      .and('contain', 'O número deve ser maior ou igual a zero');
   });
 
   it('Cenário favorável 2: Permite alterar centavos manualmente', () => {

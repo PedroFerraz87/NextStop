@@ -30,6 +30,7 @@ describe('História 4: Orçamento de Viagem', () => {
       cy.get('input[name="passagem"]').type('-500');
       cy.get('button[type="submit"]').click();
 
+    cy.get('#mensagem').should('contain.text', `O número deve ser maior ou igual a zero`);
   });
 
   it('Cenário favorável 2: Permite alterar centavos manualmente', () => {
