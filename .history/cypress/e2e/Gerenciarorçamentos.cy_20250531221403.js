@@ -4,10 +4,13 @@ describe('História 5: Gerenciar Orçamentos', () => {
     cy.deleteAllUsers();
     cy.createUser('robotestes', 'robo@example.com', 'senha1234');
     cy.login('robo@example.com', 'senha1234');
-    
+    cy
     });
 
   it('Cenário favorável 1: Deve editar um orçamento salvo corretamente', () => {
+    cy.deleteAllUsers();
+    cy.createUser('usuario', 'usuario@example.com', 'senha123');
+    cy.login('usuario@example.com', 'senha123');
 
     cy.visit('/roteiro')
     cy.contains('Destino');

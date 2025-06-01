@@ -6,7 +6,7 @@ describe('História 6: Alertas e lembretes', () => {
     cy.login('robo@example.com', 'senha1234');
   });
 
-  it('Cenário favorável 1 - Notificação correta para evento próximo', () => {
+  it('Cenário favorável 1: Notificação correta para evento próximo', () => {
     const hoje = new Date();
     const dataHoje = hoje.toISOString().split('T')[0];
     const hora = hoje.getHours() + 1;
@@ -32,7 +32,7 @@ describe('História 6: Alertas e lembretes', () => {
       .should('not.have.class', 'opacity-0');
   });
 
-  it('Cenário desfavorável 1 - Notificação atrasada por fuso horário incorreto', () => {
+  it('Cenário desfavorável 1: Notificação atrasada por fuso horário incorreto', () => {
     const eventoAtrasado = new Date(Date.now() - 3 * 3600000 + 10 * 60000);
     cy.intercept('GET', '/api/lembretes/', {
       statusCode: 200,
@@ -46,12 +46,20 @@ describe('História 6: Alertas e lembretes', () => {
     }).as('getLembretes');
 
     cy.visit('/lembretes');
+    cy.get('#mensagem').should('have.class', 'opacity-0');
   });
 
-  it('Cenário desfavorável 2 - Usuário sem roteiros salvos vê mensagem sem programações', () => {
-     cy.visit('/gerenciar');
+  it('Cenário desfavorável 2: Usuário sem roteiros salvos vê mensagem sem programações', () => {
+    cy.visit('/gerenciar');
     cy.get('button').contains('Deletar').each(($btn) => {
       cy.wrap($btn).click();
+            cy.wrap($btn).click();
+      cy.wrap($btn).click();
+      cy.wrap($btn).click();
+      cy.wrap($btn).click();
+      cy.wrap($btn).click();
+      cy.wrap($btn).click();
+
       cy.on('window:confirm', () => true);
     });
 

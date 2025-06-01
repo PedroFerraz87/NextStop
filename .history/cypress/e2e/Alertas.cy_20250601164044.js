@@ -4,7 +4,6 @@ describe('História 6: Alertas e lembretes', () => {
     cy.deleteAllUsers();
     cy.createUser('robotestes', 'robo@example.com', 'senha1234');
     cy.login('robo@example.com', 'senha1234');
-    cy.visit('/lembretes');  
   });
 
   it('Cenário favorável 1 - Notificação correta para evento próximo', () => {
@@ -25,7 +24,7 @@ describe('História 6: Alertas e lembretes', () => {
     cy.get('button[type="submit"]').click();
     });
  
-    
+    cy.visit('/lembretes')
 
     cy.get('#mensagem')
       .should('not.have.class', 'opacity-0')

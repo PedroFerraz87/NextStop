@@ -3,7 +3,7 @@ describe('História 4: Orçamento de Viagem', () => {
     cy.deleteAllUsers();
     cy.createUser('robotestes', 'robo@example.com', 'senha1234');
     cy.login('robo@example.com', 'senha1234');
-    cy.visit('orcamento')
+    cy.visit
   });
 
   it('Cenário favorável 1: Calcula e salva orçamento corretamente', () => {

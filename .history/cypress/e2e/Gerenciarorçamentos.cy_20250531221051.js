@@ -2,13 +2,12 @@ describe('História 5: Gerenciar Orçamentos', () => {
   
   beforeEach(() => {
     cy.deleteAllUsers();
-    cy.createUser('robotestes', 'robo@example.com', 'senha1234');
-    cy.login('robo@example.com', 'senha1234');
-    
+    cy.createUser('usuario', 'usuario@example.com', 'senha123');
+    cy.login('usuario@example.com', 'senha123');
+    cy.visit('/orcamento');
     });
 
   it('Cenário favorável 1: Deve editar um orçamento salvo corretamente', () => {
-
     cy.visit('/roteiro')
     cy.contains('Destino');
     cy.contains('Data de Ida');
@@ -61,9 +60,6 @@ describe('História 5: Gerenciar Orçamentos', () => {
   });
 
   it('Cenário favorável 2: Deve excluir um orçamento salvo corretamente', () => {
-    cy.deleteAllUsers();
-    cy.createUser('usuario', 'usuario@example.com', 'senha123');
-    cy.login('usuario@example.com', 'senha123');
     cy.visit('/ver_orcamentos');
 
     cy.contains('Paris').should('exist');
@@ -74,9 +70,6 @@ describe('História 5: Gerenciar Orçamentos', () => {
   });
 
   it('Cenário desfavorável 1: Deve exibir mensagem quando não há orçamentos cadastrados', () => {
-    cy.deleteAllUsers();
-    cy.createUser('usuario', 'usuario@example.com', 'senha123');
-    cy.login('usuario@example.com', 'senha123');
     cy.visit('/ver_orcamentos');
     cy.contains('Nenhum orçamento cadastrado ainda.').should('exist');
   });

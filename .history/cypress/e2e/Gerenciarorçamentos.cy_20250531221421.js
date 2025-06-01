@@ -8,6 +8,9 @@ describe('História 5: Gerenciar Orçamentos', () => {
     });
 
   it('Cenário favorável 1: Deve editar um orçamento salvo corretamente', () => {
+    cy.deleteAllUsers();
+    cy.createUser('usuario', 'usuario@example.com', 'senha123');
+    cy.login('usuario@example.com', 'senha123');
 
     cy.visit('/roteiro')
     cy.contains('Destino');

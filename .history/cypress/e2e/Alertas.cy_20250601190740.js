@@ -12,20 +12,6 @@ describe('História 6: Alertas e lembretes', () => {
     const hora = hoje.getHours() + 1;
     const horaFormatada = `${hora.toString().padStart(2, '0')}:00`;
 
-    cy.visit('/roteiro');
-    cy.get('input[name="destino"]').type('Paris');
-    cy.get('input[name="dataIda"]').type(dataHoje);
-    cy.get('input[name="dataVolta"]').type(dataHoje);
-
-    cy.get('input[name="dias[]"]').first().type(dataHoje);
-    cy.get('input[name="horarios[]"]').first().type(horaFormatada);
-    cy.get('input[name="locais[]"]').first().type('Eiffel Tower');
-
-    cy.intercept('POST', '/roteiro/').as('postRoteiro');
-    cy.get('form').within(() => {
-      cy.get('button[type="submit"]').click();
-    });
-
     cy.visit('/lembretes');
 
     cy.get('#mensagem')

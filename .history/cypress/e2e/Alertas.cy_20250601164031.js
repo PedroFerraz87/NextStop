@@ -25,7 +25,7 @@ describe('História 6: Alertas e lembretes', () => {
     cy.get('button[type="submit"]').click();
     });
  
-    
+    cy.visit('')
 
     cy.get('#mensagem')
       .should('not.have.class', 'opacity-0')

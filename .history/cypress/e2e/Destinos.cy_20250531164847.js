@@ -19,6 +19,7 @@ describe('História 1: Sugestão de destinos', () => {
     cy.contains('Dubai, Emirados Árabes Unidos');
 
     cy.contains(destinoFavorito).parent().find('button').click();
+    cy.get('#mensagem').should('contain', `${destinoFavorito} foi adicionado aos seus favoritos!`);
 
   });
 
@@ -33,5 +34,7 @@ describe('História 1: Sugestão de destinos', () => {
 
   it('Cenário desfavorável 1: Não permite adicionar um destino já favoritado novamente', () => {
     cy.contains(destinoFavorito).parent().find('button').click();
+    cy.contains(destinoFavorito).parent().find('button').click();
+    cy.get('#mensagem').should('contain', `${destinoFavorito} já foi adicionado aos seus favoritos!`);
   });
 });

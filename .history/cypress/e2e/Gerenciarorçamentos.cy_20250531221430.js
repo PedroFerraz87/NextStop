@@ -9,6 +9,7 @@ describe('História 5: Gerenciar Orçamentos', () => {
 
   it('Cenário favorável 1: Deve editar um orçamento salvo corretamente', () => {
 
+
     cy.visit('/roteiro')
     cy.contains('Destino');
     cy.contains('Data de Ida');

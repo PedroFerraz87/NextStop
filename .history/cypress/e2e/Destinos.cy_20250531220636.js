@@ -33,5 +33,6 @@ describe('História 1: Sugestão de destinos', () => {
 
   it('Cenário desfavorável 1: Não permite adicionar um destino já favoritado novamente', () => {
     cy.contains(destinoFavorito).parent().find('button').click();
+    cy.contains(destinoFavorito).parent().find('button').click();
   });
 });
