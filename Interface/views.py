@@ -337,15 +337,18 @@ def marcar_concluido(request, item_id):
 @login_required
 def editar_item(request, item_id):
     item = get_object_or_404(ChecklistItem, id=item_id, user=request.user)
+    mensagem = None
 
     if request.method == "POST":
-        novo_nome = request.POST.get('item')
+        novo_nome = request.POST.get('item').strip()
         if novo_nome:
             item.nome = novo_nome
             item.save()
-        return redirect('checklist')
+            return redirect('checklist')
+        else:
+            mensagem = "Preencha este campo vazio"
 
-    return render(request, 'Interface/editar_item.html', {'item': item})
+    return render(request, 'Interface/editar_item.html', {'item': item, 'mensagem': mensagem})
 
 
 @login_required
@@ -353,8 +356,6 @@ def deletar_item(request, item_id):
     item = get_object_or_404(ChecklistItem, id=item_id, user=request.user)
     item.delete()
     return redirect('checklist')
-
-    return render(request, 'Interface/confirma_delete.html', {'item': item})
 
 @login_required
 def sugestao(request):

@@ -10,12 +10,19 @@
 
   <section class="flex flex-col items-center justify-center min-h-screen px-6 py-8">
     <a href="{% url 'home' %}" class="flex items-center mb-6 text-2xl font-semibold text-white">
-      <img class="w-8 h-8 mr-2" src="ttps://media.istockphoto.com/id/1414160809/pt/vetorial/airplane-icon-plane-flight-pictogram-transport-symbol-travel.jpg?s=612x612&w=0&k=20&c=YFAp5pnsR_fHynqYZ8d7nWjLDUtps7vaITIfYJBkmKY=" alt="logo"/>
+      <img class="w-8 h-8 mr-2" src="https://media.istockphoto.com/id/1414160809/pt/vetorial/airplane-icon-plane-flight-pictogram-transport-symbol-travel.jpg?s=612x612&w=0&k=20&c=YFAp5pnsR_fHynqYZ8d7nWjLDUtps7vaITIfYJBkmKY=" alt="logo"/>
       NextStop
     </a>
 
     <div class="w-full max-w-md bg-gray-800 rounded-lg shadow-md p-8">
       <h1 class="text-2xl font-bold mb-6 text-center">Editar Item</h1>
+
+      {% if mensagem %}
+        <div class="bg-red-500 text-white p-3 mb-4 rounded-lg">
+          {{ mensagem }}
+        </div>
+      {% endif %}
+
       <form method="post">
         {% csrf_token %}
         <input type="text" name="item" value="{{ item.nome }}" class="w-full p-3 rounded-lg bg-gray-700 text-white border-gray-600 focus:ring-blue-500" />
