@@ -85,7 +85,7 @@ Formamos duplas para trabalhar nas tarefas necessárias para o projeto e utiliza
 ![issue/bugtracker](https://github.com/user-attachments/assets/b1317154-ef88-46dc-8a4e-22e19d7760f0)
 
 
-[🎥 ScreenCast protótipo Lo-Fi]() <br>
+[🎥 ScreenCast protótipo Lo-Fi](https://youtu.be/HSIVb0Cjuic) <br>
 [🎥 ScreenCast site](https://youtu.be/sB4MEfnpwXw) <br>
 [🎥 ScreenCast CI/CD]() <br>
 [🎥 ScreenCast testes automatizados](https://youtu.be/UQUVxqiqeto) <br>
