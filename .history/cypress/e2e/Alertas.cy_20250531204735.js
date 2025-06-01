@@ -26,7 +26,6 @@ describe('História 6: Alertas e lembretes', () => {
     });
  
     
-
     cy.get('#mensagem')
       .should('not.have.class', 'opacity-0')
       .and('contain.text', '⚠️ Faltam 30 minutos para: Evento Próximo');

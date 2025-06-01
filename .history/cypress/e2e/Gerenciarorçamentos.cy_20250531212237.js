@@ -27,11 +27,9 @@ describe('História 5: Gerenciar Orçamentos', () => {
     });
 
     cy.visit('/orcamento');
-    cy.get('select[name="roteiro"] option').first().then(option => {
-        const val = option.attr('value');
-        cy.get('select[name="roteiro"]').select(val);
-        });
 
+    cy.get('select[name="roteiro"]').should('exist').select('Paris');
+    });
 
     cy.get('input[name="passagem"]').type('1200');
     cy.get('input[name="hospedagem"]').type('800');
@@ -52,8 +50,8 @@ describe('História 5: Gerenciar Orçamentos', () => {
     cy.get('input[name="passeios"]').clear().type('700');
     cy.get('input[name="extras"]').clear().type('300');
 
-    cy.get('button[type="submit"]').click();
-    
+    cy.contains('Salvar alterações').click();
+
     cy.url().should('include', '/ver_orcamentos');
     cy.contains('Paris').should('exist');
     cy.contains('R$ 6000.00').should('exist');
@@ -71,6 +69,7 @@ describe('História 5: Gerenciar Orçamentos', () => {
 
   it('Cenário desfavorável 1: Deve exibir mensagem quando não há orçamentos cadastrados', () => {
     cy.visit('/ver_orcamentos');
+    cy.get('form').contains('Deletar').click();
     cy.contains('Nenhum orçamento cadastrado ainda.').should('exist');
   });
 

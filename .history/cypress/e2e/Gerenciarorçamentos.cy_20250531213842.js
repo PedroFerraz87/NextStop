@@ -52,8 +52,7 @@ describe('História 5: Gerenciar Orçamentos', () => {
     cy.get('input[name="passeios"]').clear().type('700');
     cy.get('input[name="extras"]').clear().type('300');
 
-    cy.get('button[type="submit"]').click();
-    
+
     cy.url().should('include', '/ver_orcamentos');
     cy.contains('Paris').should('exist');
     cy.contains('R$ 6000.00').should('exist');

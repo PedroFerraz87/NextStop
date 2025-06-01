@@ -8,25 +8,23 @@ describe('História 6: Alertas e lembretes', () => {
   });
 
   it('Cenário favorável 1 - Notificação correta para evento próximo', () => {
-    cy.contains('Destino');
-    cy.contains('Data de Ida');
-    cy.contains('Data de Volta');
+    cy.intercept('GET', '/api/lembretes/', {
+      statusCode: 200,
+      body: [
+        {
+          titulo: 'Evento Próximo',
+          evento_iso: new Date(Date.now() + 30 * 60000).toISOString(),
+          min10: 1
+        }
+      ]
+    }).as('getLembretes');
 
-    cy.get('input[name="destino"]').type('Paris');
-    cy.get('input[name="dataIda"]').type('2025-06-15');
-    cy.get('input[name="dataVolta"]').type('2025-06-22');
+    cy.visit(lembretes');
+    cy.wait('@getLembretes');
 
-    cy.get('input[name="dias[]"]').first().type('2025-06-16');
-    cy.get('input[name="horarios[]"]').first().type('09:00');
-    cy.get('input[name="locais[]"]').first().type('Eiffel Tower');
+    cy.contains('Evento Próximo').should('be.visible');
 
-    cy.intercept('POST', '/roteiro/').as('postRoteiro');
-    cy.get('form').within(() => {
-    cy.get('button[type="submit"]').click();
-    });
- 
-    
-
+    cy.wait(1000);
     cy.get('#mensagem')
       .should('not.have.class', 'opacity-0')
       .and('contain.text', '⚠️ Faltam 30 minutos para: Evento Próximo');
@@ -44,7 +42,8 @@ describe('História 6: Alertas e lembretes', () => {
       ]
     }).as('getLembretes');
 
-    cy.visit('/lembretes');
+    cy.visit('/alertas-lembretes');
+    cy.wait('@getLembretes');
 
     cy.contains('Evento Fuso Incorreto').should('be.visible');
 
@@ -58,7 +57,8 @@ describe('História 6: Alertas e lembretes', () => {
       body: []
     }).as('getLembretes');
 
-    cy.visit('/lembretes');
+    cy.visit('/alertas-lembretes');
+    cy.wait('@getLembretes');
 
     cy.contains('Nenhuma programação próxima.').should('be.visible');
     cy.get('#mensagem').should('have.class', 'opacity-0');
