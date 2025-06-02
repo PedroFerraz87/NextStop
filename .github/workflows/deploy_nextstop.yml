@@ -13,20 +13,29 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up Python version
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Set up and install dependencies
+      - name: Create and activate virtual environment, install dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
+          pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Cleaning testing files
+      # Rodando testes Django (opcional, mas recomendado)
+      - name: Run Django Tests
+        run: |
+          source venv/bin/activate
+          python manage.py migrate
+          python manage.py test
+
+      - name: Clean sensitive and local files
         run: |
           rm -f db.sqlite3
           rm -f .env
@@ -34,17 +43,14 @@ jobs:
       - name: Zip artifact for deployment
         run: |
           cd NextStop/
-          zip release.zip ./* -r
+          zip -r ../release.zip ./
           cd ..
-          mv NextStop/release.zip .
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: |
-            release.zip
-            !venv/
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -72,7 +78,7 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_C5FEBF80184C451A92C1E94E0115A719 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_78B09E30F7AF4C48BB15304781D6CE6C }}
 
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
