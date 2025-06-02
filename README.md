@@ -88,9 +88,10 @@ Formamos duplas para trabalhar nas tarefas necessárias para o projeto e utiliza
 [🎥 ScreenCast protótipo Lo-Fi](https://youtu.be/HSIVb0Cjuic) <br>
 [🎥 ScreenCast site](https://youtu.be/sB4MEfnpwXw) <br>
 [🎥 ScreenCast CI/CD](https://youtu.be/9Dh2AzCqc7Y) <br>
-[🎥 ScreenCast testes automatizados](https://youtu.be/UQUVxqiqeto) <br>
+[🎥 ScreenCast testes automatizados parte 1](https://youtu.be/UQUVxqiqeto) <br>
 [🎥 ScreenCast testes automatizados parte 2](https://youtu.be/ROw06ufRH2M) <br>
 [🎥 ScreenCast testes automatizados parte 3](https://youtu.be/2sbSgEib090) <br>
+[🎥 ScreenCast testes automatizados parte 4](https://youtu.be/yux12btcYlM) 
 
 ### Relatos de Pair Programming 3
 Nós nos reunimos em duplas para desenvolver as atividades com maior eficiência e para entregar tudo no prazo correto. Utilizamos o Google Meet com compartilhamento de tela para as duplas e o grupo como um todo tomar decisões em conjunto.
