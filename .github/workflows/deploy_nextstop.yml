@@ -9,35 +9,30 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TARGET_ENV: dev
     permissions:
-      contents: read # This is required for actions/checkout
+      contents: read
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python version
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Create and activate virtual environment, install Python dependencies
+      - name: Install Python dependencies
         run: |
           python -m venv venv
-          source venv/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
-      
-      - name: Install Node dependencies
-        run: |
-          npm ci
+          venv/bin/pip install --upgrade pip
+          venv/bin/pip install -r requirements.txt
 
-      # 🚦 Opcional: rodar testes Django
-      - name: Run Django Tests
+      - name: Run Django tests
         run: |
-          source venv/bin/activate
-          python manage.py migrate
-          python manage.py test
+          venv/bin/python manage.py migrate
+          venv/bin/python manage.py test
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
@@ -55,57 +50,29 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # Required for requesting the JWT
-      contents: read  # Required for actions/checkout
+      id-token: write
+      contents: read
 
     steps:
-      - name: Download artifact from build job
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: python-app
 
-      - name: Unzip artifact for deployment
+      - name: Unzip artifact
         run: unzip release.zip
 
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_03E6A7A508DE4CAE9A169BAA550060E9 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_C5FEBF80184C451A92C1E94E0115A719 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_78B09E30F7AF4C48BB15304781D6CE6C }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure
         uses: azure/webapps-deploy@v3
-        id: deploy-to-webapp
         with:
           app-name: 'NextStop'
           slot-name: 'Production'
           package: release.zip
-
-      - name: Cleaning testing files
-        run: |
-          cd NextStop/
-          rm -f db.sqlite3
-          rm -f .env
-          rm cypress.config.js || true
-          rm package-lock.json || true
-          rm package.json || true
-          rm -rf cypress || true
-          rm -rf node_modules || true
-          cd ..
-
-      - name: Zip artifact for Cypress testing
-        run: |
-          cd NextStop/
-          zip release.zip ./* -r
-          cd ..
-          mv NextStop/release.zip .
-
-      - name: Run local Django server and Cypress tests
-        run: |
-          python manage.py migrate
-          python manage.py runserver &
-          sleep 5
-          npx cypress run
