@@ -26,6 +26,11 @@ describe('História 4: Orçamento de Viagem', () => {
     cy.get('button[type="submit"]').click();
     cy.get('select[name="roteiro"]').select('Roma');
 
+    cy.get('select[name="roteiro"]').then(select => {
+      const firstOption = select.find('option').first().text();
+      cy.get('select[name="roteiro"]').select(firstOption);
+    });
+
     cy.get('input[name="passagem"]').type('1200');
     cy.get('input[name="hospedagem"]').type('800');
     cy.get('input[name="alimentacao"]').type('500');
@@ -37,16 +42,14 @@ describe('História 4: Orçamento de Viagem', () => {
   });
 
   it('Cenário desfavorável 1: Não permite números negativos', () => {
-    cy.visit('orcamento')
+      cy.get('select[name="roteiro"] option').should('have.length.greaterThan', 0);
 
-      cy.get('select[name="roteiro"]').select('Roma');
       cy.get('input[name="passagem"]').type('-500');
       cy.get('button[type="submit"]').click();
 
   });
 
   it('Cenário favorável 2: Permite alterar centavos manualmente', () => {
-    cy.visit('orcamento')
     cy.get('input[name="alimentacao"]').clear().type('100.00');
 
     cy.get('input[name="alimentacao"]').invoke('val').then(valor => {
@@ -63,5 +66,4 @@ describe('História 4: Orçamento de Viagem', () => {
 
     cy.get('input[name="alimentacao"]').should('have.value', '100.00');
   });
-});
 });

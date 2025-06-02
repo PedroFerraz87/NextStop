@@ -37,7 +37,6 @@ describe('História 7: Checklist - Criação e Marcação', () => {
   });
 
   it('Cenário desfavorável 2: Tenta adicionar item vazio', () => {
-    cy.visit('/checklist');
     cy.get('button').contains('Adicionar Item').click();
 
     cy.on('window:alert', (str) => {

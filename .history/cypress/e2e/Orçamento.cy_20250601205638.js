@@ -38,8 +38,8 @@ describe('História 4: Orçamento de Viagem', () => {
 
   it('Cenário desfavorável 1: Não permite números negativos', () => {
     cy.visit('orcamento')
+      cy.get('select[name="roteiro"] option').should('have.length.greaterThan', 0);
 
-      cy.get('select[name="roteiro"]').select('Roma');
       cy.get('input[name="passagem"]').type('-500');
       cy.get('button[type="submit"]').click();
 
@@ -63,5 +63,4 @@ describe('História 4: Orçamento de Viagem', () => {
 
     cy.get('input[name="alimentacao"]').should('have.value', '100.00');
   });
-});
 });

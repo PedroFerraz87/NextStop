@@ -63,5 +63,3 @@ describe('História 4: Orçamento de Viagem', () => {
 
     cy.get('input[name="alimentacao"]').should('have.value', '100.00');
   });
-});
-});

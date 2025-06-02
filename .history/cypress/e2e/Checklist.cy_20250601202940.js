@@ -2,12 +2,12 @@ describe('História 7: Checklist - Criação e Marcação', () => {
 
   beforeEach(() => {
     cy.deleteAllUsers();
-    cy.createUser('roboteste', 'teste@example.com', 'senha12345');
-    cy.login('teste@example.com', 'senha12345');
+    cy.createUser('roboteste', 'robo@example.com', 'senha1234');
+    cy.login('teste@example.com', 'senha1234');
+    cy.visit('/checklist');
   });
 
   it('Cenário favorável 1: Criação de itens', () => {
-    cy.visit('/checklist');
     cy.get('input[name="item"]').type('Passaporte');
     cy.get('button').contains('Adicionar Item').click();
 
@@ -20,7 +20,6 @@ describe('História 7: Checklist - Criação e Marcação', () => {
   });
 
   it('Cenário favorável 2: O sistema dá o check e desce o item pro final cortado, como já concluído', () => {
-    cy.visit('/checklist');
     cy.get('input[name="item"]').type('Seguro Viagem');
     cy.get('button').contains('Adicionar Item').click();
 
@@ -37,7 +36,6 @@ describe('História 7: Checklist - Criação e Marcação', () => {
   });
 
   it('Cenário desfavorável 2: Tenta adicionar item vazio', () => {
-    cy.visit('/checklist');
     cy.get('button').contains('Adicionar Item').click();
 
     cy.on('window:alert', (str) => {

@@ -3,6 +3,7 @@ describe('História 4: Orçamento de Viagem', () => {
     cy.deleteAllUsers();
     cy.createUser('robotestes', 'robo@example.com', 'senha1234');
     cy.login('robo@example.com', 'senha1234');
+    cy.visit('orcamento')
   });
 
   it('Cenário favorável 1: Calcula e salva orçamento corretamente', () => {
@@ -11,20 +12,23 @@ describe('História 4: Orçamento de Viagem', () => {
     cy.contains('Data de Ida');
     cy.contains('Data de Volta');
 
-    cy.get('input[name="destino"]').type('Roma');
+    cy.get('input[name="destino"]').type('Paris');
     cy.get('input[name="dataIda"]').type('2025-06-15');
     cy.get('input[name="dataVolta"]').type('2025-06-22');
 
     cy.get('input[name="dias[]"]').first().type('2025-06-16');
     cy.get('input[name="horarios[]"]').first().type('09:00');
-    cy.get('input[name="locais[]"]').first().type('Coliseu');
+    cy.get('input[name="locais[]"]').first().type('Eiffel Tower');
 
     cy.intercept('POST', '/roteiro/').as('postRoteiro');
-
     cy.get('form').within(() => {
-    cy.visit('orcamento')
     cy.get('button[type="submit"]').click();
     cy.get('select[name="roteiro"]').select('Roma');
+
+    cy.get('select[name="roteiro"]').then(select => {
+      const firstOption = select.find('option').first().text();
+      cy.get('select[name="roteiro"]').select(firstOption);
+    });
 
     cy.get('input[name="passagem"]').type('1200');
     cy.get('input[name="hospedagem"]').type('800');
@@ -37,16 +41,14 @@ describe('História 4: Orçamento de Viagem', () => {
   });
 
   it('Cenário desfavorável 1: Não permite números negativos', () => {
-    cy.visit('orcamento')
+      cy.get('select[name="roteiro"] option').should('have.length.greaterThan', 0);
 
-      cy.get('select[name="roteiro"]').select('Roma');
       cy.get('input[name="passagem"]').type('-500');
       cy.get('button[type="submit"]').click();
 
   });
 
   it('Cenário favorável 2: Permite alterar centavos manualmente', () => {
-    cy.visit('orcamento')
     cy.get('input[name="alimentacao"]').clear().type('100.00');
 
     cy.get('input[name="alimentacao"]').invoke('val').then(valor => {
@@ -63,5 +65,4 @@ describe('História 4: Orçamento de Viagem', () => {
 
     cy.get('input[name="alimentacao"]').should('have.value', '100.00');
   });
-});
 });
