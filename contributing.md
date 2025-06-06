@@ -13,7 +13,8 @@ Este guia irá ajudá-lo a entender como contribuir de forma eficaz, clara e res
 4. [Padrões de Código](#padrões-de-código)
 5. [Commits](#commits)
 6. [Pull Requests](#pull-requests)
-7. [Dúvidas e Contato](#dúvidas-e-contato)
+7. [Ambiente Virtual](#Ambientevirtual)
+8. [Dúvidas e Contato](#dúvidas-e-contato)
 
 ---
 
@@ -35,11 +36,24 @@ Você pode contribuir de várias formas:
 ### Passo a Passo
 
 1. **Fork** o repositório
-2. Crie uma nova branch: `git checkout -b feature/nome-da-feature`
-3. Faça suas alterações com clareza e testes
-4. Faça o commit: `git commit -m "feat: descrição resumida"`
-5. Envie para o fork: `git push origin feature/nome-da-feature`
-6. Abra um **Pull Request**
+ Crie um fork do repositório [`PedroFerraz87/NextStop`](https://github.com/PedroFerraz87/NextStop) para a sua conta no GitHub.
+
+2. **Clone o fork localmente**  
+   ```bash
+   git clone https://github.com/PedroFerraz87/NextStop.git
+   cd NextStop
+   ```
+
+3. **Crie uma nova branch para suas alterações**  
+   ```bash
+   git checkout -b nome-da-sua-nova-branch
+   ```  
+   Use nomes descritivos como `fix/correcao-formulario` ou `feature/chatbot-NextStop`.
+3. Crie uma nova branch: `git checkout -b feature/nome-da-feature`
+4. Faça suas alterações com clareza e testes
+5. Faça o commit: `git commit -m "feat: descrição resumida"`
+6. Envie para o fork: `git push origin feature/nome-da-feature`
+7. Abra um **Pull Request**
 
 ---
 
@@ -81,6 +95,36 @@ Antes de abrir um Pull Request:
 - Faça **rebase** com a `main` se necessário
 - Descreva claramente o que foi alterado e **por quê**
 - Marque pessoas responsáveis para revisão (`@nome`)
+
+---
+
+## 🛠️ Ambiente Virtual
+
+1. Crie e ative um ambiente virtual:
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   ```
+
+2. Instale as dependências:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Aplique as migrações do banco de dados:
+
+   ```bash
+   python manage.py migrate
+   ```
+
+4. Execute o servidor local:
+
+   ```bash
+   python manage.py runserver
+   ```
+
 
 ---
 
