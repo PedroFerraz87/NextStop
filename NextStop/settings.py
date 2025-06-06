@@ -18,7 +18,7 @@ USE_TZ = True
 TIME_ZONE = 'America/Sao_Paulo' # fuso horario
 
 LOGIN_URL = '/' # adicionado depois
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Isso usa o banco de dados para armazenar sessões
+SESSION_ENGINE = 'django.db.backends.postgresql'  # Isso usa o banco de dados para armazenar sessões
 SESSION_COOKIE_AGE = 3600  # A duração da sessão em segundos (1 hora)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,21 +38,26 @@ if NOT_PROD:
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = 'django-insecure-=^tnu3-m%70hstirp3oq+9k0_06*im*s67g=hs^zkz+iyembq!'
     ALLOWED_HOSTS = [
-        'nextstop-c4dxdkh4g9apgxf5.brazilsouth-01.azurewebsites.net',
+        'nextstop2-bng8b8bqeugtf4eq.brazilsouth-01.azurewebsites.net',
         'localhost', 
         '127.0.0.1',
         ]
 
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'nextstopdb',
+        'USER': 'NextStopadm', 
+        'PASSWORD': 'Grupo8fds',       
+        'HOST': 'nextstopdb2.postgres.database.azure.com',
+        'PORT': '5432',
     }
+}
+
 else:
-    SECRET_KEY = os.getenv('SECRET_KEY')
+    SECRET_KEY = os.getenv('django-insecure-=^tnu3-m%70hstirp3oq+9k0_06*im*s67g=hs^zkz+iyembq!')
     DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
-    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split()
+    ALLOWED_HOSTS = os.getenv('[ALLOWED_HOSTS]', '').split()
     CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(' ')
 
     SECURE_SSL_REDIRECT = \
