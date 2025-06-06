@@ -81,10 +81,9 @@ jobs:
 
       - name: Cleaning testing files
         run: |
-          cd NextStop/
           rm db.sqlite3
           rm .env
-          cd ..
+          
 
       - name: Zip artifact for deployment
         run: |
