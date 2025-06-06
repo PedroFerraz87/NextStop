@@ -87,7 +87,7 @@ Formamos duplas para trabalhar nas tarefas necessárias para o projeto e utiliza
 
 [🎥 ScreenCast protótipo Lo-Fi](https://youtu.be/HSIVb0Cjuic) <br>
 [🎥 ScreenCast site](https://youtu.be/sB4MEfnpwXw) <br>
-[🎥 ScreenCast CI/CD](https://youtu.be/9Dh2AzCqc7Y) <br>
+[🎥 ScreenCast CI/CD](https://youtu.be/r92k31EvSlQ) <br>
 [🎥 ScreenCast testes automatizados parte 1](https://youtu.be/UQUVxqiqeto) <br>
 [🎥 ScreenCast testes automatizados parte 2](https://youtu.be/ROw06ufRH2M) <br>
 [🎥 ScreenCast testes automatizados parte 3](https://youtu.be/2sbSgEib090) <br>
